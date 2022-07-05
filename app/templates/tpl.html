@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1> 模板语法 </h1>
+    <span>{{ name }}</span>
+    <ul>
+        {% for item in list %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+    <ul>
+        {% for k,v in info.items %}
+            <li>{{ k }} = {{v}}</li>
+        {% endfor %}
+    </ul>
+    <ul>
+        {% for item in infoList %}
+            <li>{{ item.name }} is {{item.role}}</li>
+        {% endfor %}
+    </ul>
+    {% if name == "张三" %}
+        <h1>法外狂徒</h1>
+    {% endif %}
+</body>
+
+</html>
