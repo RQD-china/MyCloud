@@ -4,7 +4,6 @@ from django.utils.html import format_html
 from django.db.models.signals import pre_delete  # 删除文件
 from django.dispatch.dispatcher import receiver  # 删除文件
 
-
 # Create your models here.
 # 网站信息表
 class Site(models.Model):
