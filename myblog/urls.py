@@ -23,4 +23,5 @@ urlpatterns = [
     path('user/list', views.uesr_list),
     path('tpl/', views.tpl),
     path('login/', views.login),
+    path('orm/', views.orm),
 ]

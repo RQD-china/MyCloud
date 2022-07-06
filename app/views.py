@@ -37,3 +37,11 @@ def login(request):
             return render(request, "login.html", {"error": "密码错误"})
         else:
             return render(request, "login.html", {"error": "用户名不存在"})
+
+from app.models import UserInfo
+
+def orm(request):
+    # UserInfo.objects.create(name = 'rqd', password = '123456', age = 18)
+    UserInfo.objects.filter(name = 'rqd').delete()
+
+    return HttpResponse("success")
