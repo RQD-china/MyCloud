@@ -30,15 +30,11 @@
                 </div>
             </nav>
             <header>
+                {% for img in imgList %}                  
                 <div class="dynamicShuffle">
-                    <img src="https://img2.baidu.com/it/u=3399166399,3577643536&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" alt="">
+                    <img src="{{img}}" alt="">
                 </div>
-                <div class="dynamicShuffle">
-                    <img src="https://img2.baidu.com/it/u=841445988,697198274&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500" alt="">
-                </div>
-                <div class="dynamicShuffle">
-                    <img src="https://img2.baidu.com/it/u=1098587648,2758717317&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" alt="">
-                </div>
+                {% endfor %}
             </header>
             <main>
                 内容区域
