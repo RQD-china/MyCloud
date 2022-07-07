@@ -1,37 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Richy的个人博客</title>
-    <link rel="stylesheet" href="/static/css/index.css">
-    <link rel="stylesheet" href="/static/css/reset.css">
-</head>
+    <!DOCTYPE html>
+    <html lang="en">
 
-<body>
-    <div id="app">
-        <nav>
-            <div class="left">
-                <a href="#">首页</a>
-                <a href="#">新闻</a>
-                <a href="#">动态</a>
-                <a href="#">关于</a>
-                <a href="#">导航</a>
-            </div>
-            <div class="right">
-                <a href="#">登录</a>
-                <a href="#">注册</a
-            </div>
-        </nav>
-        <main>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Richy的个人博客</title>
+        <link rel="stylesheet" href="/static/mine/css/index.css">
+        <link rel="stylesheet" href="/static/mine/css/reset.css">
+        <script src="/static/mine/vue/vue.js"></script>
+    </head>
 
-        </main>
-        <footer>
+    <body>
+        <div id="app">
+            <link rel="stylesheet" :href="'/static/mine/css/theme/' + theme + '.css'">
+            <nav>
+                <div class="left">
+                    <a href="#">首页</a>
+                    <a href="#">新闻</a>
+                    <a href="#">动态</a>
+                    <a href="#">关于</a>
+                    <a href="#">导航</a>
+                </div>
+                <div class="right">
+                    <img :src="'/static/mine/img/nav/' + theme + '.svg'" @click = "setTheme(theme)">
+                    <a href="#">登录</a>
+                    <a href="#">注册</a>
+                </div>
+            </nav>
+            <main>
+                内容区域
+            </main>
+            <footer>
+                底部信息栏
+            </footer>
+        </div>
 
-        </footer>
-    </div>
-</body>
+        <script>
+            new Vue({
+            el: '#app',
+            delimiters: ["[[", "]]"],
+            data: {
+                theme: 'light'
+            },
+            created() {
+                this.initTheme()
+            },
+            methods: {
+                //设置主题
+                setTheme(themeName) {
+                    if(themeName == "light")
+                        this.theme = "dark"
+                    else
+                        this.theme = "light"
+                    
+                    //持久化存储
+                    localStorage.setItem('theme', themeName)
+                },
+                
+                //初始化主题
+                initTheme() {
+                    // 读取存储的主题
+                    let theme = localStorage.getItem('theme')
+                    if(theme) {
+                        this.theme = theme
+                    }
+                }
+            }
+        })
+        </script>
+    </body>
 
-</html>
+    </html>

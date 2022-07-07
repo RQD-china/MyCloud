@@ -4,7 +4,7 @@
 #app nav {
   width: calc(100% - 240px);
   height: 60px;
-  background-color: saddlebrown;
+  background-color: var(--nav_bg);
   display: flex;
   align-items: center;
   padding: 0 120px;
@@ -17,8 +17,13 @@
   display: flex;
   justify-content: right;
 }
+#app nav .right img {
+  width: 20px;
+  margin-right: 20px;
+}
 #app nav a {
   margin-right: 20px;
+  color: var(--nav_color);
 }
 #app nav a:last-child {
   margin-right: 0;
@@ -26,10 +31,12 @@
 #app main {
   width: 100%;
   height: 400px;
-  background-color: yellow;
+  background-color: var(--main_bg);
+  color: var(--main_color);
 }
 #app footer {
   width: 100%;
   height: 400px;
-  background-color: #5c124c;
+  background-color: var(--footer_bg);
+  color: var(--footer_color);
 }/*# sourceMappingURL=index.css.map */
