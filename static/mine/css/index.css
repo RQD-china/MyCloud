@@ -1,3 +1,21 @@
+.card {
+  border-radius: 5px;
+  background-color: white;
+}
+.card .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f5f5f5;
+  padding: 20px 20px 10px 20px;
+}
+.card .title h2 {
+  font-size: 20px;
+}
+.card .body {
+  padding: 10px 20px 20px 20px;
+}
+
 #app {
   width: 100%;
 }
@@ -53,10 +71,88 @@
   width: 100%;
 }
 #app main {
-  width: 100%;
+  width: calc(100% - 120px);
+  padding: 20px 60px;
   height: 400px;
   background-color: var(--main_bg);
   color: var(--main_color);
+  display: flex;
+  justify-content: center;
+}
+#app main .main {
+  width: 1200px;
+  min-height: 200px;
+  display: flex;
+  justify-content: space-between;
+}
+#app main .main > div > div {
+  margin-bottom: 20px;
+}
+#app main .main .left {
+  width: 69%;
+}
+#app main .main .right {
+  width: 30%;
+}
+#app main .main .right .tags > .body {
+  position: relative;
+}
+#app main .main .right .tags > .body ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+@keyframes movBox {
+  0% {
+    top: 0;
+    left: 0;
+  }
+  25% {
+    top: 0;
+    left: calc(100% - 20px);
+  }
+  50% {
+    top: calc(100% - 20px);
+    left: calc(100% - 20px);
+  }
+  75% {
+    top: calc(100% - 20px);
+    left: 0;
+  }
+  100% {
+    top: 0;
+    left: 0;
+  }
+}
+#app main .main .right .tags > .body ul::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 20px;
+  height: 20px;
+  content: "";
+  background-color: #26c6da;
+  -webkit-animation-name: movBox;
+  animation-name: movBox;
+  -webkit-animation-duration: 5s;
+  animation-duration: 5s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+#app main .main .right .tags > .body ul li {
+  width: calc(33.3% - 2px);
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #white;
+}
+#app main .main .right .tags > .body ul li:nth-child(6n+1), #app main .main .right .tags > .body ul li:nth-child(6n+2), #app main .main .right .tags > .body ul li:nth-child(6n+3) {
+  background-color: #f5f5f5;
+}
+#app main .main .right .tags > .body ul li:nth-child(3n+1), #app main .main .right .tags > .body ul li:nth-child(3n+2) {
+  border-right: 1px solid #f5f5f5;
 }
 #app footer {
   width: 100%;
