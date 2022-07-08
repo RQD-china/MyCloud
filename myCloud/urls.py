@@ -21,5 +21,6 @@ from app01 import views
 
 urlpatterns = [
     path('', views.index),
+    path('news/', views.news),
     re_path(r'media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]

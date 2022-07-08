@@ -17,8 +17,8 @@
             <link rel="stylesheet" :href="'/static/mine/css/theme/' + theme + '.css'">
             <nav>
                 <div class="left">
-                    <a href="#">首页</a>
-                    <a href="#">新闻</a>
+                    <a href="/">首页</a>
+                    <a href="/news">新闻</a>
                     <a href="#">动态</a>
                     <a href="#">关于</a>
                     <a href="#">导航</a>
@@ -31,7 +31,9 @@
             </nav>
             {% banner 'index' %}
             <main>
-                内容区域
+                {% block main %}
+                    内容区域                  
+                {% endblock main %}
             </main>
             <footer>
                 <div class="left">
