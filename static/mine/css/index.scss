@@ -51,6 +51,11 @@
             height: 100%;
             overflow: hidden;
             transition: all 1s;
+            opacity: 0;
+
+            &:first-child {
+                opacity: 1;
+            }
 
             img {
                 width: 100%;

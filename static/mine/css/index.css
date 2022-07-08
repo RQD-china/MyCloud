@@ -44,6 +44,10 @@
   height: 100%;
   overflow: hidden;
   transition: all 1s;
+  opacity: 0;
+}
+#app header > .dynamicShuffle:first-child {
+  opacity: 1;
 }
 #app header > .dynamicShuffle img {
   width: 100%;
