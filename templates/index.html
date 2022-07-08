@@ -1,7 +1,7 @@
 
     <!DOCTYPE html>
     <html lang="en">
-
+    {% load myTag %}
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,21 +29,51 @@
                     <a href="#">注册</a>
                 </div>
             </nav>
-            <header>
-                {% for img in imgList %}                  
-                <div class="dynamicShuffle">
-                    <img src="{{img}}" alt="">
-                </div>
-                {% endfor %}
-            </header>
+            {% banner 'index' %}
             <main>
                 内容区域
             </main>
             <footer>
-                底部信息栏
+                <div class="left">
+                    <p class="thank">Thank For</p>
+                    <p class="siteInfo">
+                        <span><img src="/static/mine/img/footer/baidu.png" alt=""> 百度智能云</span>
+                        <span><img src="/static/mine/img/footer/baidu.png" alt=""> 百度云SSL证书</span>
+                        <span><img src="/static/mine/img/footer/qiniu.png" alt=""> 七牛云存储</span>
+                    </p>
+                    <p class="version">
+                        <span>version</span>
+                        <span>1.0.1</span>
+                    </p>
+                    <p>Thank For</p>
+                </div>
+                <div class="right">
+                    <div class="contact">
+                        <div class="QQ">
+                            <img class="svg" src="/static/mine/img/footer/qq.svg" alt="">
+                            <img class="QR" src="/static/mine/img/footer/qq.jpg" alt="">
+                        </div>
+                        <div class="Wechat">
+                            <img class="svg" src="/static/mine/img/footer/wechat.svg" alt="">
+                            <img class="QR" src="/static/mine/img/footer/wechat.jpg" alt="">
+                        </div>
+                        <a class="link" href="https://space.bilibili.com/12188724" target="_blank">
+                            <img class="svg" src="/static/mine/img/footer/bilibili.svg" alt="">
+                            <span class="tips">点击图标跳转</span>
+                        </a>
+                        <a class="link" href="https://weibo.com/richycloud" target="_blank">
+                            <img class="svg" src="/static/mine/img/footer/weibo.svg" alt="">
+                            <span class="tips">点击图标跳转</span>
+                        </a>
+                        <a class="link" href="https://github.com/RQD-china" target="_blank">
+                            <img class="svg" src="/static/mine/img/footer/github.svg" alt="">
+                            <span class="tips">点击图标跳转</span>
+                        </a>
+                        </div>
+                    <p>联系邮箱：1245413737@qq.com</p>
+                </div>
             </footer>
         </div>
-
         <script>
             new Vue({
             el: '#app',

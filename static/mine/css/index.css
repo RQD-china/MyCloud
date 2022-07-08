@@ -36,7 +36,7 @@
   height: 500px;
   position: relative;
 }
-#app header > div {
+#app header > .dynamicShuffle {
   position: absolute;
   top: 0;
   left: 0;
@@ -45,7 +45,7 @@
   overflow: hidden;
   transition: all 1s;
 }
-#app header > div img {
+#app header > .dynamicShuffle img {
   width: 100%;
 }
 #app main {
@@ -56,7 +56,114 @@
 }
 #app footer {
   width: 100%;
-  height: 400px;
+  height: 180px;
+  display: flex;
   background-color: var(--footer_bg);
   color: var(--footer_color);
+}
+#app footer p {
+  margin: 8px 0px;
+}
+#app footer .left,
+#app footer .right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#app footer .thank {
+  color: #26c6e1;
+  font-size: 20px;
+}
+#app footer .siteInfo {
+  display: flex;
+  align-items: center;
+}
+#app footer .siteInfo span {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+#app footer .siteInfo img {
+  width: 20px;
+  margin-right: 10px;
+}
+#app footer .version {
+  display: flex;
+}
+#app footer .version span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: #333;
+  height: 30px;
+}
+#app footer .version span:nth-child(1) {
+  width: 100px;
+  background-color: #ff9800;
+  border-radius: 5px 0 0 5px;
+}
+#app footer .version span:nth-child(2) {
+  width: 70px;
+  background-color: #26c6da;
+  border-radius: 0 5px 5px 0;
+}
+#app footer .contact {
+  display: flex;
+  width: 240px;
+  justify-content: space-between;
+  position: relative;
+}
+#app footer .contact .svg {
+  position: relative;
+  width: 32px;
+  z-index: 1;
+}
+#app footer .contact .QR {
+  width: 80px;
+  position: absolute;
+  top: -50px;
+  left: -24px;
+  opacity: 0;
+  transition: all 0.5s;
+}
+#app footer .contact .tips {
+  width: 100px;
+  font-size: 14px;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  background-color: #26c6e1;
+  border-radius: 5px;
+  position: absolute;
+  top: -10px;
+  left: -34px;
+  opacity: 0;
+  transition: all 0.5s;
+}
+#app footer .contact .QQ {
+  position: relative;
+}
+#app footer .contact .QQ .svg:hover ~ .QR {
+  top: -80px;
+  left: -24px;
+  opacity: 1;
+}
+#app footer .contact .Wechat {
+  position: relative;
+}
+#app footer .contact .Wechat .svg:hover ~ .QR {
+  top: -80px;
+  left: -24px;
+  opacity: 1;
+}
+#app footer .contact .link {
+  position: relative;
+}
+#app footer .contact .link .svg:hover ~ .tips {
+  top: -35px;
+  left: -34px;
+  opacity: 1;
 }/*# sourceMappingURL=index.css.map */
