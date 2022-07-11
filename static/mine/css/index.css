@@ -91,6 +91,55 @@
 #app main .main .left {
   width: 69%;
 }
+#app main .main .left .boutique > .body ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+#app main .main .left .boutique > .body ul > li {
+  width: 50%;
+  box-sizing: border-box;
+  height: 100px;
+  padding: 10px 0;
+  display: flex;
+}
+#app main .main .left .boutique > .body ul > li .left {
+  width: 40%;
+}
+#app main .main .left .boutique > .body ul > li .left > div {
+  width: 100%;
+  overflow: hidden;
+  height: 80px;
+}
+#app main .main .left .boutique > .body ul > li .left > div img {
+  width: 100%;
+  transition: all 0.3s;
+}
+#app main .main .left .boutique > .body ul > li .left > div img:hover {
+  transform: scale(1.1);
+}
+#app main .main .left .boutique > .body ul > li .right {
+  width: 60%;
+  padding-left: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#app main .main .left .boutique > .body ul > li .right h2 {
+  color: #333;
+  font-size: 20px;
+}
+#app main .main .left .boutique > .body ul > li .right p {
+  font-size: 16px;
+  margin: 0 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#app main .main .left .boutique > .body ul > li .right span {
+  font-size: 14px;
+  color: #555;
+}
 #app main .main .left .allArticle > .body {
   background-color: transparent;
   padding: 0;
@@ -124,7 +173,6 @@
   width: 100%;
   height: 120px;
   overflow: hidden;
-  border-radius: 5px;
 }
 #app main .main .left .allArticle > .body > ul > li .left img {
   width: 100%;

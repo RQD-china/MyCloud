@@ -99,12 +99,72 @@
             display: flex;
             justify-content: space-between;
 
-            > div >div {
+            > div > div {
                 margin-bottom: 20px;
             }
 
             .left {
                 width: 69%;
+
+                .boutique > .body {
+                    ul {
+                        display: flex;
+                        flex-wrap: wrap;
+                        > li {
+                            width: 50%;
+                            box-sizing: border-box;
+                            height: 100px;
+                            padding: 10px 0;
+                            display: flex;
+
+                            .left {
+                                width: 40%;
+
+                                > div {
+                                    width: 100%;
+                                    overflow: hidden;
+                                    height: 80px;
+
+                                    img {
+                                        width: 100%;
+                                        transition: all 0.3s;
+    
+                                        &:hover {
+                                            transform: scale(1.1);
+                                        }
+                                    }
+                                }
+                            }
+
+                            .right {
+                                width: 60%;
+                                padding-left: 10px;
+                                box-sizing: border-box;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: space-between;
+
+                                h2 {
+                                    color: #333;
+                                    font-size: 20px;
+                                }
+
+                                p {
+                                    font-size: 16px;
+                                    margin: 0 5px;
+                                    white-space: nowrap;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                }
+
+                                span {
+                                    font-size: 14px;
+                                    color: #555;
+                                }
+                            }
+                        }
+                    }
+                }
 
                 .allArticle > .body {
                     background-color: transparent;
@@ -142,7 +202,6 @@
                                     width: 100%;
                                     height: 120px;
                                     overflow: hidden;
-                                    border-radius: 5px;
                                 }
 
                                 img {
