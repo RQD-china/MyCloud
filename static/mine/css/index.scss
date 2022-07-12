@@ -107,6 +107,8 @@
                 width: 69%;
 
                 .boutique > .body {
+                    padding: 0 20px 10px 20px;
+
                     ul {
                         display: flex;
                         flex-wrap: wrap;
@@ -116,6 +118,23 @@
                             height: 100px;
                             padding: 10px 0;
                             display: flex;
+
+                            &:nth-child(1), &:nth-child(2) {
+                                padding-top: 10px;                             
+                            }
+
+                            &:nth-child(1), &:nth-child(3), &:nth-child(5) {
+                                padding-right: 5px;
+                                border-right: 1px solid #f5f5f5;                                
+                            }
+
+                            &:nth-child(2), &:nth-child(4), &:nth-child(6) {
+                                padding-left: 10px;                              
+                            }
+
+                            &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4) {
+                                border-bottom: 1px solid #f5f5f5;                                       
+                            }
 
                             .left {
                                 width: 40%;
@@ -145,13 +164,15 @@
                                 justify-content: space-between;
 
                                 h2 {
-                                    color: #333;
-                                    font-size: 20px;
+                                    a {
+                                        color: #333;
+                                        font-size: 20px;
+                                    }
                                 }
 
                                 p {
                                     font-size: 16px;
-                                    margin: 0 5px;
+                                    margin: 5px 0;
                                     white-space: nowrap;
                                     overflow: hidden;
                                     text-overflow: ellipsis;

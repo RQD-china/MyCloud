@@ -91,6 +91,9 @@
 #app main .main .left {
   width: 69%;
 }
+#app main .main .left .boutique > .body {
+  padding: 0 20px 10px 20px;
+}
 #app main .main .left .boutique > .body ul {
   display: flex;
   flex-wrap: wrap;
@@ -101,6 +104,19 @@
   height: 100px;
   padding: 10px 0;
   display: flex;
+}
+#app main .main .left .boutique > .body ul > li:nth-child(1), #app main .main .left .boutique > .body ul > li:nth-child(2) {
+  padding-top: 10px;
+}
+#app main .main .left .boutique > .body ul > li:nth-child(1), #app main .main .left .boutique > .body ul > li:nth-child(3), #app main .main .left .boutique > .body ul > li:nth-child(5) {
+  padding-right: 5px;
+  border-right: 1px solid #f5f5f5;
+}
+#app main .main .left .boutique > .body ul > li:nth-child(2), #app main .main .left .boutique > .body ul > li:nth-child(4), #app main .main .left .boutique > .body ul > li:nth-child(6) {
+  padding-left: 10px;
+}
+#app main .main .left .boutique > .body ul > li:nth-child(1), #app main .main .left .boutique > .body ul > li:nth-child(2), #app main .main .left .boutique > .body ul > li:nth-child(3), #app main .main .left .boutique > .body ul > li:nth-child(4) {
+  border-bottom: 1px solid #f5f5f5;
 }
 #app main .main .left .boutique > .body ul > li .left {
   width: 40%;
@@ -125,13 +141,13 @@
   flex-direction: column;
   justify-content: space-between;
 }
-#app main .main .left .boutique > .body ul > li .right h2 {
+#app main .main .left .boutique > .body ul > li .right h2 a {
   color: #333;
   font-size: 20px;
 }
 #app main .main .left .boutique > .body ul > li .right p {
   font-size: 16px;
-  margin: 0 5px;
+  margin: 5px 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
