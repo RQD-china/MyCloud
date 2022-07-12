@@ -20,7 +20,8 @@ from django.views.static import serve
 from app01 import views
 
 urlpatterns = [
-    path('', views.index),
-    path('news/', views.news),
+    path('', views.Index),
+    path('news/', views.News),
+    path('login/', views.Login),
     re_path(r'media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]

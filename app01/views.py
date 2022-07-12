@@ -2,8 +2,10 @@ from django.shortcuts import render
 
 # Create your views here.
 
-def index(request):
+def Index(request):
     return render(request, 'index.html')
     
-def news(request):
+def News(request):
     return render(request, 'news.html')
+def Login(request):
+    return render(request, 'login.html')
