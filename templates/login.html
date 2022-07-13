@@ -20,6 +20,7 @@
                 <video src="/static/mine//img/logo/demo.mp4" muted loop autoplay></video>
             </div>
             <div class="right">
+                {% csrf_token %}
                 {% block form %}
                     <div class="right-con">
                         <h1>SIGN IN</h1>
@@ -40,6 +41,47 @@
 <script src="/static/vue/vue.js"></script>
 <script src="/static/axios/axios.min.js"></script>
 <script>
+    axios.interceptors.request.use(request => {
+        // 请求成功的拦截
+        if(request.method === 'post') {
+            let csrftoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value
+            request.headers['X-CSRFToken'] = csrftoken
+        }
+        return request
+    }, err => {
+        // 请求失败的拦截
+        return Promise.reject(err)
+    })
+    
+    axios.interceptors.response.use(res => {
+        // 成功响应的拦截
+        return Promise.resolve(res.data)
+    }, err =>{
+        // 失败响应的拦截
+        console.log(err)
+        if(err.response){
+            // 失败响应的status需要在response中获得
+            console.log(err.response)
+            switch(err.response.status){
+            // 对得到的状态码的处理，具体的设置视自己的情况而定
+            case 401:
+                console.log('未登录')
+                window.location.href='/'
+                break
+            case 404:
+                window.location.href='/'
+                break
+            case 405:
+                console.log('不支持的方法')
+                break
+            // case ...
+            default:
+                console.log('其他错误')
+                break
+            }
+        }
+    })
+
     new Vue({
         el: "#app",
         data: {
@@ -51,7 +93,7 @@
         methods: {
             login(){
                 //console.log(this.loginForm)
-
+                
                 axios.post('/login/', this.loginForm).then(res => {
                     console.log('Login Response', res)
                 })
