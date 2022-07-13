@@ -23,5 +23,6 @@ urlpatterns = [
     path('', views.Index),
     path('news/', views.News),
     path('login/', views.Login),
+    path('sign/', views.Sign),
     re_path(r'media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]

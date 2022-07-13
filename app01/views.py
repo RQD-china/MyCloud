@@ -7,5 +7,9 @@ def Index(request):
     
 def News(request):
     return render(request, 'news.html')
+
 def Login(request):
     return render(request, 'login.html')
+    
+def Sign(request):
+    return render(request, 'sign.html')

@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>用户登录</title>
+    {% block title %}
+        <title>用户登录</title>      
+    {% endblock title %}
     <link rel="shortcut icon" href="/static/mine/img/logo/logo.jpg">
     <link rel="stylesheet" href="/static/mine/css/reset.css">
     <link rel="stylesheet" href="/static/mine/css/login.css">
@@ -18,14 +20,17 @@
                 <video src="/static/mine//img/logo/demo.mp4" muted loop autoplay></video>
             </div>
             <div class="right">
-                <div class="right-con">
-                    <h1>SIGN IN</h1>
-                    <h3>USERNAME</h3>
-                    <input class="text" type="text">
-                    <h3>PASSWORD</h3>
-                    <input class="text" type="password">
-                    <input class="btn" type="submit" value="LOGIN">
-                </div>
+                {% block form %}
+                    <div class="right-con">
+                        <h1>SIGN IN</h1>
+                        <h3>USERNAME</h3>
+                        <input class="text" type="text">
+                        <h3>PASSWORD</h3>
+                        <input class="text" type="password">
+                        <input class="btn" type="submit" value="LOGIN">
+                        <input class="btn" value="SIGNUP">
+                    </div>                  
+                {% endblock form %}
             </div>
         </main>
     </div>

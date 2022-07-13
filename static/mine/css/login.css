@@ -52,7 +52,7 @@ main h1 {
   padding-bottom: 10px;
 }
 main h3 {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
   color: #70b4e3;
   padding: 20px 0;
@@ -71,10 +71,15 @@ main .btn {
   border-radius: 20px;
   border: none;
   color: #fff;
+  text-align: center;
   font-size: 16px;
   cursor: pointer;
   margin-top: 50px;
   background-image: linear-gradient(120deg, #76daec 0%, #c5a8de 100%);
+}
+main .btn:nth-child(2) {
+  margin-top: 20px;
+  background-image: linear-gradient(120deg, #c5a8de 0%, #76daec 100%);
 }
 main .btn:hover {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
