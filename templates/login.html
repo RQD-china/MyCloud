@@ -11,6 +11,8 @@
     <link rel="shortcut icon" href="/static/mine/img/logo/logo.jpg">
     <link rel="stylesheet" href="/static/mine/css/reset.css">
     <link rel="stylesheet" href="/static/mine/css/login.css">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 
 <body>
@@ -25,11 +27,11 @@
                     <div class="right-con">
                         <h1>SIGN IN</h1>
                         <h3>USERNAME</h3>
-                        <input class="text" v-model="loginForm.username" type="text">
+                        <input class="text" ref="login_form_name" v-model="loginForm.username" type="text">
                         <h3>PASSWORD</h3>
-                        <input class="text" v-model="loginForm.password" type="password">
-                        <input class="btn" type="submit" value="LOGIN">
-                        <button class="btn sign" @click="login">SIGNUP</button>
+                        <input class="text" ref="login_form_pwd" v-model="loginForm.password" type="password">
+                        <input class="btn" @click="login" type="submit" value="LOGIN">
+                        <a class="btn sign" href="/sign"><h3>SIGNUP</h3></a>
                     </div>                  
                 {% endblock form %}
             </div>
@@ -40,6 +42,8 @@
 
 <script src="/static/vue/vue.js"></script>
 <script src="/static/axios/axios.min.js"></script>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <script>
     axios.interceptors.request.use(request => {
         // 请求成功的拦截
@@ -92,10 +96,23 @@
         },
         methods: {
             login(){
-                //console.log(this.loginForm)
+                // console.log(this.loginForm)
                 
                 axios.post('/login/', this.loginForm).then(res => {
-                    console.log('Login Response', res)
+                    // console.log('Login Response', res)
+                    if(res.code) {
+                        // 验证失败
+                        this.$message.error(res.msg)
+                        this.$refs[`login_form_${res.self}`].focus()
+                        if(res.code === 3) {
+                            this.loginForm.password = ""
+                        }
+                        return
+                    } else {
+                        // 验证成功
+                        this.$message.success(res.msg)  
+                        return                      
+                    }
                 })
             }
         }
