@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-import json
+from django import forms
+from django.urls import is_valid_path
 
 # Create your views here.
 
@@ -10,6 +11,10 @@ def Index(request):
 def News(request):
     return render(request, 'news.html')
 
+class LoginForm(forms.Form):
+    name = forms.CharField(error_messages={'required': '请输入用户名'})
+    pwd = forms.CharField(error_messages={'required': '请输入密码'})
+
 def Login(request):
     if request.method == 'POST':
         res = {
@@ -18,19 +23,24 @@ def Login(request):
             'self': None
         }
         data = request.data
-        name = data['username']
-        pwd = data['password']
-        if not name:
-            res['code'] = 1
-            res['msg'] = '请输入用户名'
-            res['self'] = 'name'
-            return JsonResponse(res)
-        if not pwd:
-            res['code'] = 2
-            res['msg'] = '请输入密码'
-            res['self'] = 'pwd'
-            return JsonResponse(res)
+        form = LoginForm(data)
 
+        if not form.is_valid():
+            # 表单验证
+            errorDict = form.errors
+
+            # 拿到第一个错误信息字段名
+            errorValid = list(errorDict.keys())[0]
+            print(errorValid)
+            
+            # 获取第一个错误信息
+            errorMsg = errorDict[errorValid][0]
+            res['code'] = len(list(errorDict.keys()))
+            res['msg'] = errorMsg
+            res['self'] = errorValid
+            return JsonResponse(res)
+        name = data['name']
+        pwd = data['pwd']
         if name != 'admin' or pwd != '12345':
             res['code'] = 3
             res['msg'] = '用户名或密码错误'
