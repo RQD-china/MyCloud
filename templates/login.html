@@ -27,9 +27,9 @@
                     <div class="right-con">
                         <h1>SIGN IN</h1>
                         <h3>USERNAME</h3>
-                        <input class="text" ref="login_form_name" v-model="loginForm.name" type="text">
+                        <input class="text" ref="login_form_name" v-model="login_form.name" type="text">
                         <h3>PASSWORD</h3>
-                        <input class="text" ref="login_form_pwd" v-model="loginForm.pwd" type="password">
+                        <input class="text" ref="login_form_pwd" v-model="login_form.pwd" type="password">
                         <input class="btn" @click="login" type="submit" value="LOGIN">
                         <a class="btn sign" href="/sign"><h3>SIGNUP</h3></a>
                     </div>                  
@@ -89,23 +89,45 @@
     new Vue({
         el: "#app",
         data: {
-            loginForm: {
+            login_form: {
                 name: "",
                 pwd: ""
+            },
+            sign_form: {
+                name: "",
+                pwd: "",
+                rePwd: ""
             }
         },
         methods: {
-            login(){
-                // console.log(this.loginForm)
-                
-                axios.post('/login/', this.loginForm).then(res => {
-                     console.log('Login Response', res)
+            // 登录
+            login() {         
+                axios.post('/login/', this.login_form).then(res => {
                     if(res.code) {
                         // 验证失败
                         this.$message.error(res.msg)
                         this.$refs[`login_form_${res.self}`].focus()
                         if(res.code === 3) {
-                            this.loginForm.pwd = ""
+                            this.login_form.pwd = ""
+                        }
+                        return
+                    } else {
+                        // 验证成功
+                        this.$message.success(res.msg)  
+                        return                      
+                    }
+                })
+            }, 
+            
+            // 注册
+            sign() {         
+                axios.post('/sign/', this.sign_form).then(res => {
+                    if(res.code) {
+                        // 验证失败
+                        this.$message.error(res.msg)
+                        this.$refs[`sign_form_${res.self}`].focus()
+                        if(res.code === 4) {
+                            this.login_form.pwd = ""
                         }
                         return
                     } else {

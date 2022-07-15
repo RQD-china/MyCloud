@@ -26,7 +26,7 @@
                     <a href="#">导航</a>
                 </div>
                 <div class="right">
-                    <img :src="'/static/mine/img/nav/' + theme + '.svg'" @click = "setTheme(theme)">
+                    <img :src="'/static/mine/img/nav/' + theme + '.svg'" @click = "set_theme(theme)">
                     <a href="/login">登录</a>
                     <a href="/sign">注册</a>
                 </div>
@@ -132,7 +132,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="hotList card">
+                            <div class="hot_list card">
                                 <div class="title">
                                     <h2>今日热搜</h2>
                                     <div>
@@ -143,7 +143,7 @@
                                     主要内容区域
                                 </div>
                             </div>
-                            <div class="allArticle card">
+                            <div class="all_article card">
                                 <div class="title">
                                     <h2>博客文章</h2>
                                 </div>
@@ -216,7 +216,7 @@
                             </div>
                         </div>
                         <div class="right">
-                            <div class="siteInfo card">
+                            <div class="site_info card">
                                 <div class="title">
                                     <h2>站点信息</h2>
                                 </div>
@@ -262,7 +262,7 @@
             <footer>
                 <div class="left">
                     <p class="thank">Thank For</p>
-                    <p class="siteInfo">
+                    <p class="site_info">
                         <span><img src="/static/mine/img/footer/baidu.png" alt=""> 百度智能云</span>
                         <span><img src="/static/mine/img/footer/baidu.png" alt=""> 百度云SSL证书</span>
                         <span><img src="/static/mine/img/footer/qiniu.png" alt=""> 七牛云存储</span>
@@ -308,12 +308,12 @@
                 theme: 'light'
             },
             created() {
-                this.initTheme()
+                this.init_theme()
             },
             methods: {
                 //设置主题
-                setTheme(themeName) {
-                    if(themeName == "light")
+                set_theme(theme_name) {
+                    if(theme_name == "light")
                         this.theme = "dark"
                     else
                         this.theme = "light"
@@ -323,7 +323,7 @@
                 },
                 
                 //初始化主题
-                initTheme() {
+                init_theme() {
                     // 读取存储的主题
                     let theme = localStorage.getItem('theme')
                     if(theme) {
@@ -334,17 +334,17 @@
         })
         
             //获取轮播图
-            let menImg = document.querySelectorAll('.dynamicShuffle')
+            let men_img = document.querySelectorAll('.dynamicShuffle')
             //设置时钟轮播
-            let maxLength = menImg.length
+            let max_length = men_img.length
             let index = -1
             setInterval(() => {
                 index++
-                index = index % maxLength
-                for(let img of menImg) {
+                index = index % max_length
+                for(let img of men_img) {
                     img.style.opacity = 0
                 }
-                menImg[index].style.opacity = 1
+                men_img[index].style.opacity = 1
             }, 2000);
         </script>
     </body>

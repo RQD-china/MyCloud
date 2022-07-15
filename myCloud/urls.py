@@ -17,12 +17,14 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.conf import settings
 from django.views.static import serve
+from django.contrib import admin
 from app01 import views
 
 urlpatterns = [
-    path('', views.Index),
-    path('news/', views.News),
-    path('login/', views.Login),
-    path('sign/', views.Sign),
+    path('', views.index),
+    path('news/', views.news),
+    path('login/', views.login),
+    path('sign/', views.sign),
+    path('admin/', admin.site.urls),
     re_path(r'media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
