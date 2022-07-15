@@ -101,7 +101,7 @@
         methods: {
             // 登录
             login() {         
-                axios.post('/login/', this.login_form).then(res => {
+                axios.post('/api/login/', this.login_form).then(res => {
                     if(res.code) {
                         // 验证失败
                         this.$message.error(res.msg)
@@ -121,7 +121,7 @@
             
             // 注册
             sign() {         
-                axios.post('/sign/', this.sign_form).then(res => {
+                axios.post('/api/sign/', this.sign_form).then(res => {
                     if(res.code) {
                         // 验证失败
                         this.$message.error(res.msg)
