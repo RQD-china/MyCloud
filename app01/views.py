@@ -1,7 +1,7 @@
+import imp
 from django.shortcuts import render
 from django.http import JsonResponse
 from django import forms
-from django.urls import is_valid_path
 
 # Create your views here.
 
@@ -14,6 +14,14 @@ def News(request):
 class LoginForm(forms.Form):
     name = forms.CharField(error_messages={'required': '请输入用户名'})
     pwd = forms.CharField(error_messages={'required': '请输入密码'})
+
+    # 全局钩子
+    def clean(self):
+        name = self.cleaned_data.get('name')
+        pwd = self.cleaned_data.get('pwd')
+        if name != 'admin' or pwd != '12345':
+            self.add_error('pwd', '用户名或密码错误')
+        return self.cleaned_data
 
 def Login(request):
     if request.method == 'POST':
@@ -38,14 +46,6 @@ def Login(request):
             res['code'] = len(list(errorDict.keys()))
             res['msg'] = errorMsg
             res['self'] = errorValid
-            return JsonResponse(res)
-        name = data['name']
-        pwd = data['pwd']
-        if name != 'admin' or pwd != '12345':
-            res['code'] = 3
-            res['msg'] = '用户名或密码错误'
-            res['self'] = 'pwd'
-            return JsonResponse(res)
         return JsonResponse(res)
     return render(request, 'login.html')
     
