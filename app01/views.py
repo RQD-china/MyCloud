@@ -56,9 +56,14 @@ def Login(request):
         print(11)
         form = LoginForm(request.data)
 
+        # 登录失败
         if not form.is_valid():
-            print(111, cleanForm(form))
             res['code'], res['msg'], res['self'] = cleanForm(form)
+            return JsonResponse(res)
+        
+        # 登录成功
+        user = form.cleaned_data.get('user')
+        auth.login(request, user)
         return JsonResponse(res)
     return render(request, 'login.html')
     
