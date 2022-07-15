@@ -1,7 +1,7 @@
 import imp
 from re import U
 from click import password_option
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import JsonResponse
 from django import forms
 from django.contrib import auth
@@ -11,7 +11,7 @@ from app01.models import UserInfo
 
 # 主页
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'index.html', {'request': request})
     
 # 新闻页
 def news(request):
@@ -110,3 +110,8 @@ def sign(request):
         UserInfo.objects.create_user(username = data['name'], password = data['pwd'])
         return JsonResponse(res)
     return render(request, 'sign.html')
+
+# 注销
+def logout(request):
+    auth.logout(request)
+    return redirect('/')

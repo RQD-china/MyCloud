@@ -1,352 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load myTag %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Richy的个人博客</title>
+    <link rel="shortcut icon" href="/static/mine/img/logo/logo.jpg">
+    <link rel="stylesheet" href="/static/mine/css/index.css">
+    <link rel="stylesheet" href="/static/mine/css/reset.css">
+    <link rel="stylesheet" href="/static/font/css/font-awesome.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="/static/vue/vue.js"></script>
+</head>
 
-    <!DOCTYPE html>
-    <html lang="en">
-    {% load myTag %}
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Richy的个人博客</title>
-        <link rel="shortcut icon" href="/static/mine/img/logo/logo.jpg">
-        <link rel="stylesheet" href="/static/mine/css/index.css">
-        <link rel="stylesheet" href="/static/mine/css/reset.css">
-        <link rel="stylesheet" href="/static/font/css/font-awesome.css">
-        <script src="/static/vue/vue.js"></script>
-    </head>
-
-    <body>
-        <div id="app">
-            <link rel="stylesheet" :href="'/static/mine/css/theme/' + theme + '.css'">
-            <nav>
-                <div class="left">
-                    <a href="/">首页</a>
-                    <a href="/news">新闻</a>
-                    <a href="#">动态</a>
-                    <a href="#">关于</a>
-                    <a href="#">导航</a>
-                </div>
-                <div class="right">
-                    <img :src="'/static/mine/img/nav/' + theme + '.svg'" @click = "set_theme(theme)">
+<body>
+    <div id="app">
+        <link rel="stylesheet" :href="'/static/mine/css/theme/' + theme + '.css'">
+        <nav>
+            <div class="left">
+                <a href="/">首页</a>
+                <a href="/news">新闻</a>
+                <a href="#">动态</a>
+                <a href="#">关于</a>
+                <a href="#">导航</a>
+            </div>
+            <div class="right">
+                <img :src="'/static/mine/img/nav/' + theme + '.svg'" @click = "set_theme(theme)">
+                {% if request.user.username %}
+                    <el-dropdown>
+                        <span class="el-dropdown-link">
+                            {{ request.user.username }}<i class="el-icon-arrow-down el-icon--right"></i>
+                        </span>
+                        <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item command="a"><a href="">个人中心</a></el-dropdown-item>
+                        <el-dropdown-item command="b"><a href="">修改密码</a></el-dropdown-item>
+                        <el-dropdown-item command="c"><a href="">发布文章</a></el-dropdown-item>
+                        <el-dropdown-item command="d"><a href="">后台管理</a></el-dropdown-item>
+                        <el-dropdown-item command="e" divided><a href="/logout/">注销</a></el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>            
+                {% else %}
                     <a href="/login">登录</a>
                     <a href="/sign">注册</a>
-                </div>
-            </nav>
-            {% banner 'index' %}
-            <main>
-                {% block main %}
-                    <div class="main">
-                        <div class="left">
-                            <div class="boutique card">
-                                <div class="title">
-                                    <h2>精选文章</h2>
-                                    <div>
-                                        <a href="#">查看更多</a>
-                                    </div>
-                                </div>
-                                <div class="body">
-                                    <ul>
-                                        <li>
-                                            <div class="left">
-                                                <div>
-                                                    <img src="https://file03.16sucai.com/2017/1100/16sucai_p586f198_566.JPG" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="right">                                                
-                                                <h2><a href="">Django快速上手</a></h2>
-                                                <p>
-                                                    Django快速上手 1. 安装Django 1. 首先安装Python，我的Python是3.8版本。2. 在VSCode扩展搜索Django，安装Django插件 3. 打开VSCode终端，输入命令安装Django > pip3 install django 4. 完成Django的安装
-                                                </p>
-                                                <span>2天前</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="left">
-                                                <div>
-                                                    <img src="https://file03.16sucai.com/2017/1100/16sucai_p586f198_566.JPG" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="right">                                                
-                                                <h2><a href="">Django快速上手</a></h2>
-                                                <p>
-                                                    Django快速上手 1. 安装Django 1. 首先安装Python，我的Python是3.8版本。2. 在VSCode扩展搜索Django，安装Django插件 3. 打开VSCode终端，输入命令安装Django > pip3 install django 4. 完成Django的安装
-                                                </p>
-                                                <span>2天前</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="left">
-                                                <div>
-                                                    <img src="https://file03.16sucai.com/2017/1100/16sucai_p586f198_566.JPG" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="right">                                                
-                                                <h2><a href="">Django快速上手</a></h2>
-                                                <p>
-                                                    Django快速上手 1. 安装Django 1. 首先安装Python，我的Python是3.8版本。2. 在VSCode扩展搜索Django，安装Django插件 3. 打开VSCode终端，输入命令安装Django > pip3 install django 4. 完成Django的安装
-                                                </p>
-                                                <span>2天前</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="left">
-                                                <div>
-                                                    <img src="https://file03.16sucai.com/2017/1100/16sucai_p586f198_566.JPG" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="right">                                                
-                                                <h2><a href="">Django快速上手</a></h2>
-                                                <p>
-                                                    Django快速上手 1. 安装Django 1. 首先安装Python，我的Python是3.8版本。2. 在VSCode扩展搜索Django，安装Django插件 3. 打开VSCode终端，输入命令安装Django > pip3 install django 4. 完成Django的安装
-                                                </p>
-                                                <span>2天前</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="left">
-                                                <div>
-                                                    <img src="https://file03.16sucai.com/2017/1100/16sucai_p586f198_566.JPG" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="right">                                                
-                                                <h2><a href="">Django快速上手</a></h2>
-                                                <p>
-                                                    Django快速上手 1. 安装Django 1. 首先安装Python，我的Python是3.8版本。2. 在VSCode扩展搜索Django，安装Django插件 3. 打开VSCode终端，输入命令安装Django > pip3 install django 4. 完成Django的安装
-                                                </p>
-                                                <span>2天前</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="left">
-                                                <div>
-                                                    <img src="https://file03.16sucai.com/2017/1100/16sucai_p586f198_566.JPG" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="right">                                                
-                                                <h2><a href="">Django快速上手</a></h2>
-                                                <p>
-                                                    Django快速上手 1. 安装Django 1. 首先安装Python，我的Python是3.8版本。2. 在VSCode扩展搜索Django，安装Django插件 3. 打开VSCode终端，输入命令安装Django > pip3 install django 4. 完成Django的安装
-                                                </p>
-                                                <span>2天前</span>
-                                            </div>
-                                        </li>
-                                    </ul>
+                {% endif %}                    
+            </div>
+        </nav>
+        {% banner 'index' %}
+        <main>
+            {% block main %}
+                <div class="main">
+                    <div class="left">
+                        <div class="boutique card">
+                            <div class="title">
+                                <h2>精选文章</h2>
+                                <div>
+                                    <a href="#">查看更多</a>
                                 </div>
                             </div>
-                            <div class="hot_list card">
-                                <div class="title">
-                                    <h2>今日热搜</h2>
-                                    <div>
-                                        <a href="#">查看更多</a>
-                                    </div>
-                                </div>
-                                <div class="body">
-                                    主要内容区域
-                                </div>
-                            </div>
-                            <div class="all_article card">
-                                <div class="title">
-                                    <h2>博客文章</h2>
-                                </div>
-                                <div class="body">
-                                    <ul>
-                                        <li>
-                                            <div class="left">
-                                                <div>
-                                                    <img src="https://file03.16sucai.com/2017/1100/16sucai_p586f198_566.JPG" alt="">
-                                                </div>
+                            <div class="body">
+                                <ul>
+                                    <li>
+                                        <div class="left">
+                                            <div>
+                                                <img src="https://file03.16sucai.com/2017/1100/16sucai_p586f198_566.JPG" alt="">
                                             </div>
-                                            <div class="right">
-                                                <h2><a href="">Django快速上手</a></h2>
-                                                <p>
-                                                    Django快速上手 1. 安装Django 1. 首先安装Python，我的Python是3.8版本。2. 在VSCode扩展搜索Django，安装Django插件 3. 打开VSCode终端，输入命令安装Django > pip3 install django 4. 完成Django的安装
-                                                </p>
-                                                <div class="articleInfo">
-                                                    <span>
-                                                        <i class="fa fa-clock-o"></i>2022-07-09
-                                                    </span>
-                                                    <span>
-                                                        <i class="fa fa-eye"></i>202
-                                                    </span>
-                                                    <span>
-                                                        <i class="fa fa-thumbs-up"></i>16
-                                                    </span>
-                                                    <span>
-                                                        <i class="fa fa-comment"></i>2
-                                                    </span>
-                                                    <span>
-                                                        <i class="fa fa-star"></i>3
-                                                    </span>
-                                                </div>
-                                                <button><a href="">查看详情</a></button>
+                                        </div>
+                                        <div class="right">                                                
+                                            <h2><a href="">Django快速上手</a></h2>
+                                            <p>
+                                                Django快速上手 1. 安装Django 1. 首先安装Python，我的Python是3.8版本。2. 在VSCode扩展搜索Django，安装Django插件 3. 打开VSCode终端，输入命令安装Django > pip3 install django 4. 完成Django的安装
+                                            </p>
+                                            <span>2天前</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left">
+                                            <div>
+                                                <img src="https://file03.16sucai.com/2017/1100/16sucai_p586f198_566.JPG" alt="">
                                             </div>
-                                        </li>
-                                        <li>
-                                            <div class="left">
-                                                <div>
-                                                    <img src="https://file03.16sucai.com/2017/1100/16sucai_p586f198_566.JPG" alt="">
-                                                </div>
+                                        </div>
+                                        <div class="right">                                                
+                                            <h2><a href="">Django快速上手</a></h2>
+                                            <p>
+                                                Django快速上手 1. 安装Django 1. 首先安装Python，我的Python是3.8版本。2. 在VSCode扩展搜索Django，安装Django插件 3. 打开VSCode终端，输入命令安装Django > pip3 install django 4. 完成Django的安装
+                                            </p>
+                                            <span>2天前</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left">
+                                            <div>
+                                                <img src="https://file03.16sucai.com/2017/1100/16sucai_p586f198_566.JPG" alt="">
                                             </div>
-                                            <div class="right">
-                                                <h2><a href="">Django快速上手</a></h2>
-                                                <p>
-                                                    Django快速上手 1. 安装Django 1. 首先安装Python，我的Python是3.8版本。2. 在VSCode扩展搜索Django，安装Django插件 3. 打开VSCode终端，输入命令安装Django > pip3 install django 4. 完成Django的安装
-                                                </p>
-                                                <div class="articleInfo">
-                                                    <span>
-                                                        <i class="fa fa-clock-o"></i>2022-07-09
-                                                    </span>
-                                                    <span>
-                                                        <i class="fa fa-eye"></i>202
-                                                    </span>
-                                                    <span>
-                                                        <i class="fa fa-thumbs-up"></i>16
-                                                    </span>
-                                                    <span>
-                                                        <i class="fa fa-comment"></i>2
-                                                    </span>
-                                                    <span>
-                                                        <i class="fa fa-star"></i>3
-                                                    </span>
-                                                </div>
-                                                <button><a href="">查看详情</a></button>
+                                        </div>
+                                        <div class="right">                                                
+                                            <h2><a href="">Django快速上手</a></h2>
+                                            <p>
+                                                Django快速上手 1. 安装Django 1. 首先安装Python，我的Python是3.8版本。2. 在VSCode扩展搜索Django，安装Django插件 3. 打开VSCode终端，输入命令安装Django > pip3 install django 4. 完成Django的安装
+                                            </p>
+                                            <span>2天前</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left">
+                                            <div>
+                                                <img src="https://file03.16sucai.com/2017/1100/16sucai_p586f198_566.JPG" alt="">
                                             </div>
-                                        </li>
-                                    </ul>
-                                </div>
+                                        </div>
+                                        <div class="right">                                                
+                                            <h2><a href="">Django快速上手</a></h2>
+                                            <p>
+                                                Django快速上手 1. 安装Django 1. 首先安装Python，我的Python是3.8版本。2. 在VSCode扩展搜索Django，安装Django插件 3. 打开VSCode终端，输入命令安装Django > pip3 install django 4. 完成Django的安装
+                                            </p>
+                                            <span>2天前</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left">
+                                            <div>
+                                                <img src="https://file03.16sucai.com/2017/1100/16sucai_p586f198_566.JPG" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="right">                                                
+                                            <h2><a href="">Django快速上手</a></h2>
+                                            <p>
+                                                Django快速上手 1. 安装Django 1. 首先安装Python，我的Python是3.8版本。2. 在VSCode扩展搜索Django，安装Django插件 3. 打开VSCode终端，输入命令安装Django > pip3 install django 4. 完成Django的安装
+                                            </p>
+                                            <span>2天前</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left">
+                                            <div>
+                                                <img src="https://file03.16sucai.com/2017/1100/16sucai_p586f198_566.JPG" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="right">                                                
+                                            <h2><a href="">Django快速上手</a></h2>
+                                            <p>
+                                                Django快速上手 1. 安装Django 1. 首先安装Python，我的Python是3.8版本。2. 在VSCode扩展搜索Django，安装Django插件 3. 打开VSCode终端，输入命令安装Django > pip3 install django 4. 完成Django的安装
+                                            </p>
+                                            <span>2天前</span>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="right">
-                            <div class="site_info card">
-                                <div class="title">
-                                    <h2>站点信息</h2>
-                                </div>
-                                <div class="body">
-                                    主要内容区域
+                        <div class="hot_list card">
+                            <div class="title">
+                                <h2>今日热搜</h2>
+                                <div>
+                                    <a href="#">查看更多</a>
                                 </div>
                             </div>
-                            <div class="tags card">
-                                <div class="title">
-                                    <h2>标签云</h2>
-                                </div>
-                                <div class="body">
-                                    <ul>
-                                        <li>Python</li>
-                                        <li>Django</li>
-                                        <li>Node.js</li>
-                                        <li>HTML</li>
-                                        <li>CSS</li>
-                                        <li>JavaScript</li>
-                                        <li>Typescript</li>
-                                        <li>Vue</li>
-                                        <li>Vite</li>
-                                        <li>ORM</li>
-                                        <li>MySQL</li>
-                                        <li>Nginx</li>
-                                        <li>PHP</li>
-                                        <li>Java</li>
-                                        <li>Go</li>
-                                </div>
-                            </div>
-                            <div class="links card">
-                                <div class="title">
-                                    <h2>友情链接</h2>
-                                </div>
-                                <div class="body">
-                                    主要内容区域
-                                </div>
+                            <div class="body">
+                                主要内容区域
                             </div>
                         </div>
-                    </div>                  
-                {% endblock main %}
-            </main>
-            <footer>
-                <div class="left">
-                    <p class="thank">Thank For</p>
-                    <p class="site_info">
-                        <span><img src="/static/mine/img/footer/baidu.png" alt=""> 百度智能云</span>
-                        <span><img src="/static/mine/img/footer/baidu.png" alt=""> 百度云SSL证书</span>
-                        <span><img src="/static/mine/img/footer/qiniu.png" alt=""> 七牛云存储</span>
-                    </p>
-                    <p class="version">
-                        <span>version</span>
-                        <span>1.0.1</span>
-                    </p>
-                    <p>Powered by Django and Vue.js</p>
-                </div>
-                <div class="right">
-                    <div class="contact">
-                        <div class="QQ">
-                            <img class="svg" src="/static/mine/img/footer/qq.svg" alt="">
-                            <img class="QR" src="/static/mine/img/footer/qq.jpg" alt="">
+                        <div class="all_article card">
+                            <div class="title">
+                                <h2>博客文章</h2>
+                            </div>
+                            <div class="body">
+                                <ul>
+                                    <li>
+                                        <div class="left">
+                                            <div>
+                                                <img src="https://file03.16sucai.com/2017/1100/16sucai_p586f198_566.JPG" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="right">
+                                            <h2><a href="">Django快速上手</a></h2>
+                                            <p>
+                                                Django快速上手 1. 安装Django 1. 首先安装Python，我的Python是3.8版本。2. 在VSCode扩展搜索Django，安装Django插件 3. 打开VSCode终端，输入命令安装Django > pip3 install django 4. 完成Django的安装
+                                            </p>
+                                            <div class="articleInfo">
+                                                <span>
+                                                    <i class="fa fa-clock-o"></i>2022-07-09
+                                                </span>
+                                                <span>
+                                                    <i class="fa fa-eye"></i>202
+                                                </span>
+                                                <span>
+                                                    <i class="fa fa-thumbs-up"></i>16
+                                                </span>
+                                                <span>
+                                                    <i class="fa fa-comment"></i>2
+                                                </span>
+                                                <span>
+                                                    <i class="fa fa-star"></i>3
+                                                </span>
+                                            </div>
+                                            <button><a href="">查看详情</a></button>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left">
+                                            <div>
+                                                <img src="https://file03.16sucai.com/2017/1100/16sucai_p586f198_566.JPG" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="right">
+                                            <h2><a href="">Django快速上手</a></h2>
+                                            <p>
+                                                Django快速上手 1. 安装Django 1. 首先安装Python，我的Python是3.8版本。2. 在VSCode扩展搜索Django，安装Django插件 3. 打开VSCode终端，输入命令安装Django > pip3 install django 4. 完成Django的安装
+                                            </p>
+                                            <div class="articleInfo">
+                                                <span>
+                                                    <i class="fa fa-clock-o"></i>2022-07-09
+                                                </span>
+                                                <span>
+                                                    <i class="fa fa-eye"></i>202
+                                                </span>
+                                                <span>
+                                                    <i class="fa fa-thumbs-up"></i>16
+                                                </span>
+                                                <span>
+                                                    <i class="fa fa-comment"></i>2
+                                                </span>
+                                                <span>
+                                                    <i class="fa fa-star"></i>3
+                                                </span>
+                                            </div>
+                                            <button><a href="">查看详情</a></button>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="Wechat">
-                            <img class="svg" src="/static/mine/img/footer/wechat.svg" alt="">
-                            <img class="QR" src="/static/mine/img/footer/wechat.jpg" alt="">
+                    </div>
+                    <div class="right">
+                        <div class="site_info card">
+                            <div class="title">
+                                <h2>站点信息</h2>
+                            </div>
+                            <div class="body">
+                                主要内容区域
+                            </div>
                         </div>
-                        <a class="link" href="https://space.bilibili.com/12188724" target="_blank">
-                            <img class="svg" src="/static/mine/img/footer/bilibili.svg" alt="">
-                            <span class="tips">点击图标跳转</span>
-                        </a>
-                        <a class="link" href="https://weibo.com/richycloud" target="_blank">
-                            <img class="svg" src="/static/mine/img/footer/weibo.svg" alt="">
-                            <span class="tips">点击图标跳转</span>
-                        </a>
-                        <a class="link" href="https://github.com/RQD-china" target="_blank">
-                            <img class="svg" src="/static/mine/img/footer/github.svg" alt="">
-                            <span class="tips">点击图标跳转</span>
-                        </a>
+                        <div class="tags card">
+                            <div class="title">
+                                <h2>标签云</h2>
+                            </div>
+                            <div class="body">
+                                <ul>
+                                    <li>Python</li>
+                                    <li>Django</li>
+                                    <li>Node.js</li>
+                                    <li>HTML</li>
+                                    <li>CSS</li>
+                                    <li>JavaScript</li>
+                                    <li>Typescript</li>
+                                    <li>Vue</li>
+                                    <li>Vite</li>
+                                    <li>ORM</li>
+                                    <li>MySQL</li>
+                                    <li>Nginx</li>
+                                    <li>PHP</li>
+                                    <li>Java</li>
+                                    <li>Go</li>
+                            </div>
                         </div>
-                    <p>联系邮箱：1245413737@qq.com</p>
-                </div>
-            </footer>
-        </div>
-        <script>
-            new Vue({
-            el: '#app',
-            delimiters: ["[[", "]]"],
-            data: {
-                theme: 'light'
-            },
-            created() {
-                this.init_theme()
-            },
-            methods: {
-                //设置主题
-                set_theme(theme_name) {
-                    if(theme_name == "light")
-                        this.theme = "dark"
-                    else
-                        this.theme = "light"
-                    
-                    //持久化存储
-                    localStorage.setItem('theme', this.theme)
-                },
-                
-                //初始化主题
-                init_theme() {
-                    // 读取存储的主题
-                    let theme = localStorage.getItem('theme')
-                    if(theme) {
-                        this.theme = theme
-                    }
-                }
-            }
-        })
-        
-            //获取轮播图
-            let men_img = document.querySelectorAll('.dynamicShuffle')
-            //设置时钟轮播
-            let max_length = men_img.length
-            let index = -1
-            setInterval(() => {
-                index++
-                index = index % max_length
-                for(let img of men_img) {
-                    img.style.opacity = 0
-                }
-                men_img[index].style.opacity = 1
-            }, 2000);
-        </script>
-    </body>
+                        <div class="links card">
+                            <div class="title">
+                                <h2>友情链接</h2>
+                            </div>
+                            <div class="body">
+                                主要内容区域
+                            </div>
+                        </div>
+                    </div>
+                </div>                  
+            {% endblock main %}
+        </main>
+        <footer>
+            <div class="left">
+                <p class="thank">Thank For</p>
+                <p class="site_info">
+                    <span><img src="/static/mine/img/footer/baidu.png" alt=""> 百度智能云</span>
+                    <span><img src="/static/mine/img/footer/baidu.png" alt=""> 百度云SSL证书</span>
+                    <span><img src="/static/mine/img/footer/qiniu.png" alt=""> 七牛云存储</span>
+                </p>
+                <p class="version">
+                    <span>version</span>
+                    <span>1.0.1</span>
+                </p>
+                <p>Powered by Django and Vue.js</p>
+            </div>
+            <div class="right">
+                <div class="contact">
+                    <div class="QQ">
+                        <img class="svg" src="/static/mine/img/footer/qq.svg" alt="">
+                        <img class="QR" src="/static/mine/img/footer/qq.jpg" alt="">
+                    </div>
+                    <div class="Wechat">
+                        <img class="svg" src="/static/mine/img/footer/wechat.svg" alt="">
+                        <img class="QR" src="/static/mine/img/footer/wechat.jpg" alt="">
+                    </div>
+                    <a class="link" href="https://space.bilibili.com/12188724" target="_blank">
+                        <img class="svg" src="/static/mine/img/footer/bilibili.svg" alt="">
+                        <span class="tips">点击图标跳转</span>
+                    </a>
+                    <a class="link" href="https://weibo.com/richycloud" target="_blank">
+                        <img class="svg" src="/static/mine/img/footer/weibo.svg" alt="">
+                        <span class="tips">点击图标跳转</span>
+                    </a>
+                    <a class="link" href="https://github.com/RQD-china" target="_blank">
+                        <img class="svg" src="/static/mine/img/footer/github.svg" alt="">
+                        <span class="tips">点击图标跳转</span>
+                    </a>
+                    </div>
+                <p>联系邮箱：1245413737@qq.com</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
 
-    </html>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+new Vue({
+el: '#app',
+delimiters: ["[[", "]]"],
+data: {
+    theme: 'light'
+},
+created() {
+    this.init_theme()
+},
+methods: {
+    //设置主题
+    set_theme(theme_name) {
+        if(theme_name == "light")
+            this.theme = "dark"
+        else
+            this.theme = "light"
+        
+        //持久化存储
+        localStorage.setItem('theme', this.theme)
+    },
+    
+    //初始化主题
+    init_theme() {
+        // 读取存储的主题
+        let theme = localStorage.getItem('theme')
+        if(theme) {
+            this.theme = theme
+        }
+    }
+}
+})
+
+//获取轮播图
+let men_img = document.querySelectorAll('.dynamicShuffle')
+//设置时钟轮播
+let max_length = men_img.length
+let index = -1
+setInterval(() => {
+    index++
+    index = index % max_length
+    for(let img of men_img) {
+        img.style.opacity = 0
+    }
+    men_img[index].style.opacity = 1
+}, 2000);
+</script>

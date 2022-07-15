@@ -46,6 +46,10 @@
                 width: 20px;
                 margin-right: 20px;
             }
+
+            .el-dropdown-link {
+                color: white;
+            }
         }
 
         a {
@@ -509,4 +513,8 @@
             }
         }
     }
+}
+
+.el-dropdown-menu a {
+    color: #333;
 }

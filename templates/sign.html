@@ -12,7 +12,7 @@
         <h3>PASSWORD</h3>
         <input class="text" v-model="sign_form.pwd" ref="sign_form_pwd" type="password">
         <h3>CONFIRM PASSWORD</h3>
-        <input class="text" v-model="sign_form.re_pwd" ref="sign_form_re_pwd" type="password">
+        <input class="text" v-model="sign_form.re_pwd" ref="sign_form_re_pwd" @keydown.enter="sign" type="password">
         <input class="btn" @click = "sign" type="submit" value="SUBMIT">
     </div>                  
 {% endblock form %}

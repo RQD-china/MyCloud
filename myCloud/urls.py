@@ -24,6 +24,7 @@ urlpatterns = [
     path('', views.index),
     path('news/', views.news),
     path('login/', views.login),
+    path('logout/', views.logout),
     path('sign/', views.sign),
     path('admin/', admin.site.urls),
     re_path(r'media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
