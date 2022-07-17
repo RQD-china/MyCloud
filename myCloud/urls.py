@@ -29,6 +29,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # 路由分发
+    re_path(r'^article/(?P<nid>\d+)/', views.article),
     re_path(r'media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     re_path(r'^api/', include('api.urls')),
 ]

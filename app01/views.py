@@ -4,6 +4,7 @@ from click import password_option
 from django.shortcuts import redirect, render
 from django.http import JsonResponse
 from django.contrib import auth
+from sympy import re
 
 # Create your views here.
 
@@ -11,6 +12,10 @@ from django.contrib import auth
 def index(request):
     return render(request, 'index.html', {'request': request})
     
+# 文章
+def article(request, nid):
+    return render(request, 'article.html')
+
 # 新闻页
 def news(request):
     return render(request, 'news.html')

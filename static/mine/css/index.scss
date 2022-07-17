@@ -21,500 +21,277 @@
 #app {
     width: 100%;
 
-    nav {
-        width: calc(100% - 400px);
-        height: 60px;
-        //background-color: var(--nav_bg);
+    .main {
+        width: 1200px;
+        min-height: 200px;
+        //background-color: #26c6da;
         display: flex;
-        align-items: center;
-        padding: 0 200px;
-        z-index: 100;
-        position: fixed;
-        top: 0;
-        left: 0;
+        justify-content: space-between;
+
+        > div > div {
+            margin-bottom: 20px;
+        }
 
         .left {
-            width: 50%;
-        }
+            width: 69%;
 
-        .right {
-            width: 50%;
-            display: flex;
-            justify-content: right;
+            .boutique > .body {
+                padding: 0 20px 10px 20px;
 
-            img {
-                width: 20px;
-                margin-right: 20px;
-            }
-
-            .el-dropdown-link {
-                color: white;
-            }
-        }
-
-        a {
-            margin-right: 20px;
-            color: white;
-
-            &:last-child {
-                margin-right: 0;
-            }
-        }
-    }
-
-    header {
-        width: 100%;
-        height: 500px;
-        position: relative;
-
-        >.dynamicShuffle {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            transition: all 1s;
-            opacity: 0;
-
-            &:first-child {
-                opacity: 1;
-            }
-
-            img {
-                width: 100%;
-            }
-        }
-    }
-
-    main {
-        width: calc(100% - 120px);
-        padding: 20px 60px;
-        min-height: 600px;
-        background-color: var(--main_bg);
-        color: var(--main_color);
-        display: flex;
-        justify-content: center;
-
-        .main {
-            width: 1200px;
-            min-height: 200px;
-            //background-color: #26c6da;
-            display: flex;
-            justify-content: space-between;
-
-            > div > div {
-                margin-bottom: 20px;
-            }
-
-            .left {
-                width: 69%;
-
-                .boutique > .body {
-                    padding: 0 20px 10px 20px;
-
-                    ul {
+                ul {
+                    display: flex;
+                    flex-wrap: wrap;
+                    > li {
+                        width: 50%;
+                        box-sizing: border-box;
+                        height: 100px;
+                        padding: 10px 0;
                         display: flex;
-                        flex-wrap: wrap;
-                        > li {
-                            width: 50%;
-                            box-sizing: border-box;
-                            height: 100px;
-                            padding: 10px 0;
-                            display: flex;
 
-                            &:nth-child(1), &:nth-child(2) {
-                                padding-top: 10px;                             
-                            }
-
-                            &:nth-child(1), &:nth-child(3), &:nth-child(5) {
-                                padding-right: 5px;
-                                border-right: 1px solid #f5f5f5;                                
-                            }
-
-                            &:nth-child(2), &:nth-child(4), &:nth-child(6) {
-                                padding-left: 10px;                              
-                            }
-
-                            &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4) {
-                                border-bottom: 1px solid #f5f5f5;                                       
-                            }
-
-                            .left {
-                                width: 40%;
-
-                                > div {
-                                    width: 100%;
-                                    overflow: hidden;
-                                    height: 80px;
-
-                                    img {
-                                        width: 100%;
-                                        transition: all 0.3s;
-    
-                                        &:hover {
-                                            transform: scale(1.1);
-                                        }
-                                    }
-                                }
-                            }
-
-                            .right {
-                                width: 60%;
-                                padding-left: 10px;
-                                box-sizing: border-box;
-                                display: flex;
-                                flex-direction: column;
-                                justify-content: space-between;
-
-                                h2 {
-                                    a {
-                                        color: #333;
-                                        font-size: 20px;
-                                    }
-                                }
-
-                                p {
-                                    font-size: 16px;
-                                    margin: 5px 0;
-                                    white-space: nowrap;
-                                    overflow: hidden;
-                                    text-overflow: ellipsis;
-                                }
-
-                                span {
-                                    font-size: 14px;
-                                    color: #555;
-                                }
-                            }
+                        &:nth-child(1), &:nth-child(2) {
+                            padding-top: 10px;                             
                         }
-                    }
-                }
 
-                .all_article > .body {
-                    background-color: transparent;
-                    padding: 0;
+                        &:nth-child(1), &:nth-child(3), &:nth-child(5) {
+                            padding-right: 5px;
+                            border-right: 1px solid #f5f5f5;                                
+                        }
 
-                    > ul {
-                        width: 100%;
-                        background-color: #f5f5f5;
+                        &:nth-child(2), &:nth-child(4), &:nth-child(6) {
+                            padding-left: 10px;                              
+                        }
 
-                        > li {
-                            width: 100%;
-                            display: flex;
-                            background-color: white;
-                            margin-bottom: 20px;
-                            border-radius: 5px;
+                        &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4) {
+                            border-bottom: 1px solid #f5f5f5;                                       
+                        }
 
-                            &:first-child {
-                                border-radius: 0 0 5px 5px;
+                        .left {
+                            width: 40%;
 
-                                .left {
-                                    padding: 10px 10px 20px 20px;
-                                }
-
-                                .right {
-                                    padding: 10px 10px 20px 20px;
-                                }
-                            }
-
-                            .left {
-                                width: 30%;
-                                box-sizing: border-box;
-                                padding: 20px 10px 20px 20px;
-
-                                > div {
-                                    width: 100%;
-                                    height: 120px;
-                                    overflow: hidden;
-                                }
+                            > div {
+                                width: 100%;
+                                overflow: hidden;
+                                height: 80px;
 
                                 img {
                                     width: 100%;
-                                    height: 120px;
-                                    object-fit: cover;
                                     transition: all 0.3s;
 
                                     &:hover {
-                                        transform:  scale(1.1);
+                                        transform: scale(1.1);
                                     }
                                 }
+                            }
+                        }
+
+                        .right {
+                            width: 60%;
+                            padding-left: 10px;
+                            box-sizing: border-box;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+
+                            h2 {
+                                a {
+                                    color: #333;
+                                    font-size: 20px;
+                                }
+                            }
+
+                            p {
+                                font-size: 16px;
+                                margin: 5px 0;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                            }
+
+                            span {
+                                font-size: 14px;
+                                color: #555;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .all_article > .body {
+                background-color: transparent;
+                padding: 0;
+
+                > ul {
+                    width: 100%;
+                    background-color: #f5f5f5;
+
+                    > li {
+                        width: 100%;
+                        display: flex;
+                        background-color: white;
+                        margin-bottom: 20px;
+                        border-radius: 5px;
+
+                        &:first-child {
+                            border-radius: 0 0 5px 5px;
+
+                            .left {
+                                padding: 10px 10px 20px 20px;
                             }
 
                             .right {
-                                width: 70%;
-                                padding: 20px 20px 20px 10px;
-                                display: flex;
-                                flex-direction: column;
-                                justify-content: space-between;
-                                position: relative;
+                                padding: 10px 10px 20px 20px;
+                            }
+                        }
 
-                                > h2 {
-                                    font-size: 20px;
+                        .left {
+                            width: 30%;
+                            box-sizing: border-box;
+                            padding: 20px 10px 20px 20px;
 
-                                    > a {                                        
-                                        color: #333;
+                            > div {
+                                width: 100%;
+                                height: 120px;
+                                overflow: hidden;
+                            }
+
+                            img {
+                                width: 100%;
+                                height: 120px;
+                                object-fit: cover;
+                                transition: all 0.3s;
+
+                                &:hover {
+                                    transform:  scale(1.1);
+                                }
+                            }
+                        }
+
+                        .right {
+                            width: 70%;
+                            padding: 20px 20px 20px 10px;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+                            position: relative;
+
+                            > h2 {
+                                font-size: 20px;
+
+                                > a {                                        
+                                    color: #333;
+                                }
+                            }
+
+                            > p {
+                                display: -webkit-box;
+                                -webkit-box-orient: vertical;
+                                -webkit-line-clamp: 2;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                            }
+
+                            .article_info {
+                                > span {
+                                    margin-right: 10px;
+                                    font-size: 14px;
+                                    color: #555;
+
+                                    i {
+                                        margin-right: 5px;
                                     }
                                 }
+                            }
 
-                                > p {
-                                    display: -webkit-box;
-                                    -webkit-box-orient: vertical;
-                                    -webkit-line-clamp: 2;
-                                    overflow: hidden;
-                                    text-overflow: ellipsis;
-                                }
+                            button {
+                                width: 100px;
+                                height: 40px;
+                                background-color: #26c6da;
+                                position: absolute;
+                                bottom: 10px;
+                                right: 20px;
+                                background-color: #26c6da;
+                                border: none;
+                                border-radius: 5px;                                    
 
-                                .article_info {
-                                    > span {
-                                        margin-right: 10px;
-                                        font-size: 14px;
-                                        color: #555;
-
-                                        i {
-                                            margin-right: 5px;
-                                        }
-                                    }
-                                }
-
-                                button {
-                                    width: 100px;
-                                    height: 40px;
-                                    background-color: #26c6da;
-                                    position: absolute;
-                                    bottom: 10px;
-                                    right: 20px;
-                                    background-color: #26c6da;
-                                    border: none;
-                                    border-radius: 5px;                                    
-
-                                    a {
-                                        color: white;
-                                    }
+                                a {
+                                    color: white;
                                 }
                             }
                         }
                     }
                 }
             }
+        }
 
-            .right {
-                width: 30%;
+        .right {
+            width: 30%;
 
-                .tags > .body {
-                    position: relative;
+            .tags > .body {
+                position: relative;
 
-                    ul {
-                        display: flex;
-                        flex-wrap: wrap;
-                        margin-top: 10px;
+                ul {
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin-top: 10px;
 
-                        @keyframes movBox {
-                            0% {
-                                top: 0;
-                                left: 0;
-                            }
-                            25% {
-                                top: 0;
-                                left: calc(100% - 20px);
-                            }
-                            50% {
-                                top: calc(100% - 20px);
-                                left: calc(100% - 20px);
-                            }
-                            75% {
-                                top: calc(100% - 20px);
-                                left: 0;
-                            }
-                            100% {
-                                top: 0;
-                                left: 0;                                
-                            }
-                        }
-
-                        &::before {
-                            position: absolute;
+                    @keyframes movBox {
+                        0% {
                             top: 0;
                             left: 0;
-                            display: block;
-                            width: 20px;
-                            height: 20px;
-                            content: "";
-                            background-color: #26c6da;
-                            -webkit-animation-name: movBox;
-                            animation-name: movBox;
-                            -webkit-animation-duration: 5s;
-                            animation-duration: 5s;
-                            -webkit-animation-iteration-count: infinite;
-                            animation-iteration-count: infinite;
+                        }
+                        25% {
+                            top: 0;
+                            left: calc(100% - 20px);
+                        }
+                        50% {
+                            top: calc(100% - 20px);
+                            left: calc(100% - 20px);
+                        }
+                        75% {
+                            top: calc(100% - 20px);
+                            left: 0;
+                        }
+                        100% {
+                            top: 0;
+                            left: 0;                                
+                        }
+                    }
+
+                    &::before {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        display: block;
+                        width: 20px;
+                        height: 20px;
+                        content: "";
+                        background-color: #26c6da;
+                        -webkit-animation-name: movBox;
+                        animation-name: movBox;
+                        -webkit-animation-duration: 5s;
+                        animation-duration: 5s;
+                        -webkit-animation-iteration-count: infinite;
+                        animation-iteration-count: infinite;
+                    }
+
+                    li {
+                        width: calc(33.3% - 2px);
+                        height: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: white;
+
+                        &:nth-child(6n+1), &:nth-child(6n+2), &:nth-child(6n+3) {
+                            background-color: #f5f5f5;
                         }
 
-                        li {
-                            width: calc(33.3% - 2px);
-                            height: 40px;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            background-color: white;
-
-                            &:nth-child(6n+1), &:nth-child(6n+2), &:nth-child(6n+3) {
-                                background-color: #f5f5f5;
-                            }
-
-                            &:nth-child(3n+1), &:nth-child(3n+2) {
-                                border-right: 1px solid #f5f5f5;
-                            }
+                        &:nth-child(3n+1), &:nth-child(3n+2) {
+                            border-right: 1px solid #f5f5f5;
                         }
                     }
                 }
             }
         }
     }
-
-    footer {
-        width: 100%;
-        height: 180px;
-        display: flex;
-        background-color: var(--footer_bg);
-        color: var(--footer_color);
-
-        p {
-            margin: 8px 0px;
-        }
-
-        .left,
-        .right {
-            width: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .thank {
-            color: #26c6da;
-            font-size: 20px;
-        }
-
-        .site_info {
-            display: flex;
-            align-items: center;
-
-            span {
-                margin-right: 10px;
-                display: flex;
-                align-items: center;
-            }
-
-            img {
-                width: 20px;
-                margin-right: 10px;
-            }
-        }
-
-        .version {
-            display: flex;
-
-            span {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                color: white;
-                background-color: #333;
-                height: 30px;
-
-                &:nth-child(1) {
-                    width: 100px;
-                    background-color: #26c6da;
-                    border-radius: 5px 0 0 5px;
-                }
-
-                &:nth-child(2) {
-                    width: 70px;
-                    background-color: #26c6da;
-                    border-radius: 0 5px 5px 0;
-                }
-            }
-        }
-
-        .contact {
-            display: flex;
-            width: 240px;
-            justify-content: space-between;
-            position: relative;
-
-            .svg {
-                position: relative;
-                width: 32px;
-                z-index: 1;
-            }
-
-            .QR {
-                width: 80px;
-                position: absolute;
-                top: -50px;
-                left: -24px;
-                opacity: 0;
-                transition: all 0.5s;
-            }
-
-            .tips {
-                width: 100px;
-                font-size: 14px;
-                text-align: center;
-                line-height: 30px;
-                color: white;
-                background-color: #26c6da;
-                border-radius: 5px;
-                position: absolute;
-                top: -10px;
-                left: -34px;
-                opacity: 0;
-                transition: all 0.5s;                
-            }
-
-            .QQ {         
-                position: relative;       
-                .svg {
-                    &:hover {
-                        & ~ .QR {
-                            top: -80px;
-                            left: -24px;
-                            opacity: 1;
-                        }
-                    }
-                }
-            }
-
-            .Wechat {            
-                position: relative;
-                .svg {
-                    &:hover {
-                        & ~ .QR {
-                            top: -80px;
-                            left: -24px;
-                            opacity: 1;
-                        }
-                    }
-                }
-            }
-
-            .link {
-                position: relative;
-                .svg {
-                    &:hover {
-                        & ~ .tips {
-                            top: -35px;
-                            left: -34px;
-                            opacity: 1;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-.el-dropdown-menu a {
-    color: #333;
 }

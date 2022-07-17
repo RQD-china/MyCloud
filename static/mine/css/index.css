@@ -19,124 +19,61 @@
 #app {
   width: 100%;
 }
-#app nav {
-  width: calc(100% - 400px);
-  height: 60px;
-  display: flex;
-  align-items: center;
-  padding: 0 200px;
-  z-index: 100;
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-#app nav .left {
-  width: 50%;
-}
-#app nav .right {
-  width: 50%;
-  display: flex;
-  justify-content: right;
-}
-#app nav .right img {
-  width: 20px;
-  margin-right: 20px;
-}
-#app nav .right .el-dropdown-link {
-  color: white;
-}
-#app nav a {
-  margin-right: 20px;
-  color: white;
-}
-#app nav a:last-child {
-  margin-right: 0;
-}
-#app header {
-  width: 100%;
-  height: 500px;
-  position: relative;
-}
-#app header > .dynamicShuffle {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  transition: all 1s;
-  opacity: 0;
-}
-#app header > .dynamicShuffle:first-child {
-  opacity: 1;
-}
-#app header > .dynamicShuffle img {
-  width: 100%;
-}
-#app main {
-  width: calc(100% - 120px);
-  padding: 20px 60px;
-  min-height: 600px;
-  background-color: var(--main_bg);
-  color: var(--main_color);
-  display: flex;
-  justify-content: center;
-}
-#app main .main {
+#app .main {
   width: 1200px;
   min-height: 200px;
   display: flex;
   justify-content: space-between;
 }
-#app main .main > div > div {
+#app .main > div > div {
   margin-bottom: 20px;
 }
-#app main .main .left {
+#app .main .left {
   width: 69%;
 }
-#app main .main .left .boutique > .body {
+#app .main .left .boutique > .body {
   padding: 0 20px 10px 20px;
 }
-#app main .main .left .boutique > .body ul {
+#app .main .left .boutique > .body ul {
   display: flex;
   flex-wrap: wrap;
 }
-#app main .main .left .boutique > .body ul > li {
+#app .main .left .boutique > .body ul > li {
   width: 50%;
   box-sizing: border-box;
   height: 100px;
   padding: 10px 0;
   display: flex;
 }
-#app main .main .left .boutique > .body ul > li:nth-child(1), #app main .main .left .boutique > .body ul > li:nth-child(2) {
+#app .main .left .boutique > .body ul > li:nth-child(1), #app .main .left .boutique > .body ul > li:nth-child(2) {
   padding-top: 10px;
 }
-#app main .main .left .boutique > .body ul > li:nth-child(1), #app main .main .left .boutique > .body ul > li:nth-child(3), #app main .main .left .boutique > .body ul > li:nth-child(5) {
+#app .main .left .boutique > .body ul > li:nth-child(1), #app .main .left .boutique > .body ul > li:nth-child(3), #app .main .left .boutique > .body ul > li:nth-child(5) {
   padding-right: 5px;
   border-right: 1px solid #f5f5f5;
 }
-#app main .main .left .boutique > .body ul > li:nth-child(2), #app main .main .left .boutique > .body ul > li:nth-child(4), #app main .main .left .boutique > .body ul > li:nth-child(6) {
+#app .main .left .boutique > .body ul > li:nth-child(2), #app .main .left .boutique > .body ul > li:nth-child(4), #app .main .left .boutique > .body ul > li:nth-child(6) {
   padding-left: 10px;
 }
-#app main .main .left .boutique > .body ul > li:nth-child(1), #app main .main .left .boutique > .body ul > li:nth-child(2), #app main .main .left .boutique > .body ul > li:nth-child(3), #app main .main .left .boutique > .body ul > li:nth-child(4) {
+#app .main .left .boutique > .body ul > li:nth-child(1), #app .main .left .boutique > .body ul > li:nth-child(2), #app .main .left .boutique > .body ul > li:nth-child(3), #app .main .left .boutique > .body ul > li:nth-child(4) {
   border-bottom: 1px solid #f5f5f5;
 }
-#app main .main .left .boutique > .body ul > li .left {
+#app .main .left .boutique > .body ul > li .left {
   width: 40%;
 }
-#app main .main .left .boutique > .body ul > li .left > div {
+#app .main .left .boutique > .body ul > li .left > div {
   width: 100%;
   overflow: hidden;
   height: 80px;
 }
-#app main .main .left .boutique > .body ul > li .left > div img {
+#app .main .left .boutique > .body ul > li .left > div img {
   width: 100%;
   transition: all 0.3s;
 }
-#app main .main .left .boutique > .body ul > li .left > div img:hover {
+#app .main .left .boutique > .body ul > li .left > div img:hover {
   transform: scale(1.1);
 }
-#app main .main .left .boutique > .body ul > li .right {
+#app .main .left .boutique > .body ul > li .right {
   width: 60%;
   padding-left: 10px;
   box-sizing: border-box;
@@ -144,65 +81,65 @@
   flex-direction: column;
   justify-content: space-between;
 }
-#app main .main .left .boutique > .body ul > li .right h2 a {
+#app .main .left .boutique > .body ul > li .right h2 a {
   color: #333;
   font-size: 20px;
 }
-#app main .main .left .boutique > .body ul > li .right p {
+#app .main .left .boutique > .body ul > li .right p {
   font-size: 16px;
   margin: 5px 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-#app main .main .left .boutique > .body ul > li .right span {
+#app .main .left .boutique > .body ul > li .right span {
   font-size: 14px;
   color: #555;
 }
-#app main .main .left .all_article > .body {
+#app .main .left .all_article > .body {
   background-color: transparent;
   padding: 0;
 }
-#app main .main .left .all_article > .body > ul {
+#app .main .left .all_article > .body > ul {
   width: 100%;
   background-color: #f5f5f5;
 }
-#app main .main .left .all_article > .body > ul > li {
+#app .main .left .all_article > .body > ul > li {
   width: 100%;
   display: flex;
   background-color: white;
   margin-bottom: 20px;
   border-radius: 5px;
 }
-#app main .main .left .all_article > .body > ul > li:first-child {
+#app .main .left .all_article > .body > ul > li:first-child {
   border-radius: 0 0 5px 5px;
 }
-#app main .main .left .all_article > .body > ul > li:first-child .left {
+#app .main .left .all_article > .body > ul > li:first-child .left {
   padding: 10px 10px 20px 20px;
 }
-#app main .main .left .all_article > .body > ul > li:first-child .right {
+#app .main .left .all_article > .body > ul > li:first-child .right {
   padding: 10px 10px 20px 20px;
 }
-#app main .main .left .all_article > .body > ul > li .left {
+#app .main .left .all_article > .body > ul > li .left {
   width: 30%;
   box-sizing: border-box;
   padding: 20px 10px 20px 20px;
 }
-#app main .main .left .all_article > .body > ul > li .left > div {
+#app .main .left .all_article > .body > ul > li .left > div {
   width: 100%;
   height: 120px;
   overflow: hidden;
 }
-#app main .main .left .all_article > .body > ul > li .left img {
+#app .main .left .all_article > .body > ul > li .left img {
   width: 100%;
   height: 120px;
   object-fit: cover;
   transition: all 0.3s;
 }
-#app main .main .left .all_article > .body > ul > li .left img:hover {
+#app .main .left .all_article > .body > ul > li .left img:hover {
   transform: scale(1.1);
 }
-#app main .main .left .all_article > .body > ul > li .right {
+#app .main .left .all_article > .body > ul > li .right {
   width: 70%;
   padding: 20px 20px 20px 10px;
   display: flex;
@@ -210,28 +147,28 @@
   justify-content: space-between;
   position: relative;
 }
-#app main .main .left .all_article > .body > ul > li .right > h2 {
+#app .main .left .all_article > .body > ul > li .right > h2 {
   font-size: 20px;
 }
-#app main .main .left .all_article > .body > ul > li .right > h2 > a {
+#app .main .left .all_article > .body > ul > li .right > h2 > a {
   color: #333;
 }
-#app main .main .left .all_article > .body > ul > li .right > p {
+#app .main .left .all_article > .body > ul > li .right > p {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-#app main .main .left .all_article > .body > ul > li .right .article_info > span {
+#app .main .left .all_article > .body > ul > li .right .article_info > span {
   margin-right: 10px;
   font-size: 14px;
   color: #555;
 }
-#app main .main .left .all_article > .body > ul > li .right .article_info > span i {
+#app .main .left .all_article > .body > ul > li .right .article_info > span i {
   margin-right: 5px;
 }
-#app main .main .left .all_article > .body > ul > li .right button {
+#app .main .left .all_article > .body > ul > li .right button {
   width: 100px;
   height: 40px;
   background-color: #26c6da;
@@ -242,16 +179,16 @@
   border: none;
   border-radius: 5px;
 }
-#app main .main .left .all_article > .body > ul > li .right button a {
+#app .main .left .all_article > .body > ul > li .right button a {
   color: white;
 }
-#app main .main .right {
+#app .main .right {
   width: 30%;
 }
-#app main .main .right .tags > .body {
+#app .main .right .tags > .body {
   position: relative;
 }
-#app main .main .right .tags > .body ul {
+#app .main .right .tags > .body ul {
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;
@@ -278,7 +215,7 @@
     left: 0;
   }
 }
-#app main .main .right .tags > .body ul::before {
+#app .main .right .tags > .body ul::before {
   position: absolute;
   top: 0;
   left: 0;
@@ -294,7 +231,7 @@
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
 }
-#app main .main .right .tags > .body ul li {
+#app .main .right .tags > .body ul li {
   width: calc(33.3% - 2px);
   height: 40px;
   display: flex;
@@ -302,126 +239,9 @@
   justify-content: center;
   background-color: white;
 }
-#app main .main .right .tags > .body ul li:nth-child(6n+1), #app main .main .right .tags > .body ul li:nth-child(6n+2), #app main .main .right .tags > .body ul li:nth-child(6n+3) {
+#app .main .right .tags > .body ul li:nth-child(6n+1), #app .main .right .tags > .body ul li:nth-child(6n+2), #app .main .right .tags > .body ul li:nth-child(6n+3) {
   background-color: #f5f5f5;
 }
-#app main .main .right .tags > .body ul li:nth-child(3n+1), #app main .main .right .tags > .body ul li:nth-child(3n+2) {
+#app .main .right .tags > .body ul li:nth-child(3n+1), #app .main .right .tags > .body ul li:nth-child(3n+2) {
   border-right: 1px solid #f5f5f5;
-}
-#app footer {
-  width: 100%;
-  height: 180px;
-  display: flex;
-  background-color: var(--footer_bg);
-  color: var(--footer_color);
-}
-#app footer p {
-  margin: 8px 0px;
-}
-#app footer .left,
-#app footer .right {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-#app footer .thank {
-  color: #26c6da;
-  font-size: 20px;
-}
-#app footer .site_info {
-  display: flex;
-  align-items: center;
-}
-#app footer .site_info span {
-  margin-right: 10px;
-  display: flex;
-  align-items: center;
-}
-#app footer .site_info img {
-  width: 20px;
-  margin-right: 10px;
-}
-#app footer .version {
-  display: flex;
-}
-#app footer .version span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  background-color: #333;
-  height: 30px;
-}
-#app footer .version span:nth-child(1) {
-  width: 100px;
-  background-color: #26c6da;
-  border-radius: 5px 0 0 5px;
-}
-#app footer .version span:nth-child(2) {
-  width: 70px;
-  background-color: #26c6da;
-  border-radius: 0 5px 5px 0;
-}
-#app footer .contact {
-  display: flex;
-  width: 240px;
-  justify-content: space-between;
-  position: relative;
-}
-#app footer .contact .svg {
-  position: relative;
-  width: 32px;
-  z-index: 1;
-}
-#app footer .contact .QR {
-  width: 80px;
-  position: absolute;
-  top: -50px;
-  left: -24px;
-  opacity: 0;
-  transition: all 0.5s;
-}
-#app footer .contact .tips {
-  width: 100px;
-  font-size: 14px;
-  text-align: center;
-  line-height: 30px;
-  color: white;
-  background-color: #26c6da;
-  border-radius: 5px;
-  position: absolute;
-  top: -10px;
-  left: -34px;
-  opacity: 0;
-  transition: all 0.5s;
-}
-#app footer .contact .QQ {
-  position: relative;
-}
-#app footer .contact .QQ .svg:hover ~ .QR {
-  top: -80px;
-  left: -24px;
-  opacity: 1;
-}
-#app footer .contact .Wechat {
-  position: relative;
-}
-#app footer .contact .Wechat .svg:hover ~ .QR {
-  top: -80px;
-  left: -24px;
-  opacity: 1;
-}
-#app footer .contact .link {
-  position: relative;
-}
-#app footer .contact .link .svg:hover ~ .tips {
-  top: -35px;
-  left: -34px;
-  opacity: 1;
-}
-
-.el-dropdown-menu a {
-  color: #333;
 }/*# sourceMappingURL=index.css.map */
