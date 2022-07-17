@@ -1,8 +1,8 @@
 {% extends "index.html" %}
 
 {% block css %}
+    <link rel="stylesheet" href="/static/mine/css/article.css">    
 {% endblock css %}
-    
 {% block main %}
     <div class="article">
         <div class="article_title">
@@ -22,10 +22,21 @@
             </div>
         </div>
         <div class="article_content">
-
+            Django快速上手全文
         </div>
-        <div class="comment_commit">
-
+        <div class="comment_submit">
+            <div class="title">
+                留下你的想法
+            </div>
+            <div class="body">
+                <textarea name="" id="" cols="30" rows="10" placeholder="写下你想说的话，开启我们的故事"></textarea>
+                <button class="submit_btn">
+                    发布评论
+                </button>
+            </div>
+            <div class="footer">
+                <p><span>49</span> 人参与，<span>4</span> 人评论</p>
+            </div>
         </div>
         <div class="comment_list">
 
