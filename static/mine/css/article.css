@@ -1,5 +1,6 @@
 .article {
   width: 100%;
+  max-width: 60vw;
 }
 .article .article_title {
   display: flex;
@@ -109,6 +110,7 @@
 .article .comment_list > ul > li {
   width: 100%;
   display: flex;
+  margin-bottom: 20px;
 }
 .article .comment_list > ul > li .left {
   width: 70px;
@@ -116,6 +118,10 @@
 .article .comment_list > ul > li .left img {
   width: 50px;
   border-radius: 5px;
+  transition: all 0.3s;
+}
+.article .comment_list > ul > li .left img:hover {
+  transform: scale(1.1);
 }
 .article .comment_list > ul > li .right {
   width: calc(100% - 70px);
@@ -152,5 +158,33 @@
   font-size: 14px;
 }
 .article .comment_list > ul > li .right .comment_info > div > span {
+  cursor: pointer;
+}
+.article .comment_list > ul > li .right .sub_comment_list {
+  margin-top: 10px;
+}
+.article .comment_list > ul > li .right .sub_comment_list .sub_comment_item {
+  display: flex;
+  margin-bottom: 10px;
+}
+.article .comment_list > ul > li .right .sub_comment_list .sub_comment_item .sub_left {
+  width: 60px;
+}
+.article .comment_list > ul > li .right .sub_comment_list .sub_comment_item .sub_left img {
+  width: 40px;
+  border-radius: 4px;
+}
+.article .comment_list > ul > li .right .sub_comment_list .sub_comment_item .sub_right {
+  width: calc(100% - 60px);
+}
+.article .comment_list > ul > li .right .sub_comment_list .sub_comment_item .sub_right .sub_comment_content {
+  margin: 5px 0;
+}
+.article .comment_list > ul > li .right .sub_comment_list .sub_comment_item .sub_right .sub_comment_info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+.article .comment_list > ul > li .right .sub_comment_list .sub_comment_item .sub_right .sub_comment_info > div > span {
   cursor: pointer;
 }/*# sourceMappingURL=article.css.map */
