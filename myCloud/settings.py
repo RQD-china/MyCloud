@@ -131,6 +131,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+# 用户上传自己的文件
+MEDIA_ROOT = os.path.join(BASE_DIR, 'article_img')
+MEDIA_URL = '/article_img/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 

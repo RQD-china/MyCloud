@@ -1,24 +1,28 @@
 {% extends "index.html" %}
+{% load my_tag %}
 
 {% block css %}
     <link rel="stylesheet" href="/static/mine/css/article.css">    
 {% endblock css %}
+
+{% block banner %}
+    {% banner 'index' article %}
+{% endblock banner %}
+
 {% block main %}
     <div class="article">
         <div class="article_title">
-            <h2>Django快速上手</h2>
+            <h2>{{ article.title }}</h2>
             <p>
-                <span>发布时间: <i>2022/06/07</i></span>
-                <span>作者: <i>Richy</i></span>
-                <span>来源: <i>Richy个人博客</i></span>
+                <span>发布时间: <i>{{ article.create_date | date:'Y-m-d' }}</i></span>
+                <span>作者: <i>{{ article.author }}</i></span>
+                <span>来源: <i>{{ article.source }}</i></span>
             </p>
             <div>
                 <i title="文章标签" class="fa fa-tags"></i>
-                <i>HTML</i>
-                <i>CSS</i>
-                <i>JavaScript</i>
-                <i>Python</i>
-                <i>Django</i>
+                {% for tag in article.tag.all %}
+                    <i>{{ tag.title }}</i>
+                {% endfor %}
             </div>
         </div>
         <div class="article_content">

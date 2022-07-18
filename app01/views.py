@@ -5,6 +5,7 @@ from django.shortcuts import redirect, render
 from django.http import JsonResponse
 from django.contrib import auth
 from sympy import re
+from app01.models import Articles
 
 # Create your views here.
 
@@ -14,7 +15,11 @@ def index(request):
     
 # 文章
 def article(request, nid):
-    return render(request, 'article.html')
+    article_query =  Articles.objects.filter(nid = nid)
+    if not article_query:
+        return redirect('/')
+    article = article_query.first()
+    return render(request, 'article.html', locals())
 
 # 新闻页
 def news(request):

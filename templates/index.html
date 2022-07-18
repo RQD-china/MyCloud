@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-{% load myTag %}
+{% load my_tag %}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -49,8 +49,10 @@
                 {% endif %}                    
             </div>
         </nav>
-        {% banner 'index' %}
-        <main>
+        {% block banner %}
+            {% banner 'index' %}
+        {% endblock banner %}
+        <main>  
             {% block main %}
                 <div class="main">
                     <div class="left">
