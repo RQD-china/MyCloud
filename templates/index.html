@@ -327,48 +327,51 @@
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <script>
 new Vue({
-el: '#app',
-delimiters: ["[[", "]]"],
-data: {
-    theme: 'light'
-},
-created() {
-    this.init_theme()
-},
-methods: {
-    //设置主题
-    set_theme(theme_name) {
-        if(theme_name == "light")
-            this.theme = "dark"
-        else
-            this.theme = "light"
-        
-        //持久化存储
-        localStorage.setItem('theme', this.theme)
+    el: '#app',
+    delimiters: ["[[", "]]"],
+    data: {
+        theme: 'light'
     },
-    
-    //初始化主题
-    init_theme() {
-        // 读取存储的主题
-        let theme = localStorage.getItem('theme')
-        if(theme) {
-            this.theme = theme
+    created() {
+        this.init_theme()
+    },
+    methods: {
+        //设置主题
+        set_theme(theme_name) {
+            if(theme_name == "light")
+                this.theme = "dark"
+            else
+                this.theme = "light"
+            
+            //持久化存储
+            localStorage.setItem('theme', this.theme)
+        },
+        
+        //初始化主题
+        init_theme() {
+            // 读取存储的主题
+            let theme = localStorage.getItem('theme')
+            if(theme) {
+                this.theme = theme
+            }
         }
     }
-}
-})
+    })
 
-//获取轮播图
-let men_img = document.querySelectorAll('.dynamicShuffle')
-//设置时钟轮播
-let max_length = men_img.length
-let index = -1
-setInterval(() => {
-    index++
-    index = index % max_length
-    for(let img of men_img) {
-        img.style.opacity = 0
-    }
-    men_img[index].style.opacity = 1
-}, 2000);
+    //获取轮播图
+    let men_img = document.querySelectorAll('.dynamicShuffle')
+    //设置时钟轮播
+    let max_length = men_img.length
+    let index = -1
+    setInterval(() => {
+        index++
+        index = index % max_length
+        for(let img of men_img) {
+            img.style.opacity = 0
+        }
+        men_img[index].style.opacity = 1
+    }, 2000);
 </script>
+{% block js %}
+  
+{% endblock js %}

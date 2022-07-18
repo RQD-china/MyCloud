@@ -1,6 +1,7 @@
 .article {
   width: 100%;
   max-width: 60vw;
+  position: relative;
 }
 .article .article_title {
   display: flex;
@@ -33,6 +34,7 @@
   color: #333;
 }
 .article .article_content {
+  width: calc(100% - 40px);
   margin-top: 2px;
   min-height: 200px;
   background-color: white;
@@ -187,4 +189,34 @@
 }
 .article .comment_list > ul > li .right .sub_comment_list .sub_comment_item .sub_right .sub_comment_info > div > span {
   cursor: pointer;
+}
+.article .slider_bar {
+  width: 200px;
+  background-color: white;
+  z-index: 1;
+  border-radius: 5px;
+  position: absolute;
+  left: calc(-115px - 10vw);
+  padding: 20px;
+}
+.article .slider_bar .title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.article .slider_bar .body {
+  font-size: 14px;
+}
+.article .slider_bar .body p {
+  transition: all 0.3s;
+  cursor: pointer;
+  height: 30px;
+  line-height: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.article .slider_bar .body p:hover {
+  color: white;
+  background-color: #26c6da;
 }/*# sourceMappingURL=article.css.map */

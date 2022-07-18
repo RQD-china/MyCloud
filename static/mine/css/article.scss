@@ -1,6 +1,7 @@
 .article {
     width: 100%;
     max-width: 60vw;
+    position: relative;
 
     .article_title {
         display: flex;
@@ -41,6 +42,7 @@
     }
 
     .article_content {
+        width: calc(100% - 40px);
         margin-top: 2px;
         min-height: 200px;
         background-color: white;
@@ -224,6 +226,41 @@
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+
+    .slider_bar {
+        width: 200px;
+        background-color: white;
+        z-index: 1;
+        border-radius: 5px;
+        position: absolute;
+        left: calc(-115px - 10vw);
+        padding: 20px;
+
+        .title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .body {
+            font-size: 14px;
+
+            p {
+                transition: all 0.3s;
+                cursor: pointer;
+                height: 30px;
+                line-height: 30px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                &:hover {
+                    color: white;
+                    background-color: #26c6da;
                 }
             }
         }

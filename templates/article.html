@@ -2,6 +2,7 @@
 {% load my_tag %}
 
 {% block css %}
+    <link rel="stylesheet" href="/static/editor_md/css/editormd.css">  
     <link rel="stylesheet" href="/static/mine/css/article.css">    
 {% endblock css %}
 
@@ -11,6 +12,20 @@
 
 {% block main %}
     <div class="article">
+        <div class="slider_bar">
+            <div class="title">
+                文章目录
+            </div>
+            <div class="body">
+                <p>Hello World</p>
+                <p>用命令行编译 java 源文件</p>
+                <p>Java 基本语法</p>
+                <p>Java 修饰符</p>
+                <p>Java 变量类型</p>
+                <p>Java 枚举</p>
+                <p>Java 注释</p>
+            </div>
+        </div>
         <div class="article_title">
             <h2>{{ article.title }}</h2>
             <p>
@@ -25,8 +40,8 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="article_content">
-            Django快速上手全文
+        <div class="article_content" id="article_content">
+            <textarea style="display: none;">{{ article.content }}</textarea>
         </div>
         <div class="comment_submit">
             <div class="title">
@@ -172,3 +187,19 @@
         </div>
     </div>
 {% endblock main %}
+
+{% block js %}
+    <script src="/static/jquery/jquery.min.js"></script>
+    <script src="/static/editor_md/lib/marked.min.js"></script>
+    <script src="/static/editor_md/lib/prettify.min.js"></script>
+    <script src="/static/editor_md/editormd.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            let editor = editormd.markdownToHTML("article_content", {
+                width: "100%",
+                height: "100%",
+                path: "/static/editor_md/lib/",
+            })
+        })
+    </script>
+{% endblock js %}
