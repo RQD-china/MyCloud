@@ -180,4 +180,8 @@ footer .contact .link .svg:hover ~ .tips {
 
 .el-dropdown-menu a {
   color: #333;
+}
+
+.delete {
+  color: red;
 }/*# sourceMappingURL=base.css.map */
