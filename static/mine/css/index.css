@@ -118,7 +118,7 @@
   padding: 10px 10px 20px 20px;
 }
 #app .main .left .all_article > .body > ul > li:first-child .right {
-  padding: 10px 10px 20px 20px;
+  padding: 10px 20px 20px 10px;
 }
 #app .main .left .all_article > .body > ul > li .left {
   width: 30%;
@@ -171,11 +171,11 @@
 #app .main .left .all_article > .body > ul > li .right button {
   width: 100px;
   height: 40px;
-  background-color: #26c6da;
+  background-color: #409eff;
   position: absolute;
   bottom: 10px;
   right: 20px;
-  background-color: #26c6da;
+  background-color: #409eff;
   border: none;
   border-radius: 5px;
 }
@@ -223,7 +223,7 @@
   width: 20px;
   height: 20px;
   content: "";
-  background-color: #26c6da;
+  background-color: #409eff;
   -webkit-animation-name: movBox;
   animation-name: movBox;
   -webkit-animation-duration: 5s;

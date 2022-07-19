@@ -28,7 +28,7 @@
 .article .article_title > div i {
   font-size: 14px;
   margin-right: 5px;
-  color: #26c6da;
+  color: #409eff;
 }
 .article .article_title > div i:first-child {
   color: #333;
@@ -87,7 +87,7 @@
   width: 100px;
   height: 40px;
   border-radius: 10px;
-  background-color: #26c6da;
+  background-color: #409eff;
   color: white;
   border: none;
   cursor: pointer;
@@ -101,7 +101,7 @@
   margin-top: 10px;
 }
 .article .comment_submit .footer p > span {
-  color: #26c6da;
+  color: #409eff;
 }
 .article .comment_list {
   margin-top: 20px;
@@ -218,5 +218,5 @@
 }
 .article .slider_bar .body p:hover {
   color: white;
-  background-color: #26c6da;
+  background-color: #409eff;
 }/*# sourceMappingURL=article.css.map */

@@ -101,7 +101,7 @@ footer .right {
   align-items: center;
 }
 footer .thank {
-  color: #26c6da;
+  color: #409eff;
   font-size: 20px;
 }
 footer .site_info {
@@ -130,7 +130,7 @@ footer .version span {
 }
 footer .version span:nth-child(1) {
   width: 100px;
-  background-color: #26c6da;
+  background-color: #409eff;
   border-radius: 5px 0 0 5px;
 }
 footer .version span:nth-child(2) {
@@ -163,7 +163,7 @@ footer .contact .tips {
   text-align: center;
   line-height: 30px;
   color: white;
-  background-color: #26c6da;
+  background-color: #409eff;
   border-radius: 5px;
   position: absolute;
   top: -10px;

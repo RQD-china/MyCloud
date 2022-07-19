@@ -24,7 +24,7 @@
     .main {
         width: 1200px;
         min-height: 200px;
-        //background-color: #26c6da;
+        //background-color: #409eff;
         display: flex;
         justify-content: space-between;
 
@@ -139,7 +139,7 @@
                             }
 
                             .right {
-                                padding: 10px 10px 20px 20px;
+                                padding: 10px 20px 20px 10px;
                             }
                         }
 
@@ -205,11 +205,11 @@
                             button {
                                 width: 100px;
                                 height: 40px;
-                                background-color: #26c6da;
+                                background-color: #409eff;
                                 position: absolute;
                                 bottom: 10px;
                                 right: 20px;
-                                background-color: #26c6da;
+                                background-color: #409eff;
                                 border: none;
                                 border-radius: 5px;                                    
 
@@ -265,7 +265,7 @@
                         width: 20px;
                         height: 20px;
                         content: "";
-                        background-color: #26c6da;
+                        background-color: #409eff;
                         -webkit-animation-name: movBox;
                         animation-name: movBox;
                         -webkit-animation-duration: 5s;

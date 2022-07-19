@@ -37,3 +37,10 @@ def sign(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+# 后台页面    
+# 后台个人中心
+def backend(request):
+    if not request.user.username:
+        return redirect('/')
+    return render(request, 'backend/backend.html')

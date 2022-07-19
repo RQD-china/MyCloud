@@ -27,6 +27,8 @@ urlpatterns = [
     path('logout/', views.logout),
     path('sign/', views.sign),
     path('admin/', admin.site.urls),
+    
+    path('backend/', views.backend),
 
     # 路由分发
     re_path(r'^article/(?P<nid>\d+)/', views.article),

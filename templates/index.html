@@ -9,7 +9,7 @@
     {% block css %}
         <link rel="stylesheet" href="/static/mine/css/index.css">
     {% endblock css %}
-    <link rel="shortcut icon" href="/static/mine/img/logo/logo.jpg">
+    <link rel="shortcut icon" href="/static/mine/img/logo/logo.png">
     <link rel="stylesheet" href="/static/mine/css/base.css">
     <link rel="stylesheet" href="/static/mine/css/reset.css">
     <link rel="stylesheet" href="/static/font/css/font-awesome.css">
@@ -36,7 +36,7 @@
                             {{ request.user.username }}<i class="el-icon-arrow-down el-icon--right"></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item command="a"><a href="">个人中心</a></el-dropdown-item>
+                            <el-dropdown-item command="a"><a href="/backend/">个人中心</a></el-dropdown-item>
                             <el-dropdown-item command="b"><a href="">修改密码</a></el-dropdown-item>
                             <el-dropdown-item command="c"><a href="">发布文章</a></el-dropdown-item>
                             <el-dropdown-item command="d"><a href="">后台管理</a></el-dropdown-item>
