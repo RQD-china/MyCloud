@@ -16,6 +16,15 @@
             <el-button @click="add_article" style="float: right;" size="mini"
                 type="success">发布文章</el-button>
         </div>
+        <div class="cover">
+            <el-image
+                class="cover_img"
+                id="cover_img"
+                :src="'/article_img/article_img/' + info_form.cover + '.jpeg'"
+                :preview-src-list="['/article_img/article_img/' + info_form.cover + '.jpeg']">
+            </el-image>
+            <p>点击查看大图</p>
+        </div>
         <el-form :rules="rules" :inline="true" ref="base_info"
             :model="info_form" label-width="auto">
             <el-form-item label="标题" prop="title">
@@ -35,26 +44,29 @@
                     multiple
                     collapse-tags
                     clearable
+                    filterable
+                    allow-create
                     v-model="info_form.tags"
                     placeholder="请选择文章标签">
-                    <el-option
-                        v-for="item in options.tags"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value">
-                    </el-option>
+                    {% for tag in tag_list %}
+                        <el-option
+                            label="{{ tag.title }}"
+                            value="{{ tag.nid }}">
+                        </el-option>                  
+                    {% endfor %}
                 </el-select>
             </el-form-item>
-            <el-form-item label="封面" prop="banner">
+            <el-form-item label="封面" prop="cover">
                 <el-select
-                    v-model="info_form.banner"
+                    class="article_cover"
+                    v-model="info_form.cover"
                     placeholder="请选择文章封面">
-                    <el-option
-                        v-for="item in options.banners"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value">
-                    </el-option>
+                    {% for cover in cover_list %}
+                        <el-option
+                            label="{{ cover.url }}"
+                            value="{{ cover.nid }}">
+                        </el-option>                  
+                    {% endfor %}
                 </el-select>
             </el-form-item>
             <el-form-item label="类型" prop="recommend">
@@ -75,14 +87,6 @@
             </el-form-item>
         </el-form>
     </el-card>
-    <div class="banner">
-        <el-image
-            class="banner_img"
-            src="/article_img/article_img/1.jpeg"
-            :preview-src-list="['/article_img/article_img/1.jpeg']">
-        </el-image>
-        <p>点击查看大图</p>
-    </div>
 </div>
 {% endblock main %}
 
@@ -102,10 +106,11 @@
     new Vue({
         el: '#app',
         data: {
+            title: '发布文章',
             rules: {
                 title: [
                     { required: true, message: '请输入文章标题', trigger: 'blur' },
-                    { min: 3, message: '长度在不少于3个字符', trigger: 'blur' }
+                    { min: 3, message: '标题长度不少于3个字符', trigger: 'blur' }
                 ],
                 author: [
                     { required: true, message: '请输入文章标题', trigger: 'blur' },
@@ -118,7 +123,7 @@
                 tags: [
                     { required: true, message: '请选择至少一个标签', trigger: 'change' }
                 ],
-                banner: [
+                cover: [
                     { required: true, message: '请选择一个封面', trigger: 'blur' }
                 ],
                 intro: [
@@ -133,15 +138,15 @@
                     value: 2,
                     label:'Java',
                 }],
-                banners: [{                    
+                covers: [{                    
                     value: '/article_img/article_img/1.jpeg',
                     label:'封面1',
                 }, {                    
                     value: '/article_img/article_img/2.jpeg',
-                    label:'封面3',
+                    label:'封面2',
                 }, {                    
                     value: '/article_img/article_img/3.jpeg',
-                    label:'封面2',
+                    label:'封面3',
                 }, {                    
                     value: '/article_img/article_img/4.jpeg',
                     label:'封面4',
@@ -152,7 +157,7 @@
                 author: "Richy",
                 source: "Richy的个人博客",
                 tags: [],
-                banner: [],
+                cover: "1",
                 recommend: true,
                 intro: "",
             },
@@ -185,7 +190,10 @@
                     content: editor.querySelector('.editormd-markdown-textarea').value
                 }
                 console.log(data);
-            }    
+            },
+            backto() {
+                location.href = '/backend' 
+            },
         }
     })
 </script>

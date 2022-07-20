@@ -69,12 +69,6 @@
                     </el-submenu>
                     {% endif %}
                     <el-menu-item index="5">
-                        <a class="icon" href="/">
-                            <i class="el-icon-house icon"></i>
-                            <span slot="title">回到首页</span>
-                        </a>
-                    </el-menu-item>
-                    <el-menu-item index="6">
                         <a class="icon" href="/logout/">
                             <i class="el-icon-back icon"></i>
                             <span slot="title">注销退出</span>
@@ -82,11 +76,14 @@
                     </el-menu-item>
                 </el-menu>
             </aside>
-            <main>
+            <main>      
                 <div class="top_nav">
-                    <el-page-header content="个人中心">
-                </div>
-                {% block main %}                      
+                    <el-page-header
+                        @back="backto"
+                        :title="this.title === '个人中心' ? '返回首页' : '返回'"
+                        :content="this.title">
+                </div>        
+                {% block main %}        
                 <div class="main">
                     <el-card class="userInfo">
                             <div class="avatar">
@@ -338,9 +335,38 @@
 
 </html>
 {% block js %}  
-<script>
+<script type="text/JavaScript">
     new Vue({
         el: '#app',
+        data: {
+            title: '个人中心',
+        },
+        /*
+        created() {
+            let url = window.location.href.split('/')
+            let length = url.length
+            let title = url[length - 1]
+            let path = {
+                '': '个人中心',
+                'edit_info': '基本信息',
+                'reset_pwd': '修改密码',
+                'add_article': '发布文章',
+                'article_banner': '文章封面',
+                'avatar_list': '头像列表',
+            }
+            this.title = path[title]
+            if(path[title] === '个人中心') {
+                this.back = '返回首页'
+            } else {
+                this.back = '返回'
+            }
+            console.log(this.back)
+        },*/
+        methods: {
+            backto() {
+                location.href = '/'
+            }
+        }
     })
 </script>
 {% endblock js %}

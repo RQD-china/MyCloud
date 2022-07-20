@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 from django.http import JsonResponse
 from django.contrib import auth
 from sympy import re
-from app01.models import Articles
+from app01.models import Articles, Tags, Cover
 
 # Create your views here.
 
@@ -61,6 +61,10 @@ def reset_pwd(request):
 def add_article(request):
     if not request.user.username:
         return redirect('/')
+    # 获取标签列表
+    tag_list = Tags.objects.all()
+    # 获取封面列表
+    cover_list = Cover.objects.all()
     return render(request, 'backend/add_article.html', locals())
 
 # 文章封面
