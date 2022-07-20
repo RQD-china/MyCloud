@@ -6,81 +6,84 @@
 {% endblock css %}
 
 {% block main %}
-    <div class="main">
-        <div id="editor">
-            <textarea style="display: none;"></textarea>
+<div class="main">
+    <div id="editor">
+        <textarea style="display: none;"></textarea>
+    </div>
+    <el-card class="article_info">
+        <div slot="header" class="clearfix">
+            <span>文章信息</span>
+            <el-button @click="add_article" style="float: right;" size="mini"
+                type="success">发布文章</el-button>
         </div>
-        <el-card class="article_info">
-            <div slot="header" class="clearfix">
-                <span>文章信息</span>
-                <el-button style="float: right;" size="mini" type="success">发布文章</el-button>
-            </div>
-            <el-form :rules="rules" :inline="true" ref="base_info" :model="info_form" label-width="auto">
-                <el-form-item label="标题" prop="title">
-                  <el-input v-model="info_form.title"></el-input>
-                </el-form-item>
-                <el-form-item label="作者" prop="author">
-                  <el-input v-model="info_form.author"></el-input>
-                </el-form-item>
-                <el-form-item label="来源" prop="source">
-                  <el-input v-model="info_form.source"></el-input>
-                </el-form-item>
-            </el-form>
-            <el-form :rules="rules" ref="more_info" :model="info_form" label-width="auto">
-                <el-form-item label="标签" prop="tags">
-                    <el-select                    
+        <el-form :rules="rules" :inline="true" ref="base_info"
+            :model="info_form" label-width="auto">
+            <el-form-item label="标题" prop="title">
+                <el-input v-model="info_form.title"></el-input>
+            </el-form-item>
+            <el-form-item label="作者" prop="author">
+                <el-input v-model="info_form.author"></el-input>
+            </el-form-item>
+            <el-form-item label="来源" prop="source">
+                <el-input v-model="info_form.source"></el-input>
+            </el-form-item>
+        </el-form>
+        <el-form :rules="rules" ref="more_info" :model="info_form"
+            label-width="auto">
+            <el-form-item label="标签" prop="tags">
+                <el-select
                     multiple
                     collapse-tags
                     clearable
                     v-model="info_form.tags"
                     placeholder="请选择文章标签">
-                        <el-option
-                          v-for="item in options.tags"
-                          :key="item.value"
-                          :label="item.label"
-                          :value="item.value">
-                        </el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="封面" prop="banner">
-                    <el-select
+                    <el-option
+                        v-for="item in options.tags"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="封面" prop="banner">
+                <el-select
                     v-model="info_form.banner"
                     placeholder="请选择文章封面">
-                        <el-option
-                          v-for="item in options.banners"
-                          :key="item.value"
-                          :label="item.label"
-                          :value="item.value">
-                        </el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="类型" prop="recommend">
-                    <el-switch
+                    <el-option
+                        v-for="item in options.banners"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="类型" prop="recommend">
+                <el-switch
                     v-model="info_form.recommend"
                     active-text="推荐文章"
                     inactive-text="普通文章">
-                    </el-switch>
-                </el-form-item>
-                <el-form-item label="简介" prop="intro">
-                    <el-input
+                </el-switch>
+            </el-form-item>
+            <el-form-item label="简介" prop="intro">
+                <el-input
                     type="textarea"
                     :autosize="{ minRows: 4 }"
                     style="width: 70%;"
                     placeholder="请输入文章简介"
                     v-model="info_form.intro">
-                    </el-input>
-                </el-form-item>
-            </el-form>
-        </el-card>
-        <div class="banner">
-            <el-image 
-                class="banner_img"
-                src="/article_img/article_img/1.jpeg" 
-                :preview-src-list="['/article_img/article_img/1.jpeg']">
-            </el-image>
-            <p>点击查看大图</p>
-        </div>
+                </el-input>
+            </el-form-item>
+        </el-form>
+    </el-card>
+    <div class="banner">
+        <el-image
+            class="banner_img"
+            src="/article_img/article_img/1.jpeg"
+            :preview-src-list="['/article_img/article_img/1.jpeg']">
+        </el-image>
+        <p>点击查看大图</p>
     </div>
+</div>
 {% endblock main %}
 
 {% block js %}
@@ -90,7 +93,7 @@
 <script src="/static/editor_md/editormd.min.js"></script>
 <script type="text/javascript">
     $(function() {
-        editormd("editor", {
+        var editor = editormd("editor", {
             width: "100%",
             path: "/static/editor_md/lib/",
         })
@@ -153,6 +156,36 @@
                 recommend: true,
                 intro: "",
             },
+        },
+        methods: {
+            add_article() {                
+                let content = editor.querySelector('.editormd-markdown-textarea').value
+                if(content == '') {
+                    this.$message.error('文章内容为空！')
+                    return
+                }
+                let that = this
+                this.$refs.base_info.validate((valid) => {
+                    if (valid) {
+                        this.$refs.more_info.validate((valid) => {
+                            if (valid) {
+                                that.submit_article()
+                            } else {
+                                this.$message.error('请完善文章信息后再发布！');
+                            }
+                        })
+                    } else {
+                        this.$message.error('请完善文章信息后再发布！');
+                    }
+                })
+            },        
+            submit_article() {                
+                let data = {
+                    ...this.info_form,
+                    content: editor.querySelector('.editormd-markdown-textarea').value
+                }
+                console.log(data);
+            }    
         }
     })
 </script>
