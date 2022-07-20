@@ -29,6 +29,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     
     path('backend/', views.backend),
+    path('backend/edit_info/', views.edit_info),
+    path('backend/reset_pwd/', views.reset_pwd),
+    path('backend/add_article/', views.add_article),
+    path('backend/article_banner/', views.article_banner),
+    path('backend/avatar_list/', views.avatar_list),
 
     # 路由分发
     re_path(r'^article/(?P<nid>\d+)/', views.article),
