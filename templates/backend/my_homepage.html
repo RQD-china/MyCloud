@@ -11,6 +11,9 @@
         <link rel="stylesheet" href="/static/mine/css/reset.css">
         <link rel="stylesheet"
             href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+        {% block css %}            
+        <link rel="stylesheet" href="/static/mine/css/css/my_homepage.css">
+        {% endblock css %}
         <script src="/static/vue/vue.js"></script>
         <!-- 引入组件库 -->
         <script src="https://unpkg.com/element-ui/lib/index.js"></script>
@@ -26,7 +29,6 @@
                     <h3>管理中心</h3>
                 </div>
                 <el-menu default-active="2" class="el-menu-vertical-demo"
-                    @open="handleOpen" @close="handleClose"
                     background-color="#6d7993" text-color="#FFF">
                     <el-menu-item index="1">
                         <a class="icon" href="/backend/">
@@ -81,11 +83,11 @@
                 </el-menu>
             </aside>
             <main>
+                <div class="top_nav">
+                    <el-page-header content="个人中心">
+                </div>
                 {% block main %}                      
                 <div class="main">
-                    <div class="top_nav">
-                        <el-page-header content="个人中心">
-                    </div>
                     <el-card class="userInfo">
                             <div class="avatar">
                                 <img
@@ -335,21 +337,10 @@
     </body>
 
 </html>
+{% block js %}  
 <script>
     new Vue({
         el: '#app',
-        data: function () {
-            return {
-
-            }
-        },
-        methods: {
-            handleOpen(key, keyPath) {
-                console.log(key, keyPath);
-            },
-            handleClose(key, keyPath) {
-                console.log(key, keyPath);
-            }
-        }
     })
 </script>
+{% endblock js %}

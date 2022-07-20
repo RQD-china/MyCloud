@@ -1,5 +1,159 @@
 {% extends "backend/my_homepage.html" %}
 
+{% block css %}
+<link rel="stylesheet" href="/static/mine/css/css/add_article.css">
+<link rel="stylesheet" href="/static/editor_md/css/editormd.css">
+{% endblock css %}
+
 {% block main %}
-  
+    <div class="main">
+        <div id="editor">
+            <textarea style="display: none;"></textarea>
+        </div>
+        <el-card class="article_info">
+            <div slot="header" class="clearfix">
+                <span>文章信息</span>
+                <el-button style="float: right;" size="mini" type="success">发布文章</el-button>
+            </div>
+            <el-form :rules="rules" :inline="true" ref="base_info" :model="info_form" label-width="auto">
+                <el-form-item label="标题" prop="title">
+                  <el-input v-model="info_form.title"></el-input>
+                </el-form-item>
+                <el-form-item label="作者" prop="author">
+                  <el-input v-model="info_form.author"></el-input>
+                </el-form-item>
+                <el-form-item label="来源" prop="source">
+                  <el-input v-model="info_form.source"></el-input>
+                </el-form-item>
+            </el-form>
+            <el-form :rules="rules" ref="more_info" :model="info_form" label-width="auto">
+                <el-form-item label="标签" prop="tags">
+                    <el-select                    
+                    multiple
+                    collapse-tags
+                    clearable
+                    v-model="info_form.tags"
+                    placeholder="请选择文章标签">
+                        <el-option
+                          v-for="item in options.tags"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="封面" prop="banner">
+                    <el-select
+                    v-model="info_form.banner"
+                    placeholder="请选择文章封面">
+                        <el-option
+                          v-for="item in options.banners"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="类型" prop="recommend">
+                    <el-switch
+                    v-model="info_form.recommend"
+                    active-text="推荐文章"
+                    inactive-text="普通文章">
+                    </el-switch>
+                </el-form-item>
+                <el-form-item label="简介" prop="intro">
+                    <el-input
+                    type="textarea"
+                    :autosize="{ minRows: 4 }"
+                    style="width: 70%;"
+                    placeholder="请输入文章简介"
+                    v-model="info_form.intro">
+                    </el-input>
+                </el-form-item>
+            </el-form>
+        </el-card>
+        <div class="banner">
+            <el-image 
+                class="banner_img"
+                src="/article_img/article_img/1.jpeg" 
+                :preview-src-list="['/article_img/article_img/1.jpeg']">
+            </el-image>
+            <p>点击查看大图</p>
+        </div>
+    </div>
 {% endblock main %}
+
+{% block js %}
+<script src="/static/jquery/jquery.min.js"></script>
+<script src="/static/editor_md/lib/marked.min.js"></script>
+<script src="/static/editor_md/lib/prettify.min.js"></script>
+<script src="/static/editor_md/editormd.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        editormd("editor", {
+            width: "100%",
+            path: "/static/editor_md/lib/",
+        })
+    })
+    
+    new Vue({
+        el: '#app',
+        data: {
+            rules: {
+                title: [
+                    { required: true, message: '请输入文章标题', trigger: 'blur' },
+                    { min: 3, message: '长度在不少于3个字符', trigger: 'blur' }
+                ],
+                author: [
+                    { required: true, message: '请输入文章标题', trigger: 'blur' },
+                    { min: 3, message: '长度在不少于3个字符', trigger: 'blur' }
+                ],
+                source: [
+                    { required: true, message: '请输入文章标题', trigger: 'blur' },
+                    { min: 3, message: '长度在不少于3个字符', trigger: 'blur' }
+                ],
+                tags: [
+                    { required: true, message: '请选择至少一个标签', trigger: 'change' }
+                ],
+                banner: [
+                    { required: true, message: '请选择一个封面', trigger: 'blur' }
+                ],
+                intro: [
+                    { required: true, message: '请输入文章简介', trigger: 'blur' }
+                ],
+            },
+            options: {
+                tags: [{
+                    value: 1,
+                    label:'HTML',
+                }, {
+                    value: 2,
+                    label:'Java',
+                }],
+                banners: [{                    
+                    value: '/article_img/article_img/1.jpeg',
+                    label:'封面1',
+                }, {                    
+                    value: '/article_img/article_img/2.jpeg',
+                    label:'封面3',
+                }, {                    
+                    value: '/article_img/article_img/3.jpeg',
+                    label:'封面2',
+                }, {                    
+                    value: '/article_img/article_img/4.jpeg',
+                    label:'封面4',
+                }],
+            },
+            info_form: {
+                title: "",
+                author: "Richy",
+                source: "Richy的个人博客",
+                tags: [],
+                banner: [],
+                recommend: true,
+                intro: "",
+            },
+        }
+    })
+</script>
+{% endblock js %}
