@@ -1,4 +1,5 @@
 import imp
+import json
 from re import U
 from click import password_option
 from django.shortcuts import redirect, render
@@ -8,6 +9,11 @@ from sympy import re
 from app01.models import Articles, Tags, Cover
 
 # Create your views here.
+
+def change_type(byte):    
+    if isinstance(byte, bytes):
+        return str(byte,encoding="utf-8")  
+    return json.JSONEncoder.default(byte)
 
 # 主页
 def index(request):
@@ -68,6 +74,27 @@ def add_article(request):
     cover_num = len(cover_list)
     print(cover_num)
     return render(request, 'backend/add_article.html', locals())
+
+# 编辑文章
+def edit_article(request, nid):
+    if not request.user.username:
+        return redirect('/')
+    # 获取标签列表
+    tag_list = Tags.objects.all()
+    # 获取封面列表
+    cover_list = Cover.objects.all()
+    # 获取文章信息
+    article_obj = Articles.objects.get(nid = nid)
+    article_content = article_obj.content
+    article_title = article_obj.title
+    article_author = article_obj.author
+    article_source = article_obj.source
+    article_cover_id = article_obj.cover_id
+    article_recommend = article_obj.recommend
+    article_abstract = article_obj.abstract
+    article_tags = [str(tag.nid) for tag in article_obj.tag.all()]
+    print(article_title, article_tags)
+    return render(request, 'backend/edit_article.html', locals())
 
 # 文章封面
 def article_banner(request):

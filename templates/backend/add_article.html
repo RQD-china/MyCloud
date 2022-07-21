@@ -8,13 +8,17 @@
 {% block main %}
 <div class="main">
     <div id="editor">
-        <textarea style="display: none;"></textarea>
+        {% block textarea %}
+            <textarea style="display: none;"></textarea>          
+        {% endblock textarea %}
     </div>
     <el-card class="article_info">
         <div slot="header" class="clearfix">
             <span>文章信息</span>
-            <el-button @click="add_article" style="float: right;" size="mini"
-                type="success">发布文章</el-button>
+            {% block btn %}
+                <el-button @click="add_article" style="float: right;" size="mini"
+                    type="success">发布文章</el-button>              
+            {% endblock btn %}
         </div>
         <div class="cover">
             <el-image
@@ -93,7 +97,6 @@
 {% endblock main %}
 
 {% block js %}
-<script src="/static/axios/axios.min.js"></script>
 <script src="/static/jquery/jquery.min.js"></script>
 <script src="/static/editor_md/lib/marked.min.js"></script>
 <script src="/static/editor_md/lib/prettify.min.js"></script>

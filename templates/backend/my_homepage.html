@@ -336,6 +336,7 @@
 </html>
 {% block js %}
 {% endblock js %}
+<script src="/static/axios/axios.min.js"></script>
 <script type="text/javascript">    
     // axios请求中间件
     axios.interceptors.request.use(request => {
@@ -416,30 +417,7 @@
             },
         },
         created() {
-            let url = window.location.href.split('/')
-            let length = url.length
-            let page = url[4]
-            let path = {
-                '': '个人中心',
-                'edit_info': '基本信息',
-                'reset_pwd': '修改密码',
-                'add_article': '发布文章',
-                'article_banner': '文章封面',
-                'avatar_list': '头像列表',
-            }
-            let title = path[page]
-            this.title = title
-            if(title === '个人中心') {
-                this.back = '返回首页'
-            } else {
-                this.back = '返回'
-            }
-            if(title === '发布文章') {
-                let num = document.getElementById('coverimg_list')
-                let img_num = parseInt(num.getAttribute('data'))
-                let init = Math.floor(Math.random() * img_num)
-                this.info_form.cover_id = init
-            }
+            this.init();
         },
         methods: {
             add_article() {
@@ -486,6 +464,73 @@
                     location.href = '/'
                 else
                     location.href = '/backend'
+            },
+            init() {
+                let url = window.location.href.split('/')
+                let length = url.length
+                let page = url[4]
+                let path = {
+                    '': '个人中心',
+                    'edit_info': '基本信息',
+                    'reset_pwd': '修改密码',
+                    'add_article': '发布文章',
+                    'edit_article': '编辑文章',
+                    'article_banner': '文章封面',
+                    'avatar_list': '头像列表',
+                }
+                // 设定一个默认值
+                this.title = '返回'
+
+                // 针对不同的子页面进行初始化
+                switch (page) {
+                    case '':
+                        this.title = '个人中心'
+                        this.back = '返回首页'
+                        break
+                    case 'edit_info':
+                        this.title = '基本信息'
+                        break
+                    case 'reset_pwd':
+                        this.title = '修改密码'
+                        break
+                    case 'add_article':
+                        this.title = '发布文章'
+                        this.init_add_article()
+                        break
+                    case 'edit_article':
+                        this.title = '编辑文章'
+                        this.init_edit_article()
+                        break
+                    case 'article_banner':
+                        this.title = '文章封面'
+                        break
+                    case 'avatar_list':
+                        this.title = '头像列表'
+                        break
+                }
+            },
+            init_add_article() {                
+                if(this.title === '发布文章') {
+                    let num = document.getElementById('coverimg_list')
+                    let img_num = parseInt(num.getAttribute('data'))
+                    let init = Math.floor(Math.random() * img_num)
+                    this.info_form.cover_id = init
+                }
+            },
+            init_edit_article() {       
+                let article_obj = document.getElementById('article_info')
+                let form = this.info_form
+                for (item in form) {
+                    if(item === 'tags'){
+                        form[item] = eval(article_obj.getAttribute(item))
+                    } else {
+                        form[item] = article_obj.getAttribute(item)
+                    }
+                }
+                this.info_form = form
+            },
+            save_article() {
+
             },
         }
     })

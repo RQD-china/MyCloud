@@ -9,5 +9,4 @@ class Decode(MiddlewareMixin):
 
     # 响应中间件
     def process_response(self, request, response):
-        print('响应')
         return response

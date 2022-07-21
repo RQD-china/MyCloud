@@ -36,6 +36,7 @@ urlpatterns = [
     path('backend/avatar_list/', views.avatar_list),
 
     # 路由分发
+    re_path(r'backend/edit_article/(?P<nid>\d+)/', views.edit_article),
     re_path(r'^article/(?P<nid>\d+)/', views.article),
     re_path(r'article_img/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     re_path(r'^api/', include('api.urls')),

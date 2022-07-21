@@ -1,0 +1,21 @@
+{% extends "backend/add_article.html" %}
+{% block textarea %}
+    <textarea style="display: none;">{{ article_content }}</textarea>
+{% endblock textarea %}
+{% block btn %}
+    <div
+        id = 'article_info'
+        title = '{{ article_title  }}'
+        author = '{{ article_author  }}'
+        source = '{{ article_source  }}'
+        cover_id = '{{ article_cover_id  }}'
+        recommend = '{{ article_recommend  }}'
+        abstract = '{{ article_abstract  }}'
+        tags = '{{ article_tags  }}'>
+    </div>
+    <el-button
+        @click="save_article"
+        style="float: right;"
+        size="mini"
+        type="primary">保存文章</el-button> 
+{% endblock btn %}
