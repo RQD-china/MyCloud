@@ -20,6 +20,6 @@ class ArticleView(View):
                     tag = Tags.objects.create(title = tag)
                 article_obj.tag.add(tag)    
             res['data'] = article_obj.nid
-            res['msg'] = '文章发布成功！3秒后跳转...'
+            res['msg'] = '文章发布成功！即将跳转...'
             res['code'] = 0
         return JsonResponse(res)

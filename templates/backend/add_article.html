@@ -58,6 +58,8 @@
             </el-form-item>
             <el-form-item label="封面" prop="cover_id">
                 <el-select
+                    id="coverimg_list"
+                    data="{{ cover_num }}"
                     class="article_cover"
                     v-model="info_form.cover_id"
                     placeholder="请选择文章封面">

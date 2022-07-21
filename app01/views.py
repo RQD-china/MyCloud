@@ -65,6 +65,8 @@ def add_article(request):
     tag_list = Tags.objects.all()
     # 获取封面列表
     cover_list = Cover.objects.all()
+    cover_num = len(cover_list)
+    print(cover_num)
     return render(request, 'backend/add_article.html', locals())
 
 # 文章封面
