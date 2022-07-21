@@ -43,6 +43,7 @@
 <!-- 引入组件库 -->
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <script>
+    // axios请求中间件
     axios.interceptors.request.use(request => {
         // 请求成功的拦截
         if(request.method === 'post') {
@@ -54,7 +55,6 @@
         // 请求失败的拦截
         return Promise.reject(err)
     })
-    
     axios.interceptors.response.use(res => {
         // 成功响应的拦截
         return Promise.resolve(res.data)

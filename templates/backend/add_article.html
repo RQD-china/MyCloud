@@ -91,6 +91,7 @@
 {% endblock main %}
 
 {% block js %}
+<script src="/static/axios/axios.min.js"></script>
 <script src="/static/jquery/jquery.min.js"></script>
 <script src="/static/editor_md/lib/marked.min.js"></script>
 <script src="/static/editor_md/lib/prettify.min.js"></script>
@@ -101,100 +102,6 @@
             width: "100%",
             path: "/static/editor_md/lib/",
         })
-    })
-    
-    new Vue({
-        el: '#app',
-        data: {
-            title: '发布文章',
-            rules: {
-                title: [
-                    { required: true, message: '请输入文章标题', trigger: 'blur' },
-                    { min: 3, message: '标题长度不少于3个字符', trigger: 'blur' }
-                ],
-                author: [
-                    { required: true, message: '请输入文章标题', trigger: 'blur' },
-                    { min: 3, message: '长度在不少于3个字符', trigger: 'blur' }
-                ],
-                source: [
-                    { required: true, message: '请输入文章标题', trigger: 'blur' },
-                    { min: 3, message: '长度在不少于3个字符', trigger: 'blur' }
-                ],
-                tags: [
-                    { required: true, message: '请选择至少一个标签', trigger: 'change' }
-                ],
-                cover: [
-                    { required: true, message: '请选择一个封面', trigger: 'blur' }
-                ],
-                intro: [
-                    { required: true, message: '请输入文章简介', trigger: 'blur' }
-                ],
-            },
-            options: {
-                tags: [{
-                    value: 1,
-                    label:'HTML',
-                }, {
-                    value: 2,
-                    label:'Java',
-                }],
-                covers: [{                    
-                    value: '/article_img/article_img/1.jpeg',
-                    label:'封面1',
-                }, {                    
-                    value: '/article_img/article_img/2.jpeg',
-                    label:'封面2',
-                }, {                    
-                    value: '/article_img/article_img/3.jpeg',
-                    label:'封面3',
-                }, {                    
-                    value: '/article_img/article_img/4.jpeg',
-                    label:'封面4',
-                }],
-            },
-            info_form: {
-                title: "",
-                author: "Richy",
-                source: "Richy的个人博客",
-                tags: [],
-                cover: "1",
-                recommend: true,
-                intro: "",
-            },
-        },
-        methods: {
-            add_article() {                
-                let content = editor.querySelector('.editormd-markdown-textarea').value
-                if(content == '') {
-                    this.$message.error('文章内容为空！')
-                    return
-                }
-                let that = this
-                this.$refs.base_info.validate((valid) => {
-                    if (valid) {
-                        this.$refs.more_info.validate((valid) => {
-                            if (valid) {
-                                that.submit_article()
-                            } else {
-                                this.$message.error('请完善文章信息后再发布！');
-                            }
-                        })
-                    } else {
-                        this.$message.error('请完善文章信息后再发布！');
-                    }
-                })
-            },        
-            submit_article() {                
-                let data = {
-                    ...this.info_form,
-                    content: editor.querySelector('.editormd-markdown-textarea').value
-                }
-                console.log(data);
-            },
-            backto() {
-                location.href = '/backend' 
-            },
-        }
     })
 </script>
 {% endblock js %}
