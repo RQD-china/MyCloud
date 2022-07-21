@@ -3,7 +3,7 @@
     <textarea style="display: none;">{{ article_content }}</textarea>
 {% endblock textarea %}
 {% block btn %}
-    <div
+    <span
         id = 'article_info'
         title = '{{ article_title  }}'
         author = '{{ article_author  }}'
@@ -11,8 +11,7 @@
         cover_id = '{{ article_cover_id  }}'
         recommend = '{{ article_recommend  }}'
         abstract = '{{ article_abstract  }}'
-        tags = '{{ article_tags  }}'>
-    </div>
+        tags = '{{ article_tags  }}'>文章信息</span>
     <el-button
         @click="save_article"
         style="float: right;"

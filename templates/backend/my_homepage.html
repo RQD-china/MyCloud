@@ -460,10 +460,10 @@
                 })
             },
             backto() {
-                if( this.title === '个人中心')
+                if(this.title === '个人中心')
                     location.href = '/'
                 else
-                    location.href = '/backend'
+                    window.history.go(-1)
             },
             init() {
                 let url = window.location.href.split('/')
@@ -528,6 +528,7 @@
                     }
                 }
                 this.info_form = form
+                this.title += ' - ' + this.info_form.title
             },
             save_article() {
 
