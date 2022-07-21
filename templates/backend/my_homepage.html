@@ -82,9 +82,10 @@
                         @back="backto"
                         :title="this.title === '个人中心' ? '返回首页' : '返回'"
                         :content="this.title">
-                    </div>
-                    {% block main %}
-                    <div class="main">
+                </div>
+                {% csrf_token %}
+                {% block main %}
+                <div class="main">
                         <el-card class="userInfo">
                             <div class="avatar">
                                 <img
@@ -335,7 +336,48 @@
 </html>
 {% block js %}
 {% endblock js %}
-<script type="text/JavaScript">    
+<script type="text/javascript">    
+    // axios请求中间件
+    axios.interceptors.request.use(request => {
+        // 请求成功的拦截
+        if(request.method === 'post') {
+            let csrftoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value
+            request.headers['X-CSRFToken'] = csrftoken
+        }
+        return request
+    }, err => {
+        // 请求失败的拦截
+        return Promise.reject(err)
+    })
+    axios.interceptors.response.use(res => {
+        // 成功响应的拦截
+        return Promise.resolve(res.data)
+    }, err =>{
+        // 失败响应的拦截
+        console.log(err)
+        if(err.response){
+            // 失败响应的status需要在response中获得
+            console.log(err.response)
+            switch(err.response.status){
+            // 对得到的状态码的处理，具体的设置视自己的情况而定
+            case 401:
+                console.log('未登录')
+                window.location.href='/'
+                break
+            case 404:
+                window.location.href='/'
+                break
+            case 405:
+                console.log('不支持的方法')
+                break
+            // case ...
+            default:
+                console.log('其他错误')
+                break
+            }
+        }
+    })
+
     new Vue({
         el: '#app',
         data: {
@@ -356,43 +398,21 @@
                 tags: [
                     { required: true, message: '请选择至少一个标签', trigger: 'change' }
                 ],
-                cover: [
+                cover_id: [
                     { required: true, message: '请选择一个封面', trigger: 'blur' }
                 ],
                 intro: [
                     { required: true, message: '请输入文章简介', trigger: 'blur' }
                 ],
             },
-            options: {
-                tags: [{
-                    value: 1,
-                    label:'HTML',
-                }, {
-                    value: 2,
-                    label:'Java',
-                }],
-                covers: [{                    
-                    value: '/article_img/article_img/1.jpeg',
-                    label:'封面1',
-                }, {                    
-                    value: '/article_img/article_img/2.jpeg',
-                    label:'封面2',
-                }, {                    
-                    value: '/article_img/article_img/3.jpeg',
-                    label:'封面3',
-                }, {                    
-                    value: '/article_img/article_img/4.jpeg',
-                    label:'封面4',
-                }],
-            },
             info_form: {
                 title: "",
                 author: "Richy",
                 source: "Richy的个人博客",
                 tags: [],
-                cover: "1",
+                cover_id: "1",
                 recommend: true,
-                intro: "",
+                abstract: "",
             },
         },
         created() {
@@ -415,7 +435,7 @@
             }
         },
         methods: {
-            add_article() {                
+            add_article() {
                 let content = editor.querySelector('.editormd-markdown-textarea').value
                 if(content == '') {
                     this.$message.error('文章内容为空！')
@@ -441,9 +461,17 @@
                     ...this.info_form,
                     content: editor.querySelector('.editormd-markdown-textarea').value
                 }
-                console.log(data);
+                // console.log(data);
                 axios.post('/api/article/', data).then(res => {
-                    console.log(res);
+                    if(res.code) {
+                        this.$message.error(res.msg)
+                        return
+                    } else {
+                        this.$message.success(res.msg)
+                        setTimeout(() => {
+                            location.href = `/article/${res.data}/`
+                        }, 3000)
+                    }
                 })
             },
             backto() {

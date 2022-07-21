@@ -107,11 +107,6 @@ class Articles(models.Model):
     content = models.TextField(verbose_name='文章内容', null=True, blank=True)
     create_date = models.DateTimeField(verbose_name='文章发布日期', auto_now_add=True, null=True)
     change_date = models.DateTimeField(verbose_name='文章修改日期', auto_now=True, null=True)
-    status_choice = (
-        (0, '未发布'),
-        (1, '已发布'),
-    )
-    status = models.IntegerField(verbose_name='文章保存状态', choices=status_choice)
     recommend = models.BooleanField(verbose_name='是否上推荐', default=True)
     cover = models.ForeignKey(
         to='Cover',
@@ -123,18 +118,11 @@ class Articles(models.Model):
     comment_count = models.IntegerField(verbose_name='文章评论量', default=0)
     digg_count = models.IntegerField(verbose_name='文章点赞量', default=0)
     collects_count = models.IntegerField(verbose_name='文章收藏数', default=0)
-    category_choice = (
-        (1, '前端'),
-        (2, '后端'),
-        (3, '项目相关'),
-    )
-    category = models.IntegerField(verbose_name='文章分类', choices=category_choice, null=True, blank=True)
     tag = models.ManyToManyField(
         to='Tags',
         verbose_name='文章标签',
         blank=True
     )
-    pwd = models.CharField(max_length=32, verbose_name='文章密码', null=True, blank=True)
     author = models.CharField(max_length=16, verbose_name='作者', null=True, blank=True)
     source = models.CharField(max_length=32, verbose_name='来源', null=True, blank=True)
 

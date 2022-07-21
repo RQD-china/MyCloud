@@ -20,8 +20,8 @@
             <el-image
                 class="cover_img"
                 id="cover_img"
-                :src="'/article_img/article_img/' + info_form.cover + '.jpeg'"
-                :preview-src-list="['/article_img/article_img/' + info_form.cover + '.jpeg']">
+                :src="'/article_img/article_img/' + info_form.cover_id + '.jpeg'"
+                :preview-src-list="['/article_img/article_img/' + info_form.cover_id + '.jpeg']">
             </el-image>
             <p>点击查看大图</p>
         </div>
@@ -39,7 +39,7 @@
         </el-form>
         <el-form :rules="rules" ref="more_info" :model="info_form"
             label-width="auto">
-            <el-form-item label="标签" prop="tags">
+            <el-form-item label="标签" prop="s">
                 <el-select
                     multiple
                     collapse-tags
@@ -56,10 +56,10 @@
                     {% endfor %}
                 </el-select>
             </el-form-item>
-            <el-form-item label="封面" prop="cover">
+            <el-form-item label="封面" prop="cover_id">
                 <el-select
                     class="article_cover"
-                    v-model="info_form.cover"
+                    v-model="info_form.cover_id"
                     placeholder="请选择文章封面">
                     {% for cover in cover_list %}
                         <el-option
@@ -76,13 +76,13 @@
                     inactive-text="普通文章">
                 </el-switch>
             </el-form-item>
-            <el-form-item label="简介" prop="intro">
+            <el-form-item label="简介" prop="abstract">
                 <el-input
                     type="textarea"
                     :autosize="{ minRows: 4 }"
                     style="width: 70%;"
                     placeholder="请输入文章简介"
-                    v-model="info_form.intro">
+                    v-model="info_form.abstract">
                 </el-input>
             </el-form-item>
         </el-form>
