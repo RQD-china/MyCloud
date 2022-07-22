@@ -93,18 +93,27 @@
                             justify-content: space-between;
 
                             h2 {
+                                font-size: 18px;
+
                                 a {
                                     color: #333;
-                                    font-size: 20px;
+                                    white-space: nowrap;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
                                 }
                             }
 
                             p {
-                                font-size: 16px;
+                                font-size: 14px;
                                 margin: 5px 0;
                                 white-space: nowrap;
                                 overflow: hidden;
                                 text-overflow: ellipsis;
+                            }
+
+                            i {
+                                font-size: 14px;
+                                color: #555;
                             }
 
                             span {
@@ -190,22 +199,29 @@
                                 text-overflow: ellipsis;
                             }
 
-                            .article_info {
-                                > span {
-                                    margin-right: 10px;
+                            .info {
+                                height: 25px;
+                                
+                                i {
+                                    font-size: 16px;
+                                    color: #409eff;
+                                }
+                            
+                                span {
                                     font-size: 14px;
                                     color: #555;
-
-                                    i {
-                                        margin-right: 5px;
+                                    margin-right: 5px;
+                            
+                                    &:first-child {
+                                        font-weight: 600;
                                     }
                                 }
                             }
 
-                            button {
+                            .btn {
                                 width: 100px;
                                 height: 40px;
-                                background-color: #409eff;
+                                text-align: center;
                                 position: absolute;
                                 bottom: 10px;
                                 right: 20px;
@@ -214,6 +230,8 @@
                                 border-radius: 5px;                                    
 
                                 a {
+                                    display: block;
+                                    line-height: 40px;
                                     color: white;
                                 }
                             }

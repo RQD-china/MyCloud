@@ -1,0 +1,29 @@
+.main {
+  width: calc(100% - 40px);
+  padding: 20px;
+}
+.main #editor {
+  min-height: calc(100vh - 150px) !important;
+}
+.main .article_info {
+  position: relative;
+}
+.main .cover {
+  position: absolute;
+  top: 140px;
+  left: 338px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #DCDFE6;
+}
+.main .cover .cover_img .el-image__inner {
+  width: 120px;
+  height: 80px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.main .cover p {
+  font-size: 12px;
+  color: #777;
+  text-align: center;
+}/*# sourceMappingURL=add_article.css.map */

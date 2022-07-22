@@ -17,7 +17,9 @@ def change_type(byte):
 
 # 主页
 def index(request):
-    return render(request, 'index.html', {'request': request})
+    article_list = Articles.objects.all().order_by('-change_date')
+    recommend_list = Articles.objects.filter(recommend = True).order_by('-change_date')[:6]
+    return render(request, 'index.html', locals())
     
 # 文章
 def article(request, nid):

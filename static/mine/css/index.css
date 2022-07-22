@@ -81,16 +81,25 @@
   flex-direction: column;
   justify-content: space-between;
 }
+#app .main .left .boutique > .body ul > li .right h2 {
+  font-size: 18px;
+}
 #app .main .left .boutique > .body ul > li .right h2 a {
   color: #333;
-  font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 #app .main .left .boutique > .body ul > li .right p {
-  font-size: 16px;
+  font-size: 14px;
   margin: 5px 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+#app .main .left .boutique > .body ul > li .right i {
+  font-size: 14px;
+  color: #555;
 }
 #app .main .left .boutique > .body ul > li .right span {
   font-size: 14px;
@@ -133,7 +142,8 @@
 #app .main .left .all_article > .body > ul > li .left img {
   width: 100%;
   height: 120px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   transition: all 0.3s;
 }
 #app .main .left .all_article > .body > ul > li .left img:hover {
@@ -160,18 +170,25 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-#app .main .left .all_article > .body > ul > li .right .article_info > span {
-  margin-right: 10px;
+#app .main .left .all_article > .body > ul > li .right .info {
+  height: 25px;
+}
+#app .main .left .all_article > .body > ul > li .right .info i {
+  font-size: 16px;
+  color: #409eff;
+}
+#app .main .left .all_article > .body > ul > li .right .info span {
   font-size: 14px;
   color: #555;
-}
-#app .main .left .all_article > .body > ul > li .right .article_info > span i {
   margin-right: 5px;
 }
-#app .main .left .all_article > .body > ul > li .right button {
+#app .main .left .all_article > .body > ul > li .right .info span:first-child {
+  font-weight: 600;
+}
+#app .main .left .all_article > .body > ul > li .right .btn {
   width: 100px;
   height: 40px;
-  background-color: #409eff;
+  text-align: center;
   position: absolute;
   bottom: 10px;
   right: 20px;
@@ -179,7 +196,9 @@
   border: none;
   border-radius: 5px;
 }
-#app .main .left .all_article > .body > ul > li .right button a {
+#app .main .left .all_article > .body > ul > li .right .btn a {
+  display: block;
+  line-height: 40px;
   color: white;
 }
 #app .main .right {
@@ -192,6 +211,28 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;
+}
+@-webkit-keyframes movBox {
+  0% {
+    top: 0;
+    left: 0;
+  }
+  25% {
+    top: 0;
+    left: calc(100% - 20px);
+  }
+  50% {
+    top: calc(100% - 20px);
+    left: calc(100% - 20px);
+  }
+  75% {
+    top: calc(100% - 20px);
+    left: 0;
+  }
+  100% {
+    top: 0;
+    left: 0;
+  }
 }
 @keyframes movBox {
   0% {
