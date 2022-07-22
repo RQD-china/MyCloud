@@ -1,7 +1,7 @@
 nav {
     width: calc(100% - 400px);
-    height: 60px;
-    //background-color: var(--nav_bg);
+    height: 40px;
+    background-color: rgba(109, 121, 147, 0);
     display: flex;
     align-items: center;
     padding: 0 200px;
@@ -65,7 +65,7 @@ header {
         }
     }
 
-    >.dynamicShuffle {
+    >.dynamic_shuffle {
         position: absolute;
         top: 0;
         left: 0;

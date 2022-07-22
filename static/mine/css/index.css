@@ -6,7 +6,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid #f0f3f8;
   padding: 20px 20px 10px 20px;
 }
 .card .title h2 {
@@ -50,13 +50,13 @@
 }
 #app .main .left .boutique > .body ul > li:nth-child(1), #app .main .left .boutique > .body ul > li:nth-child(3), #app .main .left .boutique > .body ul > li:nth-child(5) {
   padding-right: 5px;
-  border-right: 1px solid #f5f5f5;
+  border-right: 1px solid #f0f3f8;
 }
 #app .main .left .boutique > .body ul > li:nth-child(2), #app .main .left .boutique > .body ul > li:nth-child(4), #app .main .left .boutique > .body ul > li:nth-child(6) {
   padding-left: 10px;
 }
 #app .main .left .boutique > .body ul > li:nth-child(1), #app .main .left .boutique > .body ul > li:nth-child(2), #app .main .left .boutique > .body ul > li:nth-child(3), #app .main .left .boutique > .body ul > li:nth-child(4) {
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid #f0f3f8;
 }
 #app .main .left .boutique > .body ul > li .left {
   width: 40%;
@@ -111,7 +111,7 @@
 }
 #app .main .left .all_article > .body > ul {
   width: 100%;
-  background-color: #f5f5f5;
+  background-color: #f0f3f8;
 }
 #app .main .left .all_article > .body > ul > li {
   width: 100%;
@@ -281,8 +281,8 @@
   background-color: white;
 }
 #app .main .right .tags > .body ul li:nth-child(6n+1), #app .main .right .tags > .body ul li:nth-child(6n+2), #app .main .right .tags > .body ul li:nth-child(6n+3) {
-  background-color: #f5f5f5;
+  background-color: #f0f3f8;
 }
 #app .main .right .tags > .body ul li:nth-child(3n+1), #app .main .right .tags > .body ul li:nth-child(3n+2) {
-  border-right: 1px solid #f5f5f5;
+  border-right: 1px solid #f0f3f8;
 }/*# sourceMappingURL=index.css.map */
