@@ -13,7 +13,7 @@
         abstract = '{{ article_abstract  }}'
         tags = '{{ article_tags  }}'>文章信息</span>
     <el-button
-        @click="save_article"
+        @click="save_article({{ nid }})"
         style="float: right;"
         size="mini"
         type="primary">保存文章</el-button> 

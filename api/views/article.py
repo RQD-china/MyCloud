@@ -1,6 +1,7 @@
 from django.views import View
 from django.http import JsonResponse
 from app01.models import Articles, Tags, Cover
+from app01.views import article
 
 class ArticleView(View):
     def post(self, request):
@@ -10,16 +11,49 @@ class ArticleView(View):
             'code': 412
         }
 
-        data: dict = request.data
-        extra = {**data}
+        # 更新数据
+        extra = {**request.data}
+        tags = extra['tags']
         del extra['tags']
         article_obj = Articles.objects.create(**extra)
+        
+        # 更新标签
         if(article_obj):
-            for tag in data['tags']:
+            for tag in tags:
                 if not tag.isdigit():
                     tag = Tags.objects.create(title = tag)
                 article_obj.tag.add(tag)    
+        
+            # 返回成功
             res['data'] = article_obj.nid
             res['msg'] = '文章发布成功！即将跳转...'
             res['code'] = 0
         return JsonResponse(res)
+    def put(self, request, nid):
+        res = {
+            'msg': '编辑的文章不存在！',
+            'code': 404
+        }        
+        article_query = Articles.objects.filter(nid = nid)
+        if not article_query:
+            return JsonResponse(res)
+        
+        # 更新数据
+        extra = {**request.data}
+        tags = extra['tags']
+        del extra['tags']
+        article_query.update(**extra)
+        
+        # 更新标签
+        article_obj = article_query.first()
+        article_obj.tag.clear()
+        for tag in tags:
+            if not tag.isdigit():
+                tag = Tags.objects.create(title = tag)
+            article_obj.tag.add(tag)
+        
+        # 返回成功
+        res['msg'] = '文章发布成功！即将跳转...'
+        res['code'] = 0
+        return JsonResponse(res)
+    

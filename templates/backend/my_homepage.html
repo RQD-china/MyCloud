@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -341,7 +340,7 @@
     // axios请求中间件
     axios.interceptors.request.use(request => {
         // 请求成功的拦截
-        if(request.method === 'post') {
+        if(request.method != 'get') {
             let csrftoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value
             request.headers['X-CSRFToken'] = csrftoken
         }
@@ -420,7 +419,8 @@
             this.init();
         },
         methods: {
-            add_article() {
+            // 文章信息表单校验
+            validate_article(func) {
                 let content = editor.querySelector('.editormd-markdown-textarea').value
                 if(content == '') {
                     this.$message.error('文章内容为空！')
@@ -431,7 +431,7 @@
                     if (valid) {
                         this.$refs.more_info.validate((valid) => {
                             if (valid) {
-                                that.submit_article()
+                                func()
                             } else {
                                 this.$message.error('请完善文章信息后再发布！');
                             }
@@ -441,30 +441,34 @@
                     }
                 })
             },        
-            submit_article() {                
-                let data = {
-                    ...this.info_form,
-                    content: editor.querySelector('.editormd-markdown-textarea').value
-                }
-                // console.log(data);
-                axios.post('/api/article/', data).then(res => {
-                    if(res.code) {
-                        this.$message.error(res.msg)
-                        return
-                    } else {
-                        this.$message.success(res.msg)
-                        setTimeout(() => {
-                            location.href = `/article/${res.data}/`
-                        }, 1000)
+            // 添加文章
+            add_article() {
+                this.validate_article(() => {
+                    let data = {
+                        ...this.info_form,
+                        content: editor.querySelector('.editormd-markdown-textarea').value
                     }
+                    axios.post('/api/article/', data).then(res => {
+                        if(res.code) {
+                            this.$message.error(res.msg)
+                            return
+                        } else {
+                            this.$message.success(res.msg)
+                            setTimeout(() => {
+                                location.href = `/article/${res.data}/`
+                            }, 1000)
+                        }
+                    })
                 })
             },
+            // 返回跳转
             backto() {
                 if(this.title === '个人中心')
                     location.href = '/'
                 else
                     window.history.go(-1)
             },
+            // 后台系统初始化
             init() {
                 let url = window.location.href.split('/')
                 let length = url.length
@@ -509,6 +513,7 @@
                         break
                 }
             },
+            // 初始化发布文章
             init_add_article() {                
                 if(this.title === '发布文章') {
                     let num = document.getElementById('coverimg_list')
@@ -517,6 +522,7 @@
                     this.info_form.cover_id = init
                 }
             },
+            // 初始化编辑文章
             init_edit_article() {       
                 let article_obj = document.getElementById('article_info')
                 let form = this.info_form
@@ -530,8 +536,25 @@
                 this.info_form = form
                 this.title += ' - ' + this.info_form.title
             },
-            save_article() {
-
+            // 保存编辑
+            save_article(nid) {
+                this.validate_article(() => {
+                    let data = {
+                        ...this.info_form,
+                        content: editor.querySelector('.editormd-markdown-textarea').value
+                    }
+                    axios.put(`/api/article/${nid}/`, data).then(res => {
+                        if(res.code) {
+                            this.$message.error(res.msg)
+                            return
+                        } else {
+                            this.$message.success(res.msg)
+                            setTimeout(() => {
+                                location.href = `/article/${nid}/`
+                            }, 1000)
+                        }
+                    })
+                })
             },
         }
     })

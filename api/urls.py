@@ -11,4 +11,5 @@ urlpatterns = [
     path('sign/', login.SignView.as_view()),    # 注册
 
     path('article/', article.ArticleView.as_view()),    # 发布文章
+    re_path('article/(?P<nid>\d+)', article.ArticleView.as_view())
 ]
