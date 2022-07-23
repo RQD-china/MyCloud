@@ -49,14 +49,15 @@
             <textarea style="display: none;">{{ article.content }}</textarea>
         </div>
         <div class="comment_submit">
+            {% csrf_token %}
             <div class="title">
                 留下你的想法
             </div>
             <div class="body">
-                <textarea name="" id="" cols="30" rows="10" placeholder="写下你想说的话，开启我们的故事"></textarea>
-                <button class="submit_btn">
+                <textarea ref="content_textarea" cols="30" rows="10" placeholder="写下你想说的话，开启我们的故事" v-model="comment_content"></textarea>
+                <el-button type="primary" size="small" class="submit_btn" @click="add_comment({{ article.nid }})">
                     发布评论
-                </button>
+                </el-button>
             </div>
             <div class="footer">
                 <p><span>49</span> 人参与，<span>4</span> 人评论</p>

@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/static/mine/css/base.css">
     <link rel="stylesheet" href="/static/mine/css/reset.css">
     <link rel="stylesheet" href="/static/font/css/font-awesome.css">
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="/static/element/index.css">
     <script src="/static/vue/vue.js"></script>
 </head>
 
@@ -224,19 +224,62 @@
 </html>
 
 <!-- 引入组件库 -->
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="/static/element/index.js"></script>
+<script src="/static/axios/axios.min.js"></script>
 <script>
+    // axios请求中间件
+    axios.interceptors.request.use(request => {
+        // 请求成功的拦截
+        if(request.method === 'post') {
+            let csrftoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value
+            request.headers['X-CSRFToken'] = csrftoken
+        }
+        return request
+    }, err => {
+        // 请求失败的拦截
+        return Promise.reject(err)
+    })
+    axios.interceptors.response.use(res => {
+        // 成功响应的拦截
+        return Promise.resolve(res.data)
+    }, err =>{
+        // 失败响应的拦截
+        console.log(err)
+        if(err.response){
+            // 失败响应的status需要在response中获得
+            console.log(err.response)
+            switch(err.response.status){
+            // 对得到的状态码的处理，具体的设置视自己的情况而定
+            case 401:
+                console.log('未登录')
+                window.location.href='/'
+                break
+            case 404:
+                window.location.href='/'
+                break
+            case 405:
+                console.log('不支持的方法')
+                break
+            // case ...
+            default:
+                console.log('其他错误')
+                break
+            }
+        }
+    })
+
     new Vue({
     el: '#app',
     delimiters: ["[[", "]]"],
     data: {
-        theme: 'light'
+        theme: 'light',
+        comment_content: '',
     },
     created() {
         this.init_theme()
     },
     methods: {
-        //设置主题
+        // 设置主题
         set_theme(theme_name) {
             if(theme_name == "light")
                 this.theme = "dark"
@@ -247,22 +290,37 @@
             localStorage.setItem('theme', this.theme)
         },
         
-        //初始化主题
+        // 初始化主题
         init_theme() {
             // 读取存储的主题
             let theme = localStorage.getItem('theme')
             if(theme) {
                 this.theme = theme
             }
+        },
+
+        // 发布评论
+        add_comment(nid) {
+            axios.post(`/api/article/comment/${nid}/`, {content: this.comment_content}).then(res => {
+                if(res.code) {
+                    if(res.self) {
+                        this.$refs[res.self].focus()
+                    }
+                    this.$message.error(res.msg)
+                    return
+                }
+                this.$message.success(res.msg)
+                location.reload()
+            })
         }
     }
     })
 
-    //获取轮播图
+    // 获取轮播图
     let top_nav = document.getElementById('top_nav')
     let head = document.getElementById('head_banner')
     let men_img = document.querySelectorAll('.dynamic_shuffle')
-    //设置时钟轮播
+    // 设置时钟轮播
     let max_length = men_img.length
     let index = -1
     window.addEventListener('scroll', function() {

@@ -9,7 +9,7 @@ def find_root_sub(root, sub_list):
 # 获取评论列表
 def get_comment(nid):
     # 找到某个文章的所有评论
-    comment_query = Comment.objects.filter(article_id = nid)    
+    comment_query = Comment.objects.filter(article_id = nid).order_by ('-create_time')
     comment_list = []
     
     for comment in comment_query:
