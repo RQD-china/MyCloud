@@ -64,130 +64,50 @@
         </div>
         <div class="comment_list">
             <ul>
-                <li>
-                    <div class="left">
-                        <img src="https://i0.hdslb.com/bfs/face/5f8f618627561a97e96ef34ba7fc953edabc37b4.jpg">
-                    </div>
-                    <div class="right">
-                        <h4>Richy</h4>
-                        <div class="comment_contetnt">
-                            <p>你好啊</p>
-                            <img src="https://i0.hdslb.com/bfs/face/5f8f618627561a97e96ef34ba7fc953edabc37b4.jpg">
-                            <img src="https://i0.hdslb.com/bfs/face/5f8f618627561a97e96ef34ba7fc953edabc37b4.jpg">
-                            <img src="https://i0.hdslb.com/bfs/face/5f8f618627561a97e96ef34ba7fc953edabc37b4.jpg">
+                {% for root_comment in comment_list %}
+                    <li>
+                        <div class="left">
+                            <img src="{{ root_comment.user.avatar.url.url }}">
                         </div>
-                        <div class="comment_info">
-                            <span>3分钟前</span>
-                            <div>
-                                <span>点赞(0)</span>
-                                <span>回复(0)</span>
-                                <span class="delete">删除</span>
+                        <div class="right">
+                            <h4>{{ root_comment.user.username }}</h4>
+                            <div class="comment_contetnt">
+                                <p>{{ root_comment.content }}</p>
                             </div>
-                        </div>
-                        <div class="sub_comment_list">
-                            <div class="sub_comment_item">
-                                <div class="sub_left">
-                                    <img src="https://i0.hdslb.com/bfs/face/5f8f618627561a97e96ef34ba7fc953edabc37b4.jpg">
+                            <div class="comment_info">
+                                <span>{{ root_comment.create_time }}</span>
+                                <div>
+                                    <span>点赞({{ root_comment.digg_count }})</span>
+                                    <span>回复({{ root_comment.comment_count }})</span>
+                                    <span class="delete">删除</span>
                                 </div>
-                                <div class="sub_right">
-                                    <h4>Richy</h4>
-                                    <div class="sub_comment_content">
-                                        <p>你好</p>
+                            </div>
+                            <div class="sub_comment_list">
+                                {% for sub_comment in root_comment.sub_comment %}
+                                <div class="sub_comment_item">
+                                    <div class="sub_left">
+                                        <img src="{{ sub_comment.user.avatar.url.url }}">
                                     </div>
-                                    <div class="sub_comment_info">
-                                        <span>刚刚</span>
-                                        <div>
-                                            <span>点赞(0)</span>
-                                            <span>回复(0)</span>
-                                            <span class="delete">删除</span>
+                                    <div class="sub_right">
+                                        <h4>{{ sub_comment.user.username }}&nbsp;<span>@{{ sub_comment.parent_comment.user.username }}</span></h4>
+                                        <div class="sub_comment_content">
+                                            <p>{{ sub_comment.content }}</p>
+                                        </div>
+                                        <div class="sub_comment_info">
+                                            <span>{{ sub_comment.create_time }}</span>
+                                            <div>
+                                                <span>点赞({{ sub_comment.digg_count }})</span>
+                                                <span>回复</span>
+                                                <span class="delete">删除</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="sub_comment_item">
-                                <div class="sub_left">
-                                    <img src="https://i0.hdslb.com/bfs/face/5f8f618627561a97e96ef34ba7fc953edabc37b4.jpg">
-                                </div>
-                                <div class="sub_right">
-                                    <h4>Richy</h4>
-                                    <div class="sub_comment_content">
-                                        <p>你好</p>
-                                    </div>
-                                    <div class="sub_comment_info">
-                                        <span>刚刚</span>
-                                        <div>
-                                            <span>点赞(0)</span>
-                                            <span>回复(0)</span>
-                                            <span class="delete">删除</span>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="left">
-                        <img src="https://i0.hdslb.com/bfs/face/5f8f618627561a97e96ef34ba7fc953edabc37b4.jpg">
-                    </div>
-                    <div class="right">
-                        <h4>Richy</h4>
-                        <div class="comment_contetnt">
-                            <p>你好啊</p>
-                            <img src="https://i0.hdslb.com/bfs/face/5f8f618627561a97e96ef34ba7fc953edabc37b4.jpg">
-                            <img src="https://i0.hdslb.com/bfs/face/5f8f618627561a97e96ef34ba7fc953edabc37b4.jpg">
-                            <img src="https://i0.hdslb.com/bfs/face/5f8f618627561a97e96ef34ba7fc953edabc37b4.jpg">
-                        </div>
-                        <div class="comment_info">
-                            <span>3分钟前</span>
-                            <div>
-                                <span>点赞(0)</span>
-                                <span>回复(0)</span>
-                                <span class="delete">删除</span>
-                            </div>
-                        </div>
-                        <div class="sub_comment_list">
-                            <div class="sub_comment_item">
-                                <div class="sub_left">
-                                    <img src="https://i0.hdslb.com/bfs/face/5f8f618627561a97e96ef34ba7fc953edabc37b4.jpg">
-                                </div>
-                                <div class="sub_right">
-                                    <h4>Richy</h4>
-                                    <div class="sub_comment_content">
-                                        <p>你好</p>
-                                    </div>
-                                    <div class="sub_comment_info">
-                                        <span>刚刚</span>
-                                        <div>
-                                            <span>点赞(0)</span>
-                                            <span>回复(0)</span>
-                                            <span class="delete">删除</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="sub_comment_item">
-                                <div class="sub_left">
-                                    <img src="https://i0.hdslb.com/bfs/face/5f8f618627561a97e96ef34ba7fc953edabc37b4.jpg">
-                                </div>
-                                <div class="sub_right">
-                                    <h4>Richy</h4>
-                                    <div class="sub_comment_content">
-                                        <p>你好</p>
-                                    </div>
-                                    <div class="sub_comment_info">
-                                        <span>刚刚</span>
-                                        <div>
-                                            <span>点赞(0)</span>
-                                            <span>回复(0)</span>
-                                            <span class="delete">删除</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
+                    </li>                  
+                {% endfor %}
             </ul>
         </div>
     </div>

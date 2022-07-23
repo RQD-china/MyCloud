@@ -202,5 +202,5 @@ footer .contact .link .svg:hover ~ .tips {
 }
 
 .delete {
-  color: red;
+  color: red !important;
 }/*# sourceMappingURL=base.css.map */

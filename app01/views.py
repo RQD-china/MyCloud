@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from django.contrib import auth
 from sympy import re
 from app01.models import Articles, Tags, Cover
+from app01.utils.comment import get_comment
 
 # Create your views here.
 
@@ -27,6 +28,8 @@ def article(request, nid):
     if not article_query:
         return redirect('/')
     article = article_query.first()
+    comment_list = get_comment(nid)
+    print(comment_list)
     return render(request, 'article.html', locals())
 
 # 新闻页
