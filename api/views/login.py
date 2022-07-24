@@ -1,9 +1,10 @@
 from django import forms
 from django.contrib import auth
-from app01.models import UserInfo
+from app01.models import UserInfo, Avatars
 from django.views import View
 from django.shortcuts import redirect, render
 from django.http import JsonResponse
+import random
 
 # 登录表单验证
 class LoginForm(forms.Form):
@@ -93,5 +94,12 @@ class SignView(View):
         
         # 注册成功
         data = request.data
-        UserInfo.objects.create_user(username = data['name'], password = data['pwd'])
+        user = UserInfo.objects.create_user(
+            username = data['name'],
+            password = data['pwd'])
+        
+        # 随机选择头像
+        avatar_list = [i.nid for i in Avatars.objects.all()]
+        user.avatar_id = random.choice(avatar_list)
+        user.save()
         return JsonResponse(res)

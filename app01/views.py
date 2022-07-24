@@ -29,7 +29,6 @@ def article(request, nid):
         return redirect('/')
     article = article_query.first()
     comment_list = get_comment(nid)
-    print(comment_list)
     return render(request, 'article.html', locals())
 
 # 新闻页
@@ -77,7 +76,6 @@ def add_article(request):
     # 获取封面列表
     cover_list = Cover.objects.all()
     cover_num = len(cover_list)
-    print(cover_num)
     return render(request, 'backend/add_article.html', locals())
 
 # 编辑文章
@@ -98,7 +96,6 @@ def edit_article(request, nid):
     article_recommend = article_obj.recommend
     article_abstract = article_obj.abstract
     article_tags = [str(tag.nid) for tag in article_obj.tag.all()]
-    print(article_title, article_tags)
     return render(request, 'backend/edit_article.html', locals())
 
 # 文章封面

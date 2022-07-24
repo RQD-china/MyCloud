@@ -72,7 +72,7 @@
 }
 .article .comment_submit .body {
   width: calc(100% - 40px);
-  height: 200px;
+  height: 160px;
   padding: 20px;
   background-color: #f5f5f5;
   border-radius: 5px;
@@ -160,16 +160,21 @@
   justify-content: space-between;
   font-size: 14px;
 }
+.article .comment_list > ul > li .right .comment_info span {
+  color: #777;
+}
 .article .comment_list > ul > li .right .comment_info > div > span {
   cursor: pointer;
   color: #409eff;
 }
 .article .comment_list > ul > li .right .sub_comment_list {
-  margin-top: 10px;
+  margin-top: 5px;
+  border-top: 1px solid #6d7993;
+  padding-top: 10px;
 }
 .article .comment_list > ul > li .right .sub_comment_list .sub_comment_item {
   display: flex;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 .article .comment_list > ul > li .right .sub_comment_list .sub_comment_item .sub_left {
   width: 60px;
@@ -181,20 +186,61 @@
 .article .comment_list > ul > li .right .sub_comment_list .sub_comment_item .sub_right {
   width: calc(100% - 60px);
 }
-.article .comment_list > ul > li .right .sub_comment_list .sub_comment_item .sub_right > h4 > span {
+.article .comment_list > ul > li .right .sub_comment_list .sub_comment_item .sub_right > h5 > span {
   color: #409eff;
 }
 .article .comment_list > ul > li .right .sub_comment_list .sub_comment_item .sub_right .sub_comment_content {
-  margin: 5px 0;
+  margin: 3px 0;
+  font-size: 14px;
 }
 .article .comment_list > ul > li .right .sub_comment_list .sub_comment_item .sub_right .sub_comment_info {
   display: flex;
   justify-content: space-between;
-  font-size: 14px;
+  font-size: 12px;
+}
+.article .comment_list > ul > li .right .sub_comment_list .sub_comment_item .sub_right .sub_comment_info span {
+  color: #777;
 }
 .article .comment_list > ul > li .right .sub_comment_list .sub_comment_item .sub_right .sub_comment_info > div > span {
   cursor: pointer;
   color: #409eff;
+}
+.article .comment_list > ul > li .right .sub_comment_list .sub_comment_textarea {
+  position: relative;
+  display: none;
+}
+.article .comment_list > ul > li .right .sub_comment_list .sub_comment_textarea textarea {
+  resize: none;
+  width: calc(100% - 20px);
+  height: 120px;
+  padding: 10px;
+  margin: 10px 0;
+  color: #333;
+  box-shadow: inset 1px 1px 6px rgba(0, 0, 0, 0.08);
+  border: none;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+}
+.article .comment_list > ul > li .right .sub_comment_list .sub_comment_textarea textarea:focus {
+  border: none;
+  outline: none;
+}
+.article .comment_list > ul > li .right .sub_comment_list .sub_comment_textarea .reply {
+  position: absolute;
+  width: 60px;
+  height: 30px;
+  bottom: 25px;
+  right: 15px;
+  color: #FFF;
+  background-color: #67c23a;
+  border: none;
+  font-size: 12px;
+  text-align: center;
+  border-radius: 3px;
+  transition: 0.1s;
+}
+.article .comment_list > ul > li .right .sub_comment_list .sub_comment_textarea .reply:hover {
+  background-color: #78d34b;
 }
 .article .slider_bar {
   width: 200px;

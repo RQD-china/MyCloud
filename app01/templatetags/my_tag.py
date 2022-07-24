@@ -9,7 +9,5 @@ def banner(menuName, article=None):
     img_list = [img.url.url for img in img_obj]
     if article:        
         cover = article.cover.url.url
-        print(cover)
         return {"img_list": [cover]}
-    print(img_list)
     return {"img_list": img_list}

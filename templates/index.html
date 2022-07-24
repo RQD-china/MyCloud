@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="/static/mine/css/base.css">
     <link rel="stylesheet" href="/static/mine/css/reset.css">
     <link rel="stylesheet" href="/static/font/css/font-awesome.css">
-    <link rel="stylesheet" href="/static/element/index.css">
+    <link rel="stylesheet" href="/static/element/theme-chalk/index.css">
     <script src="/static/vue/vue.js"></script>
+    <script src="/static/jquery/jquery.min.js"></script>
 </head>
 
 <body>
@@ -274,6 +275,10 @@
     data: {
         theme: 'light',
         comment_content: '',
+        unfold: {
+            nid: '',
+            cid: ''
+        }
     },
     created() {
         this.init_theme()
@@ -289,7 +294,6 @@
             //持久化存储
             localStorage.setItem('theme', this.theme)
         },
-        
         // 初始化主题
         init_theme() {
             // 读取存储的主题
@@ -298,7 +302,6 @@
                 this.theme = theme
             }
         },
-
         // 发布评论
         add_comment(nid) {
             axios.post(`/api/article/comment/${nid}/`, {content: this.comment_content}).then(res => {
@@ -312,7 +315,45 @@
                 this.$message.success(res.msg)
                 location.reload()
             })
-        }
+        },
+        // 发布子评论
+        add_sub_comment(e, nid) {
+            axios.post(`/api/article/comment/${parseInt(nid)}/`, {
+                content: $(e.target).prev().val(),
+                cid: $(e.target).prev().attr('cid')
+            }).then(res => {
+                if(res.code) {
+                    if(res.self) {
+                        this.$refs[`sub_${res.self}`].focus()
+                    }
+                    this.$message.error(res.msg)
+                    return
+                }
+                this.$message.success(res.msg)
+                location.reload()
+            })
+        },
+        // 展示回复输入框
+        show_reply_textarea(nid, username, cid) {
+            let sub_textarea = $(`#sub_textarea_${nid}`)
+            if(this.unfold.cid != cid) {
+                if(this.unfold.nid && this.unfold.nid != nid) {
+                    let textarea = $(`#sub_textarea_${this.unfold.nid}`)
+                    $(textarea).slideToggle()
+                    $(sub_textarea).slideToggle()
+                }
+                if(!this.unfold.nid) {
+                    $(sub_textarea).slideToggle()
+                }
+                this.unfold.cid = cid
+                this.unfold.nid = nid
+            } else {
+                this.unfold.nid = this.unfold.cid = ''
+                $(sub_textarea).slideToggle()
+            }
+            $(sub_textarea).find('textarea').attr('placeholder', `回复 ${username}`)
+            $(sub_textarea).find('textarea').attr('cid', cid)
+        },
     }
     })
 

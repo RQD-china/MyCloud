@@ -60,7 +60,7 @@
                 </el-button>
             </div>
             <div class="footer">
-                <p><span>49</span> 人参与，<span>4</span> 人评论</p>
+                <p><span>49</span> 人阅读过，<span>{{ article.comment_count }}</span> 人评论</p>
             </div>
         </div>
         <div class="comment_list">
@@ -79,7 +79,7 @@
                                 <span>{{ root_comment.create_time }}</span>
                                 <div>
                                     <span>点赞({{ root_comment.digg_count }})</span>
-                                    <span>回复({{ root_comment.comment_count }})</span>
+                                    <span @click="show_reply_textarea ('{{ root_comment.nid }}', '{{ root_comment.user.username }}', '{{ root_comment.nid }}')">回复({{ root_comment.comment_count }})</span>
                                     <span class="delete">删除</span>
                                 </div>
                             </div>
@@ -90,7 +90,7 @@
                                         <img src="{{ sub_comment.user.avatar.url.url }}">
                                     </div>
                                     <div class="sub_right">
-                                        <h4>{{ sub_comment.user.username }}&nbsp;<span>@{{ sub_comment.parent_comment.user.username }}</span></h4>
+                                        <h5>{{ sub_comment.user.username }}&nbsp;<span>@{{ sub_comment.parent_comment.user.username }}</span></h5>
                                         <div class="sub_comment_content">
                                             <p>{{ sub_comment.content }}</p>
                                         </div>
@@ -98,13 +98,23 @@
                                             <span>{{ sub_comment.create_time }}</span>
                                             <div>
                                                 <span>点赞({{ sub_comment.digg_count }})</span>
-                                                <span>回复</span>
+                                                <span @click="show_reply_textarea ('{{ root_comment.nid }}', '{{ sub_comment.user.username }}', '{{ sub_comment.nid }}')">回复</span>
                                                 <span class="delete">删除</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 {% endfor %}
+                                <div id="sub_textarea_{{ root_comment.nid }}" class="sub_comment_textarea">
+                                    <textarea
+                                    cols="30"
+                                    rows="10"
+                                    placeholder="回复 user01"
+                                    ref="sub_content_textarea"></textarea>
+                                    <button
+                                    class = reply
+                                    @click="add_sub_comment($event, '{{ article.nid }}')">回复</button>
+                                </div>
                             </div>
                         </div>
                     </li>                  
