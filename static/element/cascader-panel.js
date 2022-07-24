@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 59);
+/******/ 	return __webpack_require__(__webpack_require__.s = 60);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -189,7 +189,7 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 14:
+/***/ 15:
 /***/ (function(module, exports) {
 
 module.exports = require("element-ui/lib/scrollbar");
@@ -245,7 +245,14 @@ module.exports = require("element-ui/lib/radio");
 
 /***/ }),
 
-/***/ 59:
+/***/ 6:
+/***/ (function(module, exports) {
+
+module.exports = require("element-ui/lib/mixins/locale");
+
+/***/ }),
+
+/***/ 60:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -284,7 +291,7 @@ var external_babel_helper_vue_jsx_merge_props_ = __webpack_require__(26);
 var external_babel_helper_vue_jsx_merge_props_default = /*#__PURE__*/__webpack_require__.n(external_babel_helper_vue_jsx_merge_props_);
 
 // EXTERNAL MODULE: external "element-ui/lib/scrollbar"
-var scrollbar_ = __webpack_require__(14);
+var scrollbar_ = __webpack_require__(15);
 var scrollbar_default = /*#__PURE__*/__webpack_require__.n(scrollbar_);
 
 // EXTERNAL MODULE: external "element-ui/lib/checkbox"
@@ -1050,13 +1057,10 @@ var store_Store = function () {
   };
 
   Store.prototype.getNodeByValue = function getNodeByValue(value) {
-    if (value) {
-      var nodes = this.getFlattedNodes(false, !this.config.lazy).filter(function (node) {
-        return Object(util_["valueEquals"])(node.path, value) || node.value === value;
-      });
-      return nodes && nodes.length ? nodes[0] : null;
-    }
-    return null;
+    var nodes = this.getFlattedNodes(false, !this.config.lazy).filter(function (node) {
+      return Object(util_["valueEquals"])(node.path, value) || node.value === value;
+    });
+    return nodes && nodes.length ? nodes[0] : null;
   };
 
   return Store;
@@ -1214,16 +1218,17 @@ var checkNode = function checkNode(el) {
   },
 
   watch: {
+    value: function value() {
+      this.syncCheckedValue();
+      this.checkStrictly && this.calculateCheckedNodePaths();
+    },
+
     options: {
       handler: function handler() {
         this.initStore();
       },
       immediate: true,
       deep: true
-    },
-    value: function value() {
-      this.syncCheckedValue();
-      this.checkStrictly && this.calculateCheckedNodePaths();
     },
     checkedValue: function checkedValue(val) {
       if (!Object(util_["isEqual"])(val, this.value)) {
@@ -1235,7 +1240,7 @@ var checkNode = function checkNode(el) {
   },
 
   mounted: function mounted() {
-    if (!Object(util_["isEmpty"])(this.value)) {
+    if (!this.isEmptyValue(this.value)) {
       this.syncCheckedValue();
     }
   },
@@ -1282,6 +1287,16 @@ var checkNode = function checkNode(el) {
         node.syncCheckState(_this.checkedValue);
       });
     },
+    isEmptyValue: function isEmptyValue(val) {
+      var multiple = this.multiple,
+          config = this.config;
+      var emitPath = config.emitPath;
+
+      if (multiple || emitPath) {
+        return Object(util_["isEmpty"])(val);
+      }
+      return false;
+    },
     syncActivePath: function syncActivePath() {
       var _this2 = this;
 
@@ -1296,7 +1311,7 @@ var checkNode = function checkNode(el) {
           return _this2.getNodeByValue(node.getValue());
         });
         this.expandNodes(nodes);
-      } else if (!Object(util_["isEmpty"])(checkedValue)) {
+      } else if (!this.isEmptyValue(checkedValue)) {
         var value = multiple ? checkedValue[0] : checkedValue;
         var checkedNode = this.getNodeByValue(value) || {};
         var _nodes = (checkedNode.pathNodes || []).slice(0, -1);
@@ -1479,7 +1494,7 @@ var checkNode = function checkNode(el) {
           return node.checked;
         });
       } else {
-        return Object(util_["isEmpty"])(checkedValue) ? [] : [this.getNodeByValue(checkedValue)];
+        return this.isEmptyValue(checkedValue) ? [] : [this.getNodeByValue(checkedValue)];
       }
     },
     clearCheckedNodes: function clearCheckedNodes() {
@@ -1535,13 +1550,6 @@ cascader_panel.install = function (Vue) {
 };
 
 /* harmony default export */ var packages_cascader_panel = __webpack_exports__["default"] = (cascader_panel);
-
-/***/ }),
-
-/***/ 6:
-/***/ (function(module, exports) {
-
-module.exports = require("element-ui/lib/mixins/locale");
 
 /***/ }),
 

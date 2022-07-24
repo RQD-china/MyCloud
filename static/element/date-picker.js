@@ -249,19 +249,19 @@ module.exports = require("element-ui/lib/input");
 module.exports = require("element-ui/lib/utils/clickoutside");
 
 /***/ }),
-/* 13 */
+/* 13 */,
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = require("element-ui/lib/button");
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = require("element-ui/lib/scrollbar");
 
 /***/ }),
-/* 15 */,
 /* 16 */,
 /* 17 */,
 /* 18 */,
@@ -947,7 +947,9 @@ var NewPopper = {
     appendToBody: vue_popper_default.a.props.appendToBody,
     offset: vue_popper_default.a.props.offset,
     boundariesPadding: vue_popper_default.a.props.boundariesPadding,
-    arrowOffset: vue_popper_default.a.props.arrowOffset
+    arrowOffset: vue_popper_default.a.props.arrowOffset,
+    placement: vue_popper_default.a.props.placement,
+    transformOrigin: vue_popper_default.a.props.transformOrigin
   },
   methods: vue_popper_default.a.methods,
   data: function data() {
@@ -2137,7 +2139,7 @@ render._withStripped = true
 var date_util_ = __webpack_require__(1);
 
 // EXTERNAL MODULE: external "element-ui/lib/scrollbar"
-var scrollbar_ = __webpack_require__(14);
+var scrollbar_ = __webpack_require__(15);
 var scrollbar_default = /*#__PURE__*/__webpack_require__.n(scrollbar_);
 
 // EXTERNAL MODULE: ./src/directives/repeat-click.js
@@ -2357,16 +2359,16 @@ var repeat_click = __webpack_require__(30);
     bindScrollEvent: function bindScrollEvent() {
       var _this2 = this;
 
-      var bindFuntion = function bindFuntion(type) {
+      var bindFunction = function bindFunction(type) {
         _this2.$refs[type].wrap.onscroll = function (e) {
           // TODO: scroll is emitted when set scrollTop programatically
           // should find better solutions in the future!
           _this2.handleScroll(type, e);
         };
       };
-      bindFuntion('hours');
-      bindFuntion('minutes');
-      bindFuntion('seconds');
+      bindFunction('hours');
+      bindFunction('minutes');
+      bindFunction('seconds');
     },
     handleScroll: function handleScroll(type) {
       var value = Math.min(Math.round((this.$refs[type].wrap.scrollTop - (this.scrollBarHeight(type) * 0.5 - 10) / this.typeItemHeight(type) + 3) / this.typeItemHeight(type)), type === 'hours' ? 23 : 59);
@@ -2888,7 +2890,7 @@ var input_ = __webpack_require__(10);
 var input_default = /*#__PURE__*/__webpack_require__.n(input_);
 
 // EXTERNAL MODULE: external "element-ui/lib/button"
-var button_ = __webpack_require__(13);
+var button_ = __webpack_require__(14);
 var button_default = /*#__PURE__*/__webpack_require__.n(button_);
 
 // EXTERNAL MODULE: ./packages/date-picker/src/panel/time.vue + 4 modules

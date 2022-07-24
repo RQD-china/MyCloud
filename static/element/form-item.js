@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 67);
+/******/ 	return __webpack_require__(__webpack_require__.s = 69);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -210,7 +210,7 @@ module.exports = require("async-validator");
 
 /***/ }),
 
-/***/ 67:
+/***/ 69:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -544,6 +544,11 @@ component.options.__file = "packages/form/src/label-wrap.vue"
     },
     validateStatus: function validateStatus(value) {
       this.validateState = value;
+    },
+    rules: function rules(value) {
+      if ((!value || value.length === 0) && this.required === undefined) {
+        this.clearValidate();
+      }
     }
   },
   computed: {

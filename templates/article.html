@@ -80,7 +80,11 @@
                                 <div>
                                     <span>点赞({{ root_comment.digg_count }})</span>
                                     <span @click="show_reply_textarea ('{{ root_comment.nid }}', '{{ root_comment.user.username }}', '{{ root_comment.nid }}')">回复({{ root_comment.comment_count }})</span>
-                                    <span class="delete">删除</span>
+                                    {% if request.user.is_superuser or request.user == sub_comment.user %}
+                                        <span
+                                        class="delete"
+                                        @click="del_comment('{{ root_comment.nid }}')">删除</span>
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="sub_comment_list">
@@ -99,7 +103,11 @@
                                             <div>
                                                 <span>点赞({{ sub_comment.digg_count }})</span>
                                                 <span @click="show_reply_textarea ('{{ root_comment.nid }}', '{{ sub_comment.user.username }}', '{{ sub_comment.nid }}')">回复</span>
-                                                <span class="delete">删除</span>
+                                                {% if request.user.is_superuser or request.user == sub_comment.user  %}
+                                                    <span
+                                                        class="delete"
+                                                        @click="del_comment('{{ sub_comment.nid }}')">删除</span>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div>
