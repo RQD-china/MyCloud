@@ -26,6 +26,17 @@
                 <p>Java 注释</p>
             </div>
         </div>
+        <div class="actions">
+            <div class="item">
+
+            </div>
+            <div class="item">
+                
+            </div>
+            <div class="item">
+                
+            </div>
+        </div>
         <div class="article_title">
             <h2>
                 {{ article.title }}
@@ -78,7 +89,7 @@
                             <div class="comment_info">
                                 <span>{{ root_comment.create_time }}</span>
                                 <div>
-                                    <span>点赞({{ root_comment.digg_count }})</span>
+                                    <span @click="comment_digg($event, '{{ root_comment.nid }}')">点赞({{ root_comment.digg_count }})</span>
                                     <span @click="show_reply_textarea ('{{ root_comment.nid }}', '{{ root_comment.user.username }}', '{{ root_comment.nid }}')">回复({{ root_comment.comment_count }})</span>
                                     {% if request.user.is_superuser or request.user == sub_comment.user %}
                                         <span
@@ -101,7 +112,7 @@
                                         <div class="sub_comment_info">
                                             <span>{{ sub_comment.create_time }}</span>
                                             <div>
-                                                <span>点赞({{ sub_comment.digg_count }})</span>
+                                                <span @click="comment_digg($event, '{{ sub_comment.nid }}')">点赞({{ sub_comment.digg_count }})</span>
                                                 <span @click="show_reply_textarea ('{{ root_comment.nid }}', '{{ sub_comment.user.username }}', '{{ sub_comment.nid }}')">回复</span>
                                                 {% if request.user.is_superuser or request.user == sub_comment.user  %}
                                                     <span

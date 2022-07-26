@@ -379,6 +379,18 @@
                 })
                 
             },
+            // 评论点赞
+            comment_digg(e, nid) {                
+                axios.post(`/api/article/digg/${nid}/`).then(res => {
+                    if(res.code) {
+                        this.$message.error(res.msg)
+                        return
+                    }
+                    this.$message.success(res.msg)
+                    // 更新前端数据
+                    e.target.innerHTML = `点赞(${res.data})`
+                })
+            }
         }
     })
 
@@ -393,7 +405,12 @@
         let value = window.scrollY
         if(value <= 200) {
             head.style.height = Math.abs(400 - value) + 'px'
-            top_nav.style.backgroundColor = 'rgba(109,121,147,' + value/200 + ')'
+        }
+        if(value <= 100 && top_nav.classList['value']) {
+            top_nav.classList.remove('show')
+        }
+        if(value > 100 && !top_nav.classList['value']) {
+            top_nav.classList.add('show')
         }
     })
     setInterval(() => {

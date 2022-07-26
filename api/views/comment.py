@@ -14,11 +14,13 @@ class CommentView(View):
             'code': 412,
             'self': None
         }
-        # 评论内容校验
-        data = request.data
+        # 登录校验
         if not request.user.username:
             res['msg'] = '请先登录再评论'
             return JsonResponse(res)
+        
+        # 评论内容校验
+        data = request.data
         content = data.get('content')
         if not content:
             res['msg'] = '请输入评论内容'
@@ -80,4 +82,24 @@ class CommentView(View):
             res['code'] = 0
             return JsonResponse(res)
         res['msg'] = '用户验证失败'
+        return JsonResponse(res)
+
+class CommentDiggView(View):
+    def post(self, request, nid):
+        res = {
+            'msg': '评论点赞成功!',
+            'code': 412,
+            'data': 0
+        }
+
+        # 登录校验
+        if not request.user.username:
+            res['msg'] = '请先登录再评论'
+            return JsonResponse(res)
+        
+        #点赞+1
+        comment_query = Comment.objects.filter(nid=nid)
+        comment_query.update(digg_count=F('digg_count') + 1)
+        res['code'] = 0
+        res['data'] = comment_query.first().digg_count
         return JsonResponse(res)

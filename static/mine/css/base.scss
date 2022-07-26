@@ -9,6 +9,7 @@ nav {
     position: fixed;
     top: 0;
     left: 0;
+    transition-duration: 0.5s;
 
     .left {
         width: 50%;
@@ -36,6 +37,20 @@ nav {
         &:last-child {
             margin-right: 0;
         }
+    }
+}
+
+nav.show {
+    background-color: white;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    transition-duration: 0.5s;
+
+    a {
+        color: #333;
+    }
+
+    .el-dropdown-link {
+        color: #333;
     }
 }
 
