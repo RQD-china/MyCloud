@@ -278,10 +278,18 @@
             unfold: {
                 nid: '',
                 cid: ''
-            }
+            },
+            catalog: [],
+            select_tab: 0
         },
         created() {
             this.init_theme()
+            let url = window.location.href.split('/')
+            if(url[3] === 'article') {
+                setTimeout(()=>{
+                    this.get_catalog()
+                },200)
+            }
         },
         methods: {
             // 设置主题
@@ -393,42 +401,133 @@
                         return
                     }
                     this.$message.success(res.msg)
+                    $(dom).next().text(res.data)
                 })
             },
             // 文章收藏
             article_collect(e, nid) { 
                 let dom = e.target
-                dom.classList.add('on')
                 axios.post(`/api/article/collect/${nid}/`).then(res => {
                     if(res.code) {
                         this.$message.error(res.msg)
                         return
                     }
                     this.$message.success(res.msg)
+                    $(dom).next().text(res.data)
+                    if(res.collect) {
+                        dom.classList.add('on')
+                        console.log(res.collect)
+                    } else {
+                        dom.classList.remove('on')
+                        console.log(res.collect)
+                    }
                 })
             },
+            // 回到顶部
+            go_to_top() {
+                $('html,body').animate({
+                    scrollTop: 0
+                }, 600)
+            },
+            // 加载文章目录
+            get_catalog() {
+                let content = $('#article_content')
+                let h_list = content.children('h1,h2,h3,h4')
+                let list = []
+                for(i = 0; i < h_list.length; i++) {
+                    let title = h_list[i].innerText
+                    let tag_name = h_list[i].tagName
+                    let pos = '#' + h_list[i].id
+                    let element = {
+                        tag_name,
+                        title,
+                        pos,
+                        select: ''
+                    }
+                    list.push(element)
+                }
+                list.push({
+                    tag_name: 'H1',
+                    title: '评论',
+                    pos: '.comment_submit',
+                    select: ''
+                })
+                list[0].select = 'select'
+                this.catalog = list
+                this.select_title(list)
+            },
+            // 设置自动选中标题
+            select_title(catalog) {
+                // 获取各标题位置
+                let pos_list = []
+                for(let i = 0; i < catalog.length; i++) {
+                    let box = $(catalog[i].pos)
+                    let pos = box.offset()
+                    pos_list.push( Math.floor(pos.top - 50))
+                }
+                pos_list[pos_list.length - 1] -= 50
+                this.pos_list = pos_list
+                // 监听文章阅读位置
+                window.addEventListener('scroll', throttle(() => {
+                    let value = Math.ceil(window.scrollY)
+                    let i = 0
+                    while(i < this.pos_list.length - 1 && !(value >= this.pos_list[i] && value < this.pos_list[i + 1])) {
+                        i++;
+                    }
+                    if(i < this.pos_list.length - 1 && value >= this.pos_list[i] + 40)
+                        i++
+                    if(value < pos_list[0])
+                        i = 0
+                    this.catalog[this.select_tab].select = ''
+                    this.select_tab = i
+                    this.catalog[this.select_tab].select = 'select'
+                }))
+            },
+            // 目录跳转
+            go_content(select, index) {
+                let box = $(select)
+                let pos = box.offset()
+                pos.top -= 50
+                $('html,body').animate({
+                    scrollTop: pos.top
+                })
+            }
         }
     })
 
-    // 获取轮播图
+    // 节流函数
+    function throttle(fn, delay = 200) {
+        let ttimer = null
+        return function (...args) {
+            const _this = this
+            if(!ttimer) {
+                ttimer = setTimeout(() => {
+                    fn.apply(this, args)
+                    ttimer = null
+                }, delay)
+            }
+        }
+    }
+
+    // 获取DOM
     let top_nav = document.getElementById('top_nav')
     let head = document.getElementById('head_banner')
     let men_img = document.querySelectorAll('.dynamic_shuffle')
     // 设置时钟轮播
     let max_length = men_img.length
     let index = -1
-    window.addEventListener('scroll', function() {
-        let value = window.scrollY
-        if(value <= 200) {
-            head.style.height = Math.abs(400 - value) + 'px'
-        }
-        if(value <= 100 && top_nav.classList['value']) {
-            top_nav.classList.remove('show')
-        }
-        if(value > 100 && !top_nav.classList['value']) {
-            top_nav.classList.add('show')
-        }
-    })
+    window.addEventListener('scroll', throttle(() => {
+            let value = Math.ceil(window.scrollY)
+            if(value <= 100) {
+                head.style.height = Math.abs(400 - value) + 'px'
+            }
+            if(value <= 100 && top_nav.classList['value']) {
+                top_nav.classList.remove('show')
+            }
+            if(value > 100 && !top_nav.classList['value']) {
+                top_nav.classList.add('show')
+            }
+        }, 100))
     setInterval(() => {
         index++
         index = index % max_length

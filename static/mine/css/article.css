@@ -1,7 +1,59 @@
 .article {
   width: 100%;
-  max-width: 60vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
+}
+.article .slider_bar {
+  width: calc(15vw - 20px);
+  background-color: white;
+  z-index: 1;
+  border-radius: 5px;
+  padding: 20px;
+  position: absolute;
+  top: 0;
+  left: -50px;
+}
+.article .slider_bar .title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.article .slider_bar .body {
+  font-size: 14px;
+}
+.article .slider_bar .body p {
+  transition: all 0.3s;
+  cursor: pointer;
+  height: 20px;
+  line-height: 20px;
+  padding-left: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 5px solid white;
+}
+.article .slider_bar .body p:hover {
+  background-color: #f0f3f8;
+  border: 5px solid #f0f3f8;
+}
+.article .slider_bar .body p.select {
+  border-left-color: #409eff;
+}
+.article .slider_bar .body p[tagname=H2] {
+  padding-left: 10px;
+}
+.article .slider_bar .body p[tagname=H3] {
+  padding-left: 15px;
+}
+.article .slider_bar .body p[tagname=H4] {
+  padding-left: 20px;
+}
+.article .slider_bar.binding {
+  position: fixed;
+  top: 50px;
+  left: 10px;
 }
 .article .actions {
   position: fixed;
@@ -38,41 +90,13 @@
   top: -5px;
   right: 5px;
 }
-.article .slider_bar {
-  width: 200px;
-  background-color: white;
-  z-index: 1;
-  border-radius: 5px;
-  position: absolute;
-  left: calc(-115px - 10vw);
-  padding: 20px;
-}
-.article .slider_bar .title {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 5px;
-}
-.article .slider_bar .body {
-  font-size: 14px;
-}
-.article .slider_bar .body p {
-  transition: all 0.3s;
-  cursor: pointer;
-  height: 30px;
-  line-height: 30px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.article .slider_bar .body p:hover {
-  color: white;
-  background-color: #409eff;
-}
 .article .article_title {
+  width: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: white;
+  border-radius: 5px 5px 0 0;
 }
 .article .article_title h2 {
   padding: 10px 0;
@@ -107,16 +131,19 @@
   color: #333;
 }
 .article .article_content {
-  width: calc(100% - 40px);
+  width: calc(70% - 40px);
   margin-top: 2px;
   min-height: 200px;
   background-color: white;
+  border-radius: 0 0 5px 5px;
 }
 .article .comment_submit {
+  width: calc(70% - 40px);
   margin-top: 20px;
   min-height: 200px;
   background-color: white;
   padding: 20px 20px 10px 20px;
+  border-radius: 5px;
 }
 .article .comment_submit .title {
   padding-bottom: 10px;
@@ -170,6 +197,7 @@
   color: #409eff;
 }
 .article .comment_list {
+  width: 70%;
   margin-top: 20px;
 }
 .article .comment_list ul {

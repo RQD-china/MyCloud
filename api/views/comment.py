@@ -129,6 +129,7 @@ class ArticleCollectView(View):
         res = {
             'msg': '文章收藏成功!',
             'code': 412,
+            'collect': False,
             'data': 0
         }
 
@@ -139,9 +140,16 @@ class ArticleCollectView(View):
 
         #是否已收藏
         collect = request.user.collects.filter(nid=nid)
-        print(collect)
-        # article_query = Articles.objects.filter(nid=nid)
-        # article_query.update(digg_count=F('digg_count') + 1)
+        article_query = Articles.objects.filter(nid=nid)
+        num = 1
+        if collect:
+            res['msg'] = '文章取消收藏成功！'
+            request.user.collects.remove(nid)
+            num = -1
+        else:
+            request.user.collects.add(nid)
+            res['collect'] = True
+        article_query.update(collects_count=F('collects_count') + num)
+        res['data'] = article_query.first().collects_count
         res['code'] = 0
-        res['data'] = article_query.first().digg_count
         return JsonResponse(res)

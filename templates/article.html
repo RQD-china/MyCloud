@@ -1,5 +1,5 @@
 {% extends "index.html" %}
-{% load my_tag %}
+{% load my_tag my_filter %}
 
 {% block css %}
     <link rel="stylesheet" href="/static/editor_md/css/editormd.css">  
@@ -12,33 +12,32 @@
 
 {% block main %}
     <div class="article">
-        <div class="slider_bar">
+        <div id="slider_bar" class="slider_bar">
             <div class="title">
                 文章目录
             </div>
             <div class="body">
-                <p>Hello World</p>
-                <p>用命令行编译 java 源文件</p>
-                <p>Java 基本语法</p>
-                <p>Java 修饰符</p>
-                <p>Java 变量类型</p>
-                <p>Java 枚举</p>
-                <p>Java 注释</p>
+                <p 
+                    :id = "'catalog_tab_' + index"
+                    :class = "item.select"
+                    @click="go_content(item.pos, index)"
+                    :tagname="item.tag_name" 
+                    v-for="(item, index) in catalog">[[ item.title ]]</p>
             </div>
         </div>
         <div class="actions">
-            <div class="item" @click="article_digg($event, '{{ article.nid }}')">
+            <div class="item" title="点赞">
                 <el-badge value="{{ article.digg_count }}" :max="99">
-                    <i class="el-icon-thumb"></i>
+                    <i class="el-icon-thumb" @click="article_digg($event, '{{ article.nid }}')"></i>
                 </el-badge>
             </div>
-            <div class="item" @click="article_collect($event, '{{ article.nid }}')">
+            <div class="item">
                 <el-badge value="{{ article.collects_count }}" :max="99">
-                    <i class="el-icon-star-off"></i>
+                    <i class="el-icon-star-off {{ article|is_collect:request }}" @click="article_collect($event, '{{ article.nid }}')"></i>
                 </el-badge>
             </div>
-            <div class="item" @click="">
-                <i class="el-icon-arrow-up on"></i>
+            <div class="item" title="回到顶部">
+                <i class="el-icon-arrow-up on" @click="go_to_top"></i>
             </div>
         </div>
         <div class="article_title">
@@ -166,17 +165,30 @@
 {% endblock main %}
 
 {% block js %}
-    <script src="/static/jquery/jquery.min.js"></script>
-    <script src="/static/editor_md/lib/marked.min.js"></script>
-    <script src="/static/editor_md/lib/prettify.min.js"></script>
-    <script src="/static/editor_md/editormd.min.js"></script>
-    <script type="text/javascript">
-        $(function() {
-            let editor = editormd.markdownToHTML("article_content", {
-                width: "100%",
-                height: "100%",
-                path: "/static/editor_md/lib/",
-            })
+<script src="/static/jquery/jquery.min.js"></script>
+<script src="/static/editor_md/lib/marked.min.js"></script>
+<script src="/static/editor_md/lib/prettify.min.js"></script>
+<script src="/static/editor_md/editormd.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        let editor = editormd.markdownToHTML("article_content", {
+            width: "100%",
+            height: "100%",
+            path: "/static/editor_md/lib/",
         })
-    </script>
+    })
+
+    // 获取DOM
+    let slider_bar = document.getElementById('slider_bar')
+        
+    window.addEventListener('scroll', throttle(() => {
+        let value = Math.ceil(window.scrollY)
+        if(value <= 300 && slider_bar.classList['value'] != 'slider_bar') {
+            slider_bar.classList.remove('binding')
+        }
+        if(value > 300 && slider_bar.classList['value'] === 'slider_bar') {
+            slider_bar.classList.add('binding')
+        }
+    }, 20))
+</script>
 {% endblock js %}
