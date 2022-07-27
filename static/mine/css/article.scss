@@ -16,6 +16,31 @@
             background-color: white;
             border-radius: 50%;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            i {
+                font-size: 20px;
+                color: #777;
+            }
+
+            i.on {
+                color: #409eff;
+            }
+
+            span {
+                margin-top: -2px;
+                font-size: 10px;
+                color: #777;
+            }
+
+            .el-badge__content.is-fixed {
+                top: -5px;
+                right: 5px;
+            }
         }
     }
 

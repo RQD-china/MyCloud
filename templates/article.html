@@ -27,14 +27,18 @@
             </div>
         </div>
         <div class="actions">
-            <div class="item">
-
+            <div class="item" @click="article_digg($event, '{{ article.nid }}')">
+                <el-badge value="{{ article.digg_count }}" :max="99">
+                    <i class="el-icon-thumb"></i>
+                </el-badge>
             </div>
-            <div class="item">
-                
+            <div class="item" @click="article_collect($event, '{{ article.nid }}')">
+                <el-badge value="{{ article.collects_count }}" :max="99">
+                    <i class="el-icon-star-off"></i>
+                </el-badge>
             </div>
-            <div class="item">
-                
+            <div class="item" @click="">
+                <i class="el-icon-arrow-up on"></i>
             </div>
         </div>
         <div class="article_title">
@@ -92,10 +96,19 @@
                                     <span @click="comment_digg($event, '{{ root_comment.nid }}')">点赞({{ root_comment.digg_count }})</span>
                                     <span @click="show_reply_textarea ('{{ root_comment.nid }}', '{{ root_comment.user.username }}', '{{ root_comment.nid }}')">回复({{ root_comment.comment_count }})</span>
                                     {% if request.user.is_superuser or request.user == sub_comment.user %}
+                                    <el-popconfirm
+                                        confirm-button-text='删除'
+                                        confirm-button-type="danger"
+                                        cancel-button-text='取消'
+                                        title="确认删除该条评论吗？"
+                                        @confirm="del_comment('{{ root_comment.nid }}')"
+                                        @cancel="$message({type: 'info', message: '取消删除'})"
+                                        >
                                         <span
-                                        class="delete"
-                                        @click="del_comment('{{ root_comment.nid }}')">删除</span>
+                                            slot="reference"
+                                            class="delete">删除</span>
                                     {% endif %}
+                                    </el-popconfirm>
                                 </div>
                             </div>
                             <div class="sub_comment_list">
@@ -115,9 +128,18 @@
                                                 <span @click="comment_digg($event, '{{ sub_comment.nid }}')">点赞({{ sub_comment.digg_count }})</span>
                                                 <span @click="show_reply_textarea ('{{ root_comment.nid }}', '{{ sub_comment.user.username }}', '{{ sub_comment.nid }}')">回复</span>
                                                 {% if request.user.is_superuser or request.user == sub_comment.user  %}
+                                                <el-popconfirm
+                                                    confirm-button-text='删除'
+                                                    confirm-button-type="danger"
+                                                    cancel-button-text='取消'
+                                                    title="确认删除该条评论吗？"
+                                                    @confirm="del_comment('{{ sub_comment.nid }}')"
+                                                    @cancel="$message({type: 'info', message: '取消删除'})"
+                                                    >
                                                     <span
-                                                        class="delete"
-                                                        @click="del_comment('{{ sub_comment.nid }}')">删除</span>
+                                                        slot="reference"
+                                                        class="delete">删除</span>
+                                                </el-popconfirm>
                                                 {% endif %}
                                             </div>
                                         </div>

@@ -94,7 +94,7 @@ class CommentDiggView(View):
 
         # 登录校验
         if not request.user.username:
-            res['msg'] = '请先登录再评论'
+            res['msg'] = '请先登录再点赞'
             return JsonResponse(res)
         
         #点赞+1
@@ -102,4 +102,46 @@ class CommentDiggView(View):
         comment_query.update(digg_count=F('digg_count') + 1)
         res['code'] = 0
         res['data'] = comment_query.first().digg_count
+        return JsonResponse(res)
+
+class ArticleDiggView(View):
+    def post(self, request, nid):
+        res = {
+            'msg': '文章点赞成功!',
+            'code': 412,
+            'data': 0
+        }
+
+        # 登录校验
+        if not request.user.username:
+            res['msg'] = '请先登录再点赞'
+            return JsonResponse(res)
+        
+        #点赞+1
+        article_query = Articles.objects.filter(nid=nid)
+        article_query.update(digg_count=F('digg_count') + 1)
+        res['code'] = 0
+        res['data'] = article_query.first().digg_count
+        return JsonResponse(res)
+
+class ArticleCollectView(View):
+    def post(self, request, nid):
+        res = {
+            'msg': '文章收藏成功!',
+            'code': 412,
+            'data': 0
+        }
+
+        # 登录校验
+        if not request.user.username:
+            res['msg'] = '请先登录再收藏'
+            return JsonResponse(res)
+
+        #是否已收藏
+        collect = request.user.collects.filter(nid=nid)
+        print(collect)
+        # article_query = Articles.objects.filter(nid=nid)
+        # article_query.update(digg_count=F('digg_count') + 1)
+        res['code'] = 0
+        res['data'] = article_query.first().digg_count
         return JsonResponse(res)

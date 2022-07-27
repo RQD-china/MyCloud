@@ -13,6 +13,10 @@ urlpatterns = [
     re_path('article/(?P<nid>\d+)/', article.ArticleView.as_view()),    # 编辑文章
     re_path('article/comment/(?P<nid>\d+)/',
             comment.CommentView.as_view()),    # 发布评论
+    re_path('comment/digg/(?P<nid>\d+)/',
+            comment.CommentDiggView.as_view()),    # 点赞评论
     re_path('article/digg/(?P<nid>\d+)/',
-            comment.CommentDiggView.as_view()),    # 发布评论
+            comment.CommentDiggView.as_view()),    # 点赞文章
+    re_path('article/collect/(?P<nid>\d+)/',
+            comment.CommentDiggView.as_view()),    # 收藏文章
 ]

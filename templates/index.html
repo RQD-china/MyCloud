@@ -355,33 +355,20 @@
                 $(sub_textarea).find('textarea').attr('cid', cid)
                 $(sub_textarea).find('textarea').focus()
             },
-            // 删除子评论
+            // 删除评论
             del_comment(nid) {
-                console.log(nid)
-                this.$confirm('确认删除该条评论吗？\n已删除的评论不可恢复。', '提示', {
-                    confirmButtonText: '确认删除',
-                    cancelButtonText: '手滑了，取消',
-                    type: 'warning'
-                }).then(() => {
-                    axios.delete(`/api/article/comment/${nid}/`).then(res => {
-                        if(res.code) {
-                            this.$message.error(res.msg)
-                            return
-                        }
-                        this.$message.success(res.msg)
-                        location.reload()
-                    })
-                }).catch(() => {
-                    this.$message({
-                        type: 'info',
-                        message: '取消删除'
-                    })
+                axios.delete(`/api/article/comment/${nid}/`).then(res => {
+                    if(res.code) {
+                        this.$message.error(res.msg)
+                        return
+                    }
+                    this.$message.success(res.msg)
+                    location.reload()
                 })
-                
             },
             // 评论点赞
-            comment_digg(e, nid) {                
-                axios.post(`/api/article/digg/${nid}/`).then(res => {
+            comment_digg(e, nid) { 
+                axios.post(`/api/comment/digg/${nid}/`).then(res => {
                     if(res.code) {
                         this.$message.error(res.msg)
                         return
@@ -390,7 +377,36 @@
                     // 更新前端数据
                     e.target.innerHTML = `点赞(${res.data})`
                 })
-            }
+            },
+            // 文章点赞
+            article_digg(e, nid) { 
+                let dom = e.target
+                dom.classList.add('on')
+                let timer = null
+                timer = setTimeout(() => {
+                    clearTimeout(timer)
+                    dom.classList.remove('on')
+                }, 1000)
+                axios.post(`/api/article/digg/${nid}/`).then(res => {
+                    if(res.code) {
+                        this.$message.error(res.msg)
+                        return
+                    }
+                    this.$message.success(res.msg)
+                })
+            },
+            // 文章收藏
+            article_collect(e, nid) { 
+                let dom = e.target
+                dom.classList.add('on')
+                axios.post(`/api/article/collect/${nid}/`).then(res => {
+                    if(res.code) {
+                        this.$message.error(res.msg)
+                        return
+                    }
+                    this.$message.success(res.msg)
+                })
+            },
         }
     })
 
