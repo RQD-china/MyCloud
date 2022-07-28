@@ -9,7 +9,7 @@
     {% block css %}
         <link rel="stylesheet" href="/static/mine/css/index.css">
     {% endblock css %}
-    <link rel="shortcut icon" href="/static/mine/img/logo/logo.png">
+    <link rel="shortcut icon" href="/static/mine/img/logo/logo.svg">
     <link rel="stylesheet" href="/static/mine/css/base.css">
     <link rel="stylesheet" href="/static/mine/css/reset.css">
     <link rel="stylesheet" href="/static/font/css/font-awesome.css">
@@ -23,14 +23,23 @@
         <link rel="stylesheet" :href="'/static/mine/css/theme/' + theme + '.css'">
         <nav id="top_nav">
             <div class="left">
-                <a href="/"><img src="/static/mine/img/logo/logo.png" alt="Richy个人博客">首页</a>
+                <a href="/"><img src="/static/mine/img/logo/logo.svg" alt="Richy个人博客">首页</a>
                 <a href="/news">新闻</a>
                 <a href="#">动态</a>
                 <a href="#">关于</a>
                 <a href="#">导航</a>
+                <div class="nav_search">
+                    <input 
+                        type="text"
+                        onkeypress=""
+                        placeholder="搜索你感兴趣的内容"
+                        @keyup.enter="handleSearch"
+                        v-model="search_key">
+                    <button @click="handleSearch"><i class="el-icon-search"></i></button>
+                </div>
             </div>
             <div class="right">
-                <img :src="'/static/mine/img/nav/' + theme + '.svg'" @click = "set_theme(theme)">
+                <i :class="'el-icon-' + theme" @click = "set_theme(theme)"></i>
                 {% if request.user.username %}
                     <el-dropdown>
                         <span class="el-dropdown-link">
@@ -283,7 +292,7 @@
         el: '#app',
         delimiters: ["[[", "]]"],
         data: {
-            theme: 'light',
+            theme: 'sunny',
             comment_content: '',
             unfold: {
                 nid: '',
@@ -292,7 +301,9 @@
             catalog: [],
             select_tab: 0,
             current_page: 1,
-            base_url: ''
+            base_url: '',
+            search_input: '',
+            search_key: ''
         },
         created() {
             this.init()
@@ -323,10 +334,10 @@
             },
             // 设置主题
             set_theme(theme_name) {
-                if(theme_name == "light")
-                    this.theme = "dark"
+                if(theme_name == "sunny")
+                    this.theme = "moon"
                 else
-                    this.theme = "light"
+                    this.theme = "sunny"
                 
                 //持久化存储
                 localStorage.setItem('theme', this.theme)
@@ -525,9 +536,26 @@
             handleCurrentChange(current) {
                 location.href = this.base_url + `?page=${current}#all_article`
             },
+            // 搜索
+            handleSearch() {
+                let box = document.querySelector('.nav_search')
+                console.log(box)
+                if(!box.classList.contains('show_input')) {
+                    box.classList.add('show_input')
+                    return
+                }
+                if(this.search_key) {
+                    window.open('/search/?key=' + this.search_key, name ='_blank')
+                } else {
+                    box.classList.remove('show_input')
+                    return
+                }
+            },
         }
     })
-
+</script>
+{% block banner_js %}
+<script>
     // 节流函数
     function throttle(fn, delay = 200) {
         let ttimer = null
@@ -570,6 +598,8 @@
         men_img[index].style.opacity = 1
     }, 2000);
 </script>
+{% endblock banner_js %}
+
 {% block js %}
   
 {% endblock js %}

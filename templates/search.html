@@ -10,12 +10,12 @@
 {% block main %}
   <div class="main">
     <div class="search">
-        <img src="/static/mine/img/logo/logo.png" alt="Richy个人博客">
+        <img src="/static/mine/img/logo/logo.svg" alt="Richy个人博客">
         <span> | Richy个人博客</span>
         <el-input
             class="search_input"
-            placeholder="请输入内容"
-            v-model="input"
+            placeholder="搜索你想要的内容"
+            value="{{ params.key }}"
             clearable>
         </el-input>
         <el-button
@@ -80,14 +80,22 @@
         </ul>
     </div>
     <div class="pagination" params="{{ params }}">
-        <!--el-pagination
+        <el-pagination
             background
             @current-change="handleCurrentChange"
             :current-page.sync="current_page"
             :page-size="{{ params.page_size }}"
             layout="prev, pager, next"
             :total="{{ params.total }}">
-        </el-pagination-->
+        </el-pagination>
     </div>
   </div>
 {% endblock main %}
+
+{% block banner_js %}
+<script>
+    // 固定导航条
+    let top_nav = document.getElementById('top_nav')
+    top_nav.classList.add('show')
+</script>
+{% endblock banner_js %}

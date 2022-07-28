@@ -1,39 +1,89 @@
 nav {
-    width: calc(100% - 400px);
+    box-sizing: border-box;
+    width: 100%;
     height: 40px;
     background-color: rgba(109, 121, 147, 0);
     display: flex;
     align-items: center;
-    padding: 0 200px;
+    padding: 0 10%;
     z-index: 100;
     position: fixed;
     top: 0;
     left: 0;
     transition: all 0.5s;
+    overflow: hidden;
 
     .left {
-        width: 50%;
+        width: 80%;
 
         img {
             width: 20px;
             height: 20px;
             vertical-align: text-bottom;
-            margin-right: 20px;
+            margin-right: 25px;
+            transform: translateY(-60px);
+            filter: drop-shadow(white 0 60px)
         }
 
         a {
             vertical-align: middle;
         }
+
+        .nav_search {
+            display: inline-flex;
+            border-radius: 5px;
+
+            input {
+                width: 0;
+                height: 30px;
+                color: #777;
+                border: none;
+                outline: none;
+                padding: 0;
+                transition: all 0.3s;
+                background-color: rgba(white, 0.5);
+            }
+
+            button {
+                color: white;
+                border: none;
+                background-color: transparent;
+                cursor: pointer;
+
+                &:hover {
+                    color: #ff8c31;
+                }
+            }
+
+        }
+        .nav_search.show_input {
+            input {
+                width: 120px;
+                padding: 0 10px;
+                border-radius: 5px 0 0 5px;
+            }
+
+            button {
+                color: #333;
+                border-radius: 0 5px 5px 0;
+                background-color: rgba(white, 0.5);
+            }
+        }
     }
 
     .right {
-        width: 50%;
+        width: 20%;
         display: flex;
         justify-content: right;
 
-        img {
-            width: 20px;
+        i {
+            color: white;
+            font-size: 18px;
             margin-right: 20px;
+            
+            &:hover {
+                color: #ff8c31;
+            }
         }
 
         .el-dropdown-link {
@@ -71,6 +121,24 @@ nav.show {
 
     .el-dropdown-link {
         color: #333;
+    }
+
+    i {
+        color: #333;
+    }
+
+    img {
+        transform: translateY(0);
+    }
+
+    .nav_search {
+        button {
+            color: #333;
+        }
+    }
+
+    .nav_search.show_input {
+        border: 1px solid #f0f3f8;
     }
 }
 
@@ -125,7 +193,7 @@ main {
     width: 100%;
     padding: 20px 60px;
     box-sizing: border-box;
-    min-height: 600px;
+    min-height: calc(100vh - 150px);
     background-color: var(--main_bg);
     color: var(--main_color);
     display: flex;
@@ -134,13 +202,15 @@ main {
 
 footer {
     width: 100%;
-    height: 180px;
+    height: 150px;
     display: flex;
     background-color: var(--footer_bg);
     color: var(--footer_color);
+    box-shadow: 0 2px 12px 0 rgb(0, 0, 0, 0.2);
 
     p {
-        margin: 8px 0px;
+        font-size: 14px;
+        margin: 5px 0px;
     }
 
     .left,
@@ -169,7 +239,7 @@ footer {
 
         img {
             width: 20px;
-            margin-right: 10px;
+            margin-right: 5px;
         }
     }
 
@@ -206,7 +276,7 @@ footer {
 
         .svg {
             position: relative;
-            width: 32px;
+            width: 24px;
             z-index: 1;
         }
 
@@ -214,7 +284,7 @@ footer {
             width: 80px;
             position: absolute;
             top: -50px;
-            left: -24px;
+            left: -28px;
             opacity: 0;
             transition: all 0.5s;
         }
@@ -240,7 +310,7 @@ footer {
                 &:hover {
                     & ~ .QR {
                         top: -80px;
-                        left: -24px;
+                        left: -28px;
                         opacity: 1;
                     }
                 }
@@ -253,7 +323,7 @@ footer {
                 &:hover {
                     & ~ .QR {
                         top: -80px;
-                        left: -24px;
+                        left: -28px;
                         opacity: 1;
                     }
                 }
@@ -281,4 +351,16 @@ footer {
 
 .delete {
     color: red !important;
+}
+
+.pagination {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+
+    .el-pagination.is-background .btn-next,
+    .el-pagination.is-background .btn-prev,
+    .el-pagination.is-background .el-pager li {
+        background-color: white;
+    }
 }

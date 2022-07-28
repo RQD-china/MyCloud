@@ -61,8 +61,32 @@ def sign(request):
     return render(request, 'sign.html')
 
 # 搜索页面
+
+
 def search(request):
+    if not request.GET.get('page'):
+        if not request.GET:
+            return redirect(request.path_info + '?page=1')
+        else:
+            return redirect(request.get_full_path() + '&page=1')
+
     article_list = Articles.objects.all().order_by('-change_date')
+    recommend_list = Articles.objects.filter(
+        recommend=True).order_by('-change_date')[:6]
+
+    query_params = request.GET.copy()
+
+    params = {
+        'current_page': int(request.GET.get('page')),
+        'key': request.GET.get('key', ''),
+        'base_url': request.path_info,
+        'total': article_list.count(),
+        'page_size': 2
+    }
+    if params['current_page'] > math.ceil(params['total'] / params['page_size']):
+        return redirect('/?page=1')
+    start = (params['current_page'] - 1) * params['page_size']
+    article_list = article_list[start: start + params['page_size']]
     return render(request, 'search.html', locals())
 
 # 注销
