@@ -473,15 +473,6 @@
                 let url = window.location.href.split('/')
                 let length = url.length
                 let page = url[4]
-                let path = {
-                    '': '个人中心',
-                    'edit_info': '基本信息',
-                    'reset_pwd': '修改密码',
-                    'add_article': '发布文章',
-                    'edit_article': '编辑文章',
-                    'article_banner': '文章封面',
-                    'avatar_list': '头像列表',
-                }
                 // 设定一个默认值
                 this.title = '返回'
 
@@ -518,7 +509,7 @@
                 if(this.title === '发布文章') {
                     let num = document.getElementById('coverimg_list')
                     let img_num = parseInt(num.getAttribute('data'))
-                    let init = Math.floor(Math.random() * img_num)
+                    let init = Math.ceil(Math.random() * img_num)
                     this.info_form.cover_id = init
                 }
             },

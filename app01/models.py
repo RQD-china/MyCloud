@@ -124,7 +124,7 @@ class Articles(models.Model):
         blank=True
     )
     author = models.CharField(max_length=16, verbose_name='作者', null=True, blank=True)
-    source = models.CharField(max_length=32, verbose_name='来源', null=True, blank=True)
+    source = models.CharField(max_length=128, verbose_name='来源', null=True, blank=True)
 
     link = models.URLField(verbose_name='文章链接', null=True, blank=True)
     word = models.IntegerField(verbose_name='文章字数', default=0)

@@ -29,9 +29,13 @@ nav .right .el-dropdown-link {
 nav a {
   margin-right: 20px;
   color: white;
+  transition: 0.3s;
 }
 nav a:last-child {
   margin-right: 0;
+}
+nav a:hover {
+  color: #ff8c31;
 }
 
 nav.show {
@@ -41,6 +45,10 @@ nav.show {
 }
 nav.show a {
   color: #333;
+  transition: 0.3s;
+}
+nav.show a:hover {
+  color: #409eff;
 }
 nav.show .el-dropdown-link {
   color: #333;

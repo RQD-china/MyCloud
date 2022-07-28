@@ -8,6 +8,7 @@ from django.contrib import auth
 from sympy import re
 from app01.models import Articles, Tags, Cover
 from app01.utils.comment import get_comment
+import math
 
 # Create your views here.
 
@@ -18,8 +19,24 @@ def change_type(byte):
 
 # 主页
 def index(request):
+    if not request.GET:
+        return redirect('/?page=1')
+    
     article_list = Articles.objects.all().order_by('-change_date')
     recommend_list = Articles.objects.filter(recommend = True).order_by('-change_date')[:6]
+    
+    query_params = request.GET.copy()
+    
+    params = {
+        'current_page': int(request.GET.get('page')),
+        'base_url': request.path_info,
+        'total': article_list.count(),
+        'page_size': 2
+    }
+    if params['current_page'] > math.ceil(params['total'] / params['page_size']):
+        return redirect('/?page=1')
+    start = (params['current_page'] - 1) * params['page_size']
+    article_list = article_list[start : start + params['page_size']]
     return render(request, 'index.html', locals())
     
 # 文章

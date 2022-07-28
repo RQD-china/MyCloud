@@ -16,6 +16,17 @@
   padding: 10px 20px 20px 20px;
 }
 
+.pagination {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+.pagination .el-pagination.is-background .btn-next,
+.pagination .el-pagination.is-background .btn-prev,
+.pagination .el-pagination.is-background .el-pager li {
+  background-color: white;
+}
+
 #app {
   width: 100%;
 }
