@@ -1,0 +1,93 @@
+{% extends "index.html" %}
+
+{% block banner %}
+{% endblock banner %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/mine/css/search.css">
+{% endblock css %}
+
+{% block main %}
+  <div class="main">
+    <div class="search">
+        <img src="/static/mine/img/logo/logo.png" alt="Richy个人博客">
+        <span> | Richy个人博客</span>
+        <el-input
+            class="search_input"
+            placeholder="请输入内容"
+            v-model="input"
+            clearable>
+        </el-input>
+        <el-button
+            class="search_btn"
+            type="primary"
+            icon="el-icon-search"
+            size="small">搜索</el-button>
+    </div>
+    <div class="search_criteria">
+        <ul>
+            <li class="active"><a href="">综合排序</a></li>
+            <li><a href="">最新发布</a></li>
+            <li><a href="">最多点赞</a></li>
+            <li><a href="">最多评论</a></li>
+            <li><a href="">最多收藏</a></li>
+        </ul>
+        <ul>
+            <li class="active"><a href="">全部文章</a></li>
+            <li><a href="">百字短篇</a></li>
+            <li><a href="">千字长文</a></li>
+        </ul>
+        <ul>
+            <li class="active"><a href="">全部标签</a></li>
+            <li><a href="">HTML</a></li>
+            <li><a href="">Python</a></li>
+        </ul>
+    </div>
+    <div class="search_content">
+        <ul>
+            {% for article in article_list %}
+            <li>
+                <div class="left">
+                    <a href="/article/{{ article.nid }}/">
+                        <img src="{{ article.cover.url.url }}" alt="">
+                    </a>
+                </div>
+                <div class="right">
+                    <h2><a href="/article/{{ article.nid }}/" target="_blank">{{ article.title }}</a></h2>
+                    <p class="info">
+                        <i class="el-icon-edit-outline"></i>
+                        <span class="bolded">{{ article.author }}</span>
+                        <i class="el-icon-time"></i>
+                        <span>{{ article.change_date|date:'Y-m-d' }}</span>
+                    </p>
+                    <p class="info">
+                        <i class="el-icon-view"></i>
+                        <span>{{ article.look_count }}</span>
+                        <i class="el-icon-thumb"></i>
+                        <span>{{ article.digg_count }}</span>
+                        <i class="el-icon-chat-dot-square"></i>
+                        <span>{{ article.comment_count }}</span>
+                        <i class="el-icon-star-off"></i>
+                        <span>{{ article.collects_count }}</span>
+                    </p>
+                    <div class="btn"><a href="/article/{{ article.nid }}/" target="_blank">查看详情</a></div>
+                </div>
+            </li>
+            {% endfor %}
+            {% if article_list.length == 0 %}
+                <el-empty description="这里什么都没有哦"></el-empty>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="pagination" params="{{ params }}">
+        <!--el-pagination
+            background
+            @current-change="handleCurrentChange"
+            :current-page.sync="current_page"
+            :page-size="{{ params.page_size }}"
+            layout="prev, pager, next"
+            :total="{{ params.total }}">
+        </el-pagination-->
+    </div>
+  </div>
+{% endblock main %}

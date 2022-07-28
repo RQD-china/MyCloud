@@ -60,6 +60,11 @@ def login(request):
 def sign(request):
     return render(request, 'sign.html')
 
+# 搜索页面
+def search(request):
+    article_list = Articles.objects.all().order_by('-change_date')
+    return render(request, 'search.html', locals())
+
 # 注销
 def logout(request):
     auth.logout(request)
