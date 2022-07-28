@@ -33,9 +33,9 @@
                         type="text"
                         onkeypress=""
                         placeholder="搜索你感兴趣的内容"
-                        @keyup.enter="handleSearch"
+                        @keyup.enter="handle_search"
                         v-model="search_key">
-                    <button @click="handleSearch"><i class="el-icon-search"></i></button>
+                    <button @click="handle_search"><i class="el-icon-search"></i></button>
                 </div>
             </div>
             <div class="right">
@@ -147,7 +147,7 @@
                         <div class="pagination" params="{{ params }}">
                             <el-pagination
                                 background
-                                @current-change="handleCurrentChange"
+                                @current-change="current_change"
                                 :current-page.sync="current_page"
                                 :page-size="{{ params.page_size }}"
                                 layout="prev, pager, next"
@@ -320,6 +320,9 @@
                             // 初始化文章详情页面
                             this.get_catalog()
                             break
+                        case 'search':
+                            // 初始化搜素页面
+                            this.init_search()
                         default:
                             this.init_index()
                     }
@@ -331,6 +334,12 @@
                 let params = JSON.parse(pagination.getAttribute('params').replace(/\'/g, '\"'))
                 this.current_page = params.current_page
                 this.base_url = params.base_url
+            },
+            // 初始化搜索页面
+            init_search() {
+                let dom = document.querySelector('.search_input').childNodes[1]
+                dom.focus()
+                this.search_key = dom.getAttribute('data')
             },
             // 设置主题
             set_theme(theme_name) {
@@ -533,15 +542,15 @@
                 })
             },
             // 切换页码
-            handleCurrentChange(current) {
+            current_change(current) {
                 location.href = this.base_url + `?page=${current}#all_article`
             },
-            // 搜索
-            handleSearch() {
+            // 主页搜索
+            handle_search() {
                 let box = document.querySelector('.nav_search')
-                console.log(box)
                 if(!box.classList.contains('show_input')) {
                     box.classList.add('show_input')
+                    box.childNodes[0].focus()
                     return
                 }
                 if(this.search_key) {
@@ -550,6 +559,10 @@
                     box.classList.remove('show_input')
                     return
                 }
+            },
+            // 搜索页搜索
+            search_for() {
+                location.href = '/search/?key=' + this.search_key
             },
         }
     })

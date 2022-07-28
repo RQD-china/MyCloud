@@ -15,13 +15,16 @@
         <el-input
             class="search_input"
             placeholder="搜索你想要的内容"
-            value="{{ params.key }}"
+            data="{{ params.key }}"
+            @keyup.enter.native="search_for"
+            v-model="search_key"
             clearable>
         </el-input>
         <el-button
             class="search_btn"
             type="primary"
             icon="el-icon-search"
+            @click="search_for"
             size="small">搜索</el-button>
     </div>
     <div class="search_criteria">
@@ -82,7 +85,7 @@
     <div class="pagination" params="{{ params }}">
         <el-pagination
             background
-            @current-change="handleCurrentChange"
+            @current-change="current_change"
             :current-page.sync="current_page"
             :page-size="{{ params.page_size }}"
             layout="prev, pager, next"
