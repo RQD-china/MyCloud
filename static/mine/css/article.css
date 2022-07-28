@@ -137,6 +137,31 @@
   background-color: white;
   border-radius: 0 0 5px 5px;
 }
+.article .article_content pre {
+  position: relative;
+}
+.article .article_content pre:hover .code_copy {
+  opacity: 1;
+}
+.article .article_content pre .code_copy {
+  display: inline-table;
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  opacity: 0;
+  transition: all 0.3s;
+  background-color: white;
+  padding: 0 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.article .article_content pre .code_copy:hover {
+  background-color: #f0f3f8;
+}
+.article .article_content pre .code_copy i {
+  margin-right: 2px;
+}
 .article .comment_submit {
   width: calc(70% - 40px);
   margin-top: 20px;

@@ -161,6 +161,38 @@
         min-height: 200px;
         background-color: white;
         border-radius: 0 0 5px 5px;
+
+        pre {
+            position: relative;
+
+            &:hover {
+                .code_copy {
+                    opacity: 1;
+                }
+            }
+
+            .code_copy {
+                display: inline-table;
+                position: absolute;
+                right: 10px;
+                top: 8px;
+                opacity: 0;
+                transition: all 0.3s;
+                background-color: white;
+                padding: 0 5px;
+                border: 1px solid #ddd;
+                border-radius: 3px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #f0f3f8;
+                }
+
+                i {
+                    margin-right: 2px;
+                }
+            }
+        }
     }
 
     .comment_submit {

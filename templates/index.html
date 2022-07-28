@@ -318,7 +318,7 @@
                     switch (url[3]) {
                         case 'article':
                             // 初始化文章详情页面
-                            this.get_catalog()
+                            this.init_article()
                             break
                         case 'search':
                             // 初始化搜素页面
@@ -478,8 +478,9 @@
                     scrollTop: 0
                 }, 600)
             },
-            // 加载文章目录
-            get_catalog() {
+            // 初始化文章详情
+            init_article() {
+                this.init_copy_code()
                 let content = $('#article_content')
                 let h_list = content.children('h1,h2,h3,h4')
                 let list = []
@@ -564,6 +565,37 @@
             search_for() {
                 location.href = '/search/?key=' + this.search_key
             },
+            // 初始化代码复制按钮
+            init_copy_code() {
+                //console.log($('pre'))
+                $('pre').each(function() {
+                    let copy = $(`<div class="code_copy">
+                                    <i class="el-icon-document-copy"></i>
+                                    <span>复制</span>
+                                </div>`)
+                    $(this).append(copy)
+                })
+                
+                $('pre div.code_copy').click(e => {
+                    // 获取代码
+                    let text_list = $(e.target).parent().prev().find('code')
+                    let text = ''
+                    //console.log($(e.target).prev(),text_list)
+                    text_list.each(function() {
+                        text += $(this).text() + '\n'
+                    })
+                    text = text.substr(0, text.length - 1);
+                    // 复制
+                    let element = $(`<textarea>${text}</textarea>`)
+                    $('body').append(element)
+                    element[0].select()
+                    document.execCommand('Copy')
+                    element.remove()
+
+                    // 提示成功
+                    this.$message.success('复制成功！')
+                })
+            }
         }
     })
 </script>
