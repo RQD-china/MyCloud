@@ -147,6 +147,7 @@
                         <div class="pagination" params="{{ params }}">
                             <el-pagination
                                 background
+                                hide-on-single-page
                                 @current-change="current_change"
                                 :current-page.sync="current_page"
                                 :page-size="{{ params.page_size }}"

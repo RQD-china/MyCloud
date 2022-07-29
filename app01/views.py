@@ -65,41 +65,46 @@ def sign(request):
 
 # 搜索页面
 def search(request):
+    # 获取url参数
+    search_key = request.GET.get('key', '')
+    order = request.GET.get('order', '')
+    word = request.GET.getlist('word', '')
+    page = int(request.GET.get('page', ''))
+    query_params = request.GET.copy()
+    
     # 获取页面数
-    if not request.GET.get('page'):
+    if not page:
         if not request.GET:
             return redirect(request.path_info + '?page=1')
         else:
             return redirect(request.get_full_path() + '&page=1')
     
-    # 获取url参数
-    search_key = request.GET.get('key', '')
+    # 生成页面数据
     article_list = Articles.objects.filter(
         title__contains=search_key)
-    print(article_list)
     params = {
-        'current_page': int(request.GET.get('page')),
+        'current_page': page,
         'key': search_key,
         'base_url': request.path_info,
         'total': article_list.count(),
         'page_size': 4
     }
-    query_params = request.GET.copy()
-    
-    # 排序
-    order = request.GET.get('order', '')
+
+    # 排序/筛选
+    if len(word) == 2:
+        article_list = article_list.filter(word__range=word)
+
     if order:
         try:
             article_list = article_list.order_by(order)
         except Exception:
             pass
-
+    
     # 分页
     if params['current_page'] > math.ceil(params['total'] / params['page_size']):
         params['current_page'] = 1
     start = (params['current_page'] - 1) * params['page_size']
     article_list = article_list[start: start + params['page_size']]
-    print(article_list)
     
     # 返回页面
     return render(request, 'search.html', locals())
