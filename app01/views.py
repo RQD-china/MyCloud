@@ -69,6 +69,7 @@ def search(request):
     search_key = request.GET.get('key', '')
     order = request.GET.get('order', '')
     word = request.GET.getlist('word', '')
+    tag = request.GET.get('tag', '')
     page = int(request.GET.get('page', ''))
     query_params = request.GET.copy()
     
@@ -93,6 +94,9 @@ def search(request):
     # 排序/筛选
     if len(word) == 2:
         article_list = article_list.filter(word__range=word)
+        
+    if tag:
+        article_list = article_list.filter(tag__title=tag)
 
     if order:
         try:

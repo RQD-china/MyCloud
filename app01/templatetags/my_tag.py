@@ -1,5 +1,5 @@
 from django import template
-from app01.models import Articles, Cover, MenuImg
+from app01.models import Tags, MenuImg
 from app01.utils.search import Order
 from django.utils.safestring import mark_safe
 
@@ -18,12 +18,11 @@ def banner(menuName, article=None):
 def generate_order_html(request, key):
     # 获取参数
     query_params = request.GET.copy()
-    order = ''
+    order = query_params.get(key)
     order_list =[]
     
     # 创建排序与筛选实例
     if key == 'order':
-        order = query_params.get(key)
         order_list=[('', '综合排序'),
                     ('-create_time', '最新发布'),
                     ('-look_count', '最多浏览'),
@@ -35,6 +34,12 @@ def generate_order_html(request, key):
         order_list = [([''], '全部文章'),
                       (['0', '1000'], '百字短篇'),
                       (['1000', '10000'], '千字长文')]
+    elif key == 'tag':
+        tag_list = Tags.objects.exclude(articles__isnull=True)
+        order_list.append(('', '全部标签'))
+        for tag in tag_list:
+            order_list.append((tag.title, tag.title))
+            
     order_obj = Order(
         key=key,
         order=order,

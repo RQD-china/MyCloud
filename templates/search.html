@@ -36,9 +36,7 @@
             {% generate_order_html request 'word' %}
         </ul>
         <ul>
-            <li class="active"><a href="">全部标签</a></li>
-            <li><a href="">HTML</a></li>
-            <li><a href="">Python</a></li>
+            {% generate_order_html request 'tag' %}
         </ul>
     </div>
     <div class="search_content">
