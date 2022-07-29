@@ -85,6 +85,7 @@ class CommentView(View):
         return JsonResponse(res)
 
 class CommentDiggView(View):
+    # 评论点赞
     def post(self, request, nid):
         res = {
             'msg': '评论点赞成功!',
@@ -105,6 +106,7 @@ class CommentDiggView(View):
         return JsonResponse(res)
 
 class ArticleDiggView(View):
+    # 文章点赞
     def post(self, request, nid):
         res = {
             'msg': '文章点赞成功!',
@@ -125,6 +127,7 @@ class ArticleDiggView(View):
         return JsonResponse(res)
 
 class ArticleCollectView(View):
+    # 文章收藏
     def post(self, request, nid):
         res = {
             'msg': '文章收藏成功!',

@@ -5,9 +5,11 @@ from click import password_option
 from django.shortcuts import redirect, render
 from django.http import JsonResponse
 from django.contrib import auth
+from django.db.models import F
 from sympy import re
 from app01.models import Articles, Tags, Cover
 from app01.utils.comment import get_comment
+from app01.utils.search import Order
 import math
 
 # Create your views here.
@@ -44,6 +46,7 @@ def article(request, nid):
     article_query =  Articles.objects.filter(nid = nid)
     if not article_query:
         return redirect('/')
+    article_query.update(look_count=F('look_count') + 1)
     article = article_query.first()
     comment_list = get_comment(nid)
     return render(request, 'article.html', locals())
@@ -62,26 +65,43 @@ def sign(request):
 
 # 搜索页面
 def search(request):
+    # 获取页面数
     if not request.GET.get('page'):
         if not request.GET:
             return redirect(request.path_info + '?page=1')
         else:
             return redirect(request.get_full_path() + '&page=1')
+    
+    # 获取url参数
     search_key = request.GET.get('key', '')
     article_list = Articles.objects.filter(
-        title__contains=search_key).order_by('-change_date')
+        title__contains=search_key)
+    print(article_list)
     params = {
         'current_page': int(request.GET.get('page')),
         'key': search_key,
         'base_url': request.path_info,
         'total': article_list.count(),
-        'page_size': 2
+        'page_size': 4
     }
+    query_params = request.GET.copy()
+    
+    # 排序
+    order = request.GET.get('order', '')
+    if order:
+        try:
+            article_list = article_list.order_by(order)
+        except Exception:
+            pass
+
+    # 分页
     if params['current_page'] > math.ceil(params['total'] / params['page_size']):
         params['current_page'] = 1
     start = (params['current_page'] - 1) * params['page_size']
     article_list = article_list[start: start + params['page_size']]
     print(article_list)
+    
+    # 返回页面
     return render(request, 'search.html', locals())
 
 # 注销
