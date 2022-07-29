@@ -77,8 +77,8 @@
                 </div>
             </li>
             {% endfor %}
-            {% if article_list.length == 0 %}
-                <el-empty description="这里什么都没有哦"></el-empty>
+            {% if article_list|length == 0 %}
+                <el-empty class="empty" description="这里什么都没有哦"></el-empty>
             {% endif %}
         </ul>
     </div>

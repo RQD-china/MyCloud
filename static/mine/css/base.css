@@ -301,4 +301,8 @@ footer .contact .link .svg:hover ~ .tips {
 .pagination .el-pagination.is-background .btn-prev,
 .pagination .el-pagination.is-background .el-pager li {
   background-color: white;
+}
+
+.empty {
+  width: 100%;
 }/*# sourceMappingURL=base.css.map */
