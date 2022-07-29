@@ -10,7 +10,7 @@ nav {
   position: fixed;
   top: 0;
   left: 0;
-  transition: all 0.5s;
+  transition: 0.5s;
   overflow: hidden;
 }
 nav .left {
@@ -20,12 +20,23 @@ nav .left img {
   width: 20px;
   height: 20px;
   vertical-align: text-bottom;
-  margin-right: 25px;
   transform: translateY(-60px);
   filter: drop-shadow(white 0 60px);
 }
 nav .left a {
   vertical-align: middle;
+  margin-right: 20px;
+  color: white;
+  transition: 0.3s;
+}
+nav .left a:last-child {
+  margin-right: 0;
+}
+nav .left a:hover {
+  color: #409eff;
+}
+nav .left a.active {
+  color: #409eff;
 }
 nav .left .nav_search {
   display: inline-flex;
@@ -47,8 +58,8 @@ nav .left .nav_search button {
   background-color: transparent;
   cursor: pointer;
 }
-nav .left .nav_search button:hover {
-  color: #ff8c31;
+nav .left .nav_search:hover button {
+  color: #409eff;
 }
 nav .left .nav_search.show_input input {
   width: 120px;
@@ -71,21 +82,10 @@ nav .right i {
   margin-right: 20px;
 }
 nav .right i:hover {
-  color: #ff8c31;
+  color: #409eff;
 }
 nav .right .el-dropdown-link {
   color: white;
-}
-nav a {
-  margin-right: 20px;
-  color: white;
-  transition: 0.3s;
-}
-nav a:last-child {
-  margin-right: 0;
-}
-nav a:hover {
-  color: #ff8c31;
 }
 
 nav.show {
@@ -97,9 +97,6 @@ nav.show a {
   color: #333;
   transition: 0.3s;
 }
-nav.show a:hover {
-  color: #409eff;
-}
 nav.show .el-dropdown-link {
   color: #333;
 }
@@ -109,7 +106,7 @@ nav.show i {
 nav.show img {
   transform: translateY(0);
 }
-nav.show .nav_search button {
+nav.show .nav_search > button {
   color: #333;
 }
 nav.show .nav_search.show_input {

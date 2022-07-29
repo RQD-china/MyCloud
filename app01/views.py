@@ -70,7 +70,7 @@ def search(request):
     order = request.GET.get('order', '')
     word = request.GET.getlist('word', '')
     tag = request.GET.get('tag', '')
-    page = int(request.GET.get('page', ''))
+    page = int(request.GET.get('page', '0'))
     query_params = request.GET.copy()
     
     # 获取页面数

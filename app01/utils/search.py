@@ -13,6 +13,7 @@ class Order:
         order_list = []
         for li in self.order_list:
             self.query_params[self.key] = li[0]
+            print(self.order, li[0])
             if self.order == li[0]:
                 li = f'<li class="active"><a href="?{self.query_encode}">{li[1]}</a></li>'
             else:

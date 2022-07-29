@@ -10,7 +10,7 @@ nav {
     position: fixed;
     top: 0;
     left: 0;
-    transition: all 0.5s;
+    transition: 0.5s;
     overflow: hidden;
 
     .left {
@@ -20,13 +20,27 @@ nav {
             width: 20px;
             height: 20px;
             vertical-align: text-bottom;
-            margin-right: 25px;
             transform: translateY(-60px);
             filter: drop-shadow(white 0 60px)
         }
 
         a {
             vertical-align: middle;
+            margin-right: 20px;
+            color: white;
+            transition: 0.3s;
+        
+            &:last-child {
+                margin-right: 0;
+            }
+        
+            &:hover {
+                color: #409eff;
+            }
+        }
+
+        a.active {
+            color: #409eff;
         }
 
         .nav_search {
@@ -49,9 +63,11 @@ nav {
                 border: none;
                 background-color: transparent;
                 cursor: pointer;
-
-                &:hover {
-                    color: #ff8c31;
+            }
+            
+            &:hover {
+                button {
+                    color: #409eff;
                 }
             }
 
@@ -82,25 +98,12 @@ nav {
             margin-right: 20px;
             
             &:hover {
-                color: #ff8c31;
+                color: #409eff;
             }
         }
 
         .el-dropdown-link {
             color: white;
-        }
-    }
-
-    a {
-        margin-right: 20px;
-        color: white;
-        transition: 0.3s;
-
-        &:last-child {
-            margin-right: 0;
-        }
-        &:hover {
-            color: #ff8c31;
         }
     }
 }
@@ -113,10 +116,6 @@ nav.show {
     a {
         color: #333;
         transition: 0.3s;
-
-        &:hover {
-            color: #409eff;
-        }
     }
 
     .el-dropdown-link {
@@ -131,10 +130,8 @@ nav.show {
         transform: translateY(0);
     }
 
-    .nav_search {
-        button {
-            color: #333;
-        }
+    .nav_search > button {
+        color: #333;
     }
 
     .nav_search.show_input {

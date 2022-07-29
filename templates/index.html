@@ -22,12 +22,9 @@
     <div id="app">
         <link rel="stylesheet" :href="'/static/mine/css/theme/' + theme + '.css'">
         <nav id="top_nav">
-            <div class="left">
-                <a href="/"><img src="/static/mine/img/logo/logo.svg" alt="Richy个人博客">首页</a>
-                <a href="/news">新闻</a>
-                <a href="#">动态</a>
-                <a href="#">关于</a>
-                <a href="#">导航</a>
+            <div class="left" id="top_nav_left">
+                <a href="/"><img src="/static/mine/img/logo/logo.svg" alt="Richy个人博客"></a>
+                {% dynamic_nav request %}
                 <div class="nav_search">
                     <input 
                         type="text"
@@ -289,6 +286,19 @@
         }
     })
 
+    /*/ 动态导航栏
+    function dynamic_nav() {
+        let a_list = document.querySelectorAll('#top_nav_left>a')
+        let page = '/' + location.pathname.split('/')[1]
+        for(const a of a_list) {
+            let a_href = a.getAttribute('href')
+            if(a_href === page) {
+                a.classList.add('active')
+            }
+        }
+    }
+    dynamic_nav()*/
+
     new Vue({
         el: '#app',
         delimiters: ["[[", "]]"],
@@ -314,9 +324,9 @@
             init() {
                 this.init_theme()
                 setTimeout(()=>{
-                    let url = window.location.href.split('/')
+                    let page = location.pathname.split('/')[1]
                     // 针对不同的子页面进行初始化
-                    switch (url[3]) {
+                    switch (page) {
                         case 'article':
                             // 初始化文章详情页面
                             this.init_article()
