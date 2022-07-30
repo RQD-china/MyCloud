@@ -46,6 +46,16 @@ ul {
     overflow-y: scroll;
 }
 
+iconpark-icon {
+    vertical-align: middle;
+}
+
+svg {
+    position: absolute;
+    bottom: -0.125em;
+    color: #409eff;
+}
+
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;

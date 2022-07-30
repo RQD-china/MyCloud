@@ -124,37 +124,27 @@
                                     <li>
                                         <div class="left">
                                             <div>
-                                                <a href="/article/{{ article.nid
-                                                    }}/">
-                                                    <img src="{{
-                                                        article.cover.url.url
-                                                        }}" alt="">
+                                                <a href="/article/{{ article.nid }}/">
+                                                    <img src="{{ article.cover.url.url }}" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="right">
-                                            <h2><a href="/article/{{ article.nid
-                                                    }}/">{{ article.title }}</a></h2>
+                                            <h2><a href="/article/{{ article.nid }}/">{{ article.title }}</a></h2>
                                             <p>{{ article.abstract }}</p>
                                             <div class="info">
-                                                <i class="el-icon-edit-outline"></i>
-                                                <span class="bolded">{{
-                                                    article.author }}</span>
-                                                <i class="el-icon-time"></i>
-                                                <span>{{
-                                                    article.change_date|date:'Y-m-d'
-                                                    }}</span>
-                                                <i class="el-icon-view"></i>
+                                                <iconpark-icon name="author"></iconpark-icon>
+                                                <span class="bolded">{{ article.author }}</span>
+                                                <iconpark-icon name="calendar"></iconpark-icon>
+                                                <span>{{ article.change_date|date:'Y-m-d' }}</span>
+                                                <iconpark-icon name="view"></iconpark-icon>
                                                 <span>{{ article.look_count }}</span>
-                                                <i class="el-icon-thumb"></i>
+                                                <iconpark-icon name="thumbs-up"></iconpark-icon>
                                                 <span>{{ article.digg_count }}</span>
-                                                <i
-                                                    class="el-icon-chat-dot-square"></i>
-                                                <span>{{ article.comment_count
-                                                    }}</span>
-                                                <i class="el-icon-star-off"></i>
-                                                <span>{{ article.collects_count
-                                                    }}</span>
+                                                <iconpark-icon name="comment"></iconpark-icon>
+                                                <span>{{ article.comment_count }}</span>
+                                                <iconpark-icon name="like"></iconpark-icon>
+                                                <span>{{ article.collects_count }}</span>
                                             </div>
                                             <div class="btn"><a
                                                     href="/article/{{
@@ -288,6 +278,7 @@
     <!-- 引入组件库 -->
     <script src="/static/element/index.js"></script>
     <script src="/static/axios/axios.min.js"></script>
+    <script src="https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_17540_7.4058ed81dd62a6cd7bdac2fe92c1f88e.js"></script>
     <script>
     // axios请求中间件
     axios.interceptors.request.use(request => {
@@ -482,8 +473,8 @@
                 let dom = e.target
                 dom.classList.add('on')
                 let timer = null
+                clearTimeout(timer)
                 timer = setTimeout(() => {
-                    clearTimeout(timer)
                     dom.classList.remove('on')
                 }, 1000)
                 axios.post(`/api/article/digg/${nid}/`).then(res => {

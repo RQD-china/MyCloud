@@ -74,11 +74,11 @@
   align-items: center;
   justify-content: center;
 }
-.article .actions .item i {
+.article .actions .item iconpark-icon {
   font-size: 20px;
   color: #777;
 }
-.article .actions .item i.on {
+.article .actions .item iconpark-icon.on {
   color: #409eff;
 }
 .article .actions .item span {

@@ -51,19 +51,19 @@
                 <div class="right">
                     <h2><a href="/article/{{ article.nid }}/" target="_blank">{{ article.title }}</a></h2>
                     <p class="info">
-                        <i class="el-icon-edit-outline"></i>
+                        <iconpark-icon name="author"></iconpark-icon>
                         <span class="bolded">{{ article.author }}</span>
-                        <i class="el-icon-time"></i>
+                        <iconpark-icon name="calendar"></iconpark-icon>
                         <span>{{ article.change_date|date:'Y-m-d' }}</span>
                     </p>
                     <p class="info">
-                        <i class="el-icon-view"></i>
+                        <iconpark-icon name="view"></iconpark-icon>
                         <span>{{ article.look_count }}</span>
-                        <i class="el-icon-thumb"></i>
+                        <iconpark-icon name="thumbs-up"></iconpark-icon>
                         <span>{{ article.digg_count }}</span>
-                        <i class="el-icon-chat-dot-square"></i>
+                        <iconpark-icon name="comment"></iconpark-icon>
                         <span>{{ article.comment_count }}</span>
-                        <i class="el-icon-star-off"></i>
+                        <iconpark-icon name="like"></iconpark-icon>
                         <span>{{ article.collects_count }}</span>
                     </p>
                     <div class="btn"><a href="/article/{{ article.nid }}/" target="_blank">查看详情</a></div>

@@ -28,12 +28,12 @@
         <div class="actions">
             <div class="item" title="点赞">
                 <el-badge value="{{ article.digg_count }}" :max="99">
-                    <i class="el-icon-thumb" @click="article_digg($event, '{{ article.nid }}')"></i>
+                    <iconpark-icon @click="article_digg($event, '{{ article.nid }}')" name="thumbs-up"></iconpark-icon>
                 </el-badge>
             </div>
             <div class="item">
                 <el-badge value="{{ article.collects_count }}" :max="99">
-                    <i class="el-icon-star-off {{ article|is_collect:request }}" @click="article_collect($event, '{{ article.nid }}')"></i>
+                    <iconpark-icon class="{{ article|is_collect:request }}" @click="article_collect($event, '{{ article.nid }}')" name="like"></iconpark-icon>
                 </el-badge>
             </div>
             <div class="item" title="回到顶部">

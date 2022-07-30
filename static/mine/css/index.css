@@ -173,7 +173,7 @@
 #app .main .left .all_article > .body > ul > li .right .info {
   height: 25px;
 }
-#app .main .left .all_article > .body > ul > li .right .info i {
+#app .main .left .all_article > .body > ul > li .right .info iconpark-icon {
   font-size: 16px;
   color: #409eff;
 }
