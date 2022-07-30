@@ -1,66 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-{% load my_tag %}
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Richy的个人博客</title>
-    {% block css %}
+    {% load my_tag %}
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Richy的个人博客</title>
+        {% block css %}
         <link rel="stylesheet" href="/static/mine/css/index.css">
-    {% endblock css %}
-    <link rel="shortcut icon" href="/static/mine/img/logo/logo.svg">
-    <link rel="stylesheet" href="/static/mine/css/base.css">
-    <link rel="stylesheet" href="/static/mine/css/reset.css">
-    <link rel="stylesheet" href="/static/font/css/font-awesome.css">
-    <link rel="stylesheet" href="/static/element/theme-chalk/index.css">
-    <script src="/static/vue/vue.js"></script>
-    <script src="/static/jquery/jquery.min.js"></script>
-</head>
+        {% endblock css %}
+        <link rel="shortcut icon" href="/static/mine/img/logo/logo.svg">
+        <link rel="stylesheet" href="/static/mine/css/base.css">
+        <link rel="stylesheet" href="/static/mine/css/reset.css">
+        <link rel="stylesheet" href="/static/font/css/font-awesome.css">
+        <link rel="stylesheet" href="/static/element/theme-chalk/index.css">
+        <script src="/static/vue/vue.js"></script>
+        <script src="/static/jquery/jquery.min.js"></script>
+    </head>
 
-<body>
-    <div id="app">
-        <link rel="stylesheet" :href="'/static/mine/css/theme/' + theme + '.css'">
-        <nav id="top_nav">
-            <div class="left" id="top_nav_left">
-                <a href="/"><img src="/static/mine/img/logo/logo.svg" alt="Richy个人博客"></a>
-                {% dynamic_nav request %}
-                <div class="nav_search">
-                    <input 
-                        type="text"
-                        onkeypress=""
-                        placeholder="搜索你感兴趣的内容"
-                        @keyup.enter="handle_search"
-                        v-model="search_key">
-                    <button @click="handle_search"><i class="el-icon-search"></i></button>
+    <body>
+        <div id="app">
+            <link rel="stylesheet" :href="'/static/mine/css/theme/' + theme +
+                '.css'">
+            <nav id="top_nav">
+                <div class="left" id="top_nav_left">
+                    <a href="/"><img src="/static/mine/img/logo/logo.svg"
+                            alt="Richy个人博客"></a>
+                    {% dynamic_nav request %}
+                    <div class="nav_search">
+                        <input
+                            type="text"
+                            onkeypress=""
+                            placeholder="搜索你感兴趣的内容"
+                            @keyup.enter="handle_search"
+                            v-model="search_key">
+                        <button @click="handle_search"><i
+                                class="el-icon-search"></i></button>
+                    </div>
                 </div>
-            </div>
-            <div class="right">
-                <i :class="'el-icon-' + theme" @click = "set_theme(theme)"></i>
-                {% if request.user.username %}
+                <div class="right">
+                    <i :class="'el-icon-' + theme" @click="set_theme(theme)"></i>
+                    {% if request.user.username %}
                     <el-dropdown>
                         <span class="el-dropdown-link">
-                            {{ request.user.username }}<i class="el-icon-arrow-down el-icon--right"></i>
+                            {{ request.user.username }}<i
+                                class="el-icon-arrow-down el-icon--right"></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item command="a"><a href="/backend/">个人中心</a></el-dropdown-item>
                             <el-dropdown-item command="b"><a href="">修改密码</a></el-dropdown-item>
                             <el-dropdown-item command="c"><a href="">发布文章</a></el-dropdown-item>
                             <el-dropdown-item command="d"><a href="">后台管理</a></el-dropdown-item>
-                            <el-dropdown-item command="e" divided><a href="/logout/">注销</a></el-dropdown-item>
+                            <el-dropdown-item command="e" divided><a
+                                    href="/logout/">注销</a></el-dropdown-item>
                         </el-dropdown-menu>
-                    </el-dropdown>            
-                {% else %}
+                    </el-dropdown>
+                    {% else %}
                     <a href="/login">登录</a>
                     <a href="/sign">注册</a>
-                {% endif %}                    
-            </div>
-        </nav>
-        {% block banner %}
+                    {% endif %}
+                </div>
+            </nav>
+            {% block banner %}
             {% banner 'index' %}
-        {% endblock banner %}
-        <main id="main">  
-            {% block main %}
+            {% endblock banner %}
+            <main id="main">
+                {% block main %}
                 <div class="main">
                     <div class="left">
                         <div class="boutique card">
@@ -73,20 +78,27 @@
                             <div class="body">
                                 <ul>
                                     {% for recommend in recommend_list %}
-                                        <li>
-                                            <div class="left">
-                                                <div>
-                                                    <a href="/article/{{ recommend.nid }}/">
-                                                        <img src="{{ recommend.cover.url.url }}" alt="">
-                                                    </a>
-                                                </div>
+                                    <li>
+                                        <div class="left">
+                                            <div>
+                                                <a href="/article/{{
+                                                    recommend.nid }}/">
+                                                    <img src="{{
+                                                        recommend.cover.url.url
+                                                        }}" alt="">
+                                                </a>
                                             </div>
-                                            <div class="right">
-                                                <h2><a href="/article/{{ recommend.nid }}/">{{ recommend.title }}</a></h2>
-                                                <p>{{ recommend.abstract }}</p>
-                                                <span>{{ recommend.change_date|date:'Y-m-d' }}</span>
-                                            </div>
-                                        </li>
+                                        </div>
+                                        <div class="right">
+                                            <h2><a href="/article/{{
+                                                    recommend.nid }}/">{{
+                                                    recommend.title }}</a></h2>
+                                            <p>{{ recommend.abstract }}</p>
+                                            <span>{{
+                                                recommend.change_date|date:'Y-m-d'
+                                                }}</span>
+                                        </div>
+                                    </li>
                                     {% endfor %}
                                 </ul>
                             </div>
@@ -112,29 +124,42 @@
                                     <li>
                                         <div class="left">
                                             <div>
-                                                <a href="/article/{{ article.nid }}/">
-                                                    <img src="{{ article.cover.url.url }}" alt="">
+                                                <a href="/article/{{ article.nid
+                                                    }}/">
+                                                    <img src="{{
+                                                        article.cover.url.url
+                                                        }}" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="right">
-                                            <h2><a href="/article/{{ article.nid }}/">{{ article.title }}</a></h2>
+                                            <h2><a href="/article/{{ article.nid
+                                                    }}/">{{ article.title }}</a></h2>
                                             <p>{{ article.abstract }}</p>
                                             <div class="info">
                                                 <i class="el-icon-edit-outline"></i>
-                                                <span class="bolded">{{ article.author }}</span>
+                                                <span class="bolded">{{
+                                                    article.author }}</span>
                                                 <i class="el-icon-time"></i>
-                                                <span>{{ article.change_date|date:'Y-m-d' }}</span>
+                                                <span>{{
+                                                    article.change_date|date:'Y-m-d'
+                                                    }}</span>
                                                 <i class="el-icon-view"></i>
                                                 <span>{{ article.look_count }}</span>
                                                 <i class="el-icon-thumb"></i>
                                                 <span>{{ article.digg_count }}</span>
-                                                <i class="el-icon-chat-dot-square"></i>
-                                                <span>{{ article.comment_count }}</span>
+                                                <i
+                                                    class="el-icon-chat-dot-square"></i>
+                                                <span>{{ article.comment_count
+                                                    }}</span>
                                                 <i class="el-icon-star-off"></i>
-                                                <span>{{ article.collects_count }}</span>
+                                                <span>{{ article.collects_count
+                                                    }}</span>
                                             </div>
-                                            <div class="btn"><a href="/article/{{ article.nid }}/" target="_blank">查看详情</a></div>
+                                            <div class="btn"><a
+                                                    href="/article/{{
+                                                    article.nid }}/"
+                                                    target="_blank">查看详情</a></div>
                                         </div>
                                     </li>
                                     {% endfor %}
@@ -183,68 +208,87 @@
                                     <li>PHP</li>
                                     <li>Java</li>
                                     <li>Go</li>
+                                </div>
+                            </div>
+                            <div class="links card">
+                                <div class="title">
+                                    <h2>友情链接</h2>
+                                </div>
+                                <div class="body">
+                                    主要内容区域
+                                </div>
                             </div>
                         </div>
-                        <div class="links card">
-                            <div class="title">
-                                <h2>友情链接</h2>
+                    </div>
+                    {% endblock main %}
+                </main>
+                <footer>
+                    <div class="left">
+                        <p class="thank">Thank For</p>
+                        <p class="site_info">
+                            <span><img src="/static/mine/img/footer/baidu.png"
+                                    alt=""> 百度智能云</span>
+                            <span><img src="/static/mine/img/footer/baidu.png"
+                                    alt=""> 百度云SSL证书</span>
+                            <span><img src="/static/mine/img/footer/qiniu.png"
+                                    alt=""> 七牛云存储</span>
+                        </p>
+                        <p class="version">
+                            <span>version</span>
+                            <span>1.0.1</span>
+                        </p>
+                        <p>Powered by Django and Vue.js</p>
+                    </div>
+                    <div class="right">
+                        <div class="contact">
+                            <div class="QQ">
+                                <img class="svg"
+                                    src="/static/mine/img/footer/qq.svg" alt="">
+                                <img class="QR"
+                                    src="/static/mine/img/footer/qq.jpg" alt="">
                             </div>
-                            <div class="body">
-                                主要内容区域
+                            <div class="Wechat">
+                                <img class="svg"
+                                    src="/static/mine/img/footer/wechat.svg"
+                                    alt="">
+                                <img class="QR"
+                                    src="/static/mine/img/footer/wechat.jpg"
+                                    alt="">
                             </div>
+                            <a class="link"
+                                href="https://space.bilibili.com/12188724"
+                                target="_blank">
+                                <img class="svg"
+                                    src="/static/mine/img/footer/bilibili.svg"
+                                    alt="">
+                                <span class="tips">点击图标跳转</span>
+                            </a>
+                            <a class="link" href="https://weibo.com/richycloud"
+                                target="_blank">
+                                <img class="svg"
+                                    src="/static/mine/img/footer/weibo.svg"
+                                    alt="">
+                                <span class="tips">点击图标跳转</span>
+                            </a>
+                            <a class="link" href="https://github.com/RQD-china"
+                                target="_blank">
+                                <img class="svg"
+                                    src="/static/mine/img/footer/github.svg"
+                                    alt="">
+                                <span class="tips">点击图标跳转</span>
+                            </a>
                         </div>
+                        <p>联系邮箱：1245413737@qq.com</p>
                     </div>
-                </div>                  
-            {% endblock main %}
-        </main>
-        <footer>
-            <div class="left">
-                <p class="thank">Thank For</p>
-                <p class="site_info">
-                    <span><img src="/static/mine/img/footer/baidu.png" alt=""> 百度智能云</span>
-                    <span><img src="/static/mine/img/footer/baidu.png" alt=""> 百度云SSL证书</span>
-                    <span><img src="/static/mine/img/footer/qiniu.png" alt=""> 七牛云存储</span>
-                </p>
-                <p class="version">
-                    <span>version</span>
-                    <span>1.0.1</span>
-                </p>
-                <p>Powered by Django and Vue.js</p>
+                </footer>
             </div>
-            <div class="right">
-                <div class="contact">
-                    <div class="QQ">
-                        <img class="svg" src="/static/mine/img/footer/qq.svg" alt="">
-                        <img class="QR" src="/static/mine/img/footer/qq.jpg" alt="">
-                    </div>
-                    <div class="Wechat">
-                        <img class="svg" src="/static/mine/img/footer/wechat.svg" alt="">
-                        <img class="QR" src="/static/mine/img/footer/wechat.jpg" alt="">
-                    </div>
-                    <a class="link" href="https://space.bilibili.com/12188724" target="_blank">
-                        <img class="svg" src="/static/mine/img/footer/bilibili.svg" alt="">
-                        <span class="tips">点击图标跳转</span>
-                    </a>
-                    <a class="link" href="https://weibo.com/richycloud" target="_blank">
-                        <img class="svg" src="/static/mine/img/footer/weibo.svg" alt="">
-                        <span class="tips">点击图标跳转</span>
-                    </a>
-                    <a class="link" href="https://github.com/RQD-china" target="_blank">
-                        <img class="svg" src="/static/mine/img/footer/github.svg" alt="">
-                        <span class="tips">点击图标跳转</span>
-                    </a>
-                    </div>
-                <p>联系邮箱：1245413737@qq.com</p>
-            </div>
-        </footer>
-    </div>
-</body>
-</html>
+        </body>
+    </html>
 
-<!-- 引入组件库 -->
-<script src="/static/element/index.js"></script>
-<script src="/static/axios/axios.min.js"></script>
-<script>
+    <!-- 引入组件库 -->
+    <script src="/static/element/index.js"></script>
+    <script src="/static/axios/axios.min.js"></script>
+    <script>
     // axios请求中间件
     axios.interceptors.request.use(request => {
         // 请求成功的拦截
@@ -285,19 +329,6 @@
             }
         }
     })
-
-    /*/ 动态导航栏
-    function dynamic_nav() {
-        let a_list = document.querySelectorAll('#top_nav_left>a')
-        let page = '/' + location.pathname.split('/')[1]
-        for(const a of a_list) {
-            let a_href = a.getAttribute('href')
-            if(a_href === page) {
-                a.classList.add('active')
-            }
-        }
-    }
-    dynamic_nav()*/
 
     new Vue({
         el: '#app',
@@ -610,8 +641,8 @@
         }
     })
 </script>
-{% block banner_js %}
-<script>
+    {% block banner_js %}
+    <script>
     // 节流函数
     function throttle(fn, delay = 200) {
         let ttimer = null
@@ -654,8 +685,8 @@
         men_img[index].style.opacity = 1
     }, 2000);
 </script>
-{% endblock banner_js %}
+    {% endblock banner_js %}
 
-{% block js %}
-  
-{% endblock js %}
+    {% block js %}
+
+    {% endblock js %}
