@@ -1,10 +1,14 @@
 .main {
     width: 1000px;
+    max-width: 80vw;
     height: calc(100vh - 120px);
+    box-sizing: border-box;
     padding: 20px;
     padding-left: 0;
     background-color: white;
     display: flex;
+    position: relative;
+    margin-bottom: 20px;
 
     .left {
         width: 150px;
@@ -32,7 +36,7 @@
     }
 
     .right {
-        width: calc(100% - 140px);
+        width: calc(100% - 160px);
         padding-left: 10px;
         
         .title {
@@ -48,12 +52,19 @@
                 border-radius: 2px;
                 margin-right: 10px;
             }
+
+            span {
+                font-size: 14px;
+                color: #777;
+                margin-left: 10px;
+            }
         }
 
         .body > ul {
             margin-top: 10px;
             list-style: none;
-            height: calc(100vh - 162px);
+            width: 100%;
+            height: calc(100vh - 200px);
             overflow: scroll;
 
             li {
@@ -95,20 +106,29 @@
                     color: #777;
                     font-size: 14px;
                 }
-            }
-            li.hot {
-                .index {
+
+                &:nth-child(1) > .index {
+                    color: white;
+                    background-color: #f56c6c;
+                }
+                &:nth-child(2) .index, &:nth-child(3) .index {
                     color: white;
                     background-color: #e6a23c;
                 }
             }
-            
-            li.first {
-                .index {
-                    color: white;
-                    background-color: #f56c6c;
-                }
-            }
+        }
+    }
+
+    .data_sources {
+        width: 120px;
+        position: absolute;
+        bottom: -20px;
+        left: calc(50% - 60px);
+        font-size: 12px;
+        color: #777;
+
+        a {
+            color: #409eff;
         }
     }
 }

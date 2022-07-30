@@ -12,116 +12,39 @@
                 class="tabs"
                 tab-position="left"
                 @tab-click="get_hot_search"
-                v-model="hot_list.name">
+                v-model="hot_tab">
                 <el-tab-pane
-                    name="微博-热门微博" 
-                    type="wbHot" 
-                    img="KqndgxeLl9">
+                    v-for="(item, index) in hot_list_info"
+                    :name="'' + index">
                     <template slot="label">
-                        <img src="https://files.codelife.cc/topsearch/KqndgxeLl9.png" alt="">
-                        微博
-                    </template>
-                </el-tab-pane>
-                <el-tab-pane
-                    name="知乎-热度榜" 
-                    type="zhihuHot" 
-                    img="mproPpoq6O">
-                    <template slot="label">
-                        <img src="https://files.codelife.cc/topsearch/mproPpoq6O.png" alt="">
-                        知乎
-                    </template>
-                </el-tab-pane>
-                <el-tab-pane
-                    name="Bilibili-热门视频" 
-                    type="bili" 
-                    img="74KvxwokxM">
-                    <template slot="label">
-                        <img src="https://files.codelife.cc/topsearch/74KvxwokxM.png" alt="">
-                        Bilibili
-                    </template>
-                </el-tab-pane>
-                <el-tab-pane
-                    name="36氪-今日热点" 
-                    type="36Ke" 
-                    img="Q1Vd5Ko85R">
-                    <template slot="label">
-                        <img src="https://files.codelife.cc/topsearch/Q1Vd5Ko85R.png" alt="">
-                        36氪
-                    </template>
-                </el-tab-pane>
-                <el-tab-pane
-                    name="百度热点-指数" 
-                    type="baiduRD" 
-                    img="Jb0vmloB1G">
-                    <template slot="label">
-                        <img src="https://files.codelife.cc/topsearch/Jb0vmloB1G.png" alt="">
-                        百度
-                    </template>
-                </el-tab-pane>
-                <el-tab-pane
-                    name="抖音-热点榜" 
-                    type="douyinHot" 
-                    img="DpQvNABoNE">
-                    <template slot="label">
-                        <img src="https://files.codelife.cc/topsearch/DpQvNABoNE.png" alt="">
-                        抖音
-                    </template>
-                </el-tab-pane>
-                <el-tab-pane
-                    name="少数派-最热文章" 
-                    type="ssPai" 
-                    img="Y2KeDGQdNP">
-                    <template slot="label">
-                        <img src="https://files.codelife.cc/topsearch/Y2KeDGQdNP.png" alt="">
-                        少数派
-                    </template>
-                </el-tab-pane>
-                <el-tab-pane
-                    name="豆瓣小组-讨论精选" 
-                    type="douban" 
-                    img="nBe0JLBv37">
-                    <template slot="label">
-                        <img src="https://files.codelife.cc/topsearch/nBe0JLBv37.png" alt="">
-                        豆瓣小组
-                    </template>
-                </el-tab-pane>
-                <el-tab-pane
-                    name="IT最新资讯" 
-                    type="itNews" 
-                    img="74Kvx59dkx">
-                    <template slot="label">
-                        <img src="https://files.codelife.cc/topsearch/74Kvx59dkx.png" alt="">
-                        IT最新资讯
-                    </template>
-                </el-tab-pane>
-                <el-tab-pane
-                    name="历史上的今天" 
-                    type="history" 
-                    img="KMZd7X3erO">
-                    <template slot="label">
-                        <img src="https://files.codelife.cc/topsearch/KMZd7X3erO.png" alt="">
-                        历史上的今天
+                        <img :src="'https://files.codelife.cc/topsearch/' + item.img + '.png'" alt="">
+                        [[ item.name ]]
                     </template>
                 </el-tab-pane>
             </el-tabs>
         </div>
         <div class="right">
             <div class="title">
-                <img :src="'https://files.codelife.cc/topsearch/' + hot_list.img + '.png'" alt="">[[ hot_list.name ]]
+                <img :src="'https://files.codelife.cc/topsearch/' + hot_list_info[hot_tab].img + '.png'" alt="">[[ hot_list_info[hot_tab].name + '-' + hot_list_info[hot_tab].title ]]
+                <span>数据更新于[[ hot_list_update ]]</span>
             </div>
             <div class="body">
                 <ul>
                     <li
-                        v-for="(item, index) in hot_list_data"
-                        :class="hot_style(index)">
+                        v-for="(item, index) in hot_list_data">
                         <span class="index">[[ index + 1 ]]</span>
                         <span class="news_title">
                             <a :href="item.url" target="_blank">[[ item.title ]]</a>
                         </span>
                         <span class="discuss">[[ item.hot ]]</span>
                     </li>
+                    <el-skeleton v-if="!hot_list_data.length" :rows="6" animated />
                 </ul>
             </div>
+        </div>
+        <div class="data_sources">
+            数据来源于
+            <a href="https://api.vvhan.com/" target="_blank">韩小韩API</a>
         </div>
     </div>
 {% endblock main %}

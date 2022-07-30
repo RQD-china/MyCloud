@@ -1,10 +1,14 @@
 .main {
   width: 1000px;
+  max-width: 80vw;
   height: calc(100vh - 120px);
+  box-sizing: border-box;
   padding: 20px;
   padding-left: 0;
   background-color: white;
   display: flex;
+  position: relative;
+  margin-bottom: 20px;
 }
 .main .left {
   width: 150px;
@@ -29,7 +33,7 @@
   margin-right: 5px;
 }
 .main .right {
-  width: calc(100% - 140px);
+  width: calc(100% - 160px);
   padding-left: 10px;
 }
 .main .right .title {
@@ -47,10 +51,16 @@
   border-radius: 2px;
   margin-right: 10px;
 }
+.main .right .title span {
+  font-size: 14px;
+  color: #777;
+  margin-left: 10px;
+}
 .main .right .body > ul {
   margin-top: 10px;
   list-style: none;
-  height: calc(100vh - 162px);
+  width: 100%;
+  height: calc(100vh - 200px);
   overflow: scroll;
 }
 .main .right .body > ul li {
@@ -88,11 +98,22 @@
   color: #777;
   font-size: 14px;
 }
-.main .right .body > ul li.hot .index {
+.main .right .body > ul li:nth-child(1) > .index {
+  color: white;
+  background-color: #f56c6c;
+}
+.main .right .body > ul li:nth-child(2) .index, .main .right .body > ul li:nth-child(3) .index {
   color: white;
   background-color: #e6a23c;
 }
-.main .right .body > ul li.first .index {
-  color: white;
-  background-color: #f56c6c;
+.main .data_sources {
+  width: 120px;
+  position: absolute;
+  bottom: -20px;
+  left: calc(50% - 60px);
+  font-size: 12px;
+  color: #777;
+}
+.main .data_sources a {
+  color: #409eff;
 }/*# sourceMappingURL=news.css.map */

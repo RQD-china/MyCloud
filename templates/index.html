@@ -337,11 +337,61 @@
             base_url: '',
             search_input: '',
             search_key: '',
-            hot_list: {
-                name: '微博-热门微博',
-                img: 'KqndgxeLl9'
-            },
+            hot_tab: 0,
+            last_tab: -1,
+            hot_list_info: [{
+                name: '微博',
+                title: '热门微博',
+                type: 'wbHot',
+                img: 'KqndgxeLl9',
+            }, {
+                name: '知乎',
+                title: '热度榜',
+                type: 'zhihuHot',
+                img: 'mproPpoq6O',
+            }, {
+                name: 'Bilibili',
+                title: '热门视频',
+                type: 'bili',
+                img: '74KvxwokxM',
+            }, {
+                name: '36氪',
+                title: '今日热点',
+                type: '36Ke',
+                img: 'Q1Vd5Ko85R',
+            }, {
+                name: '百度热点',
+                title: '指数',
+                type: 'baiduRD',
+                img: 'Jb0vmloB1G',
+            }, {
+                name: '抖音',
+                title: '热点榜',
+                type: 'douyinHot',
+                img: 'DpQvNABoNE',
+            }, {
+                name: '少数派',
+                title: '最热文章',
+                type: 'ssPai',
+                img: 'Y2KeDGQdNP',
+            }, {
+                name: '豆瓣小组',
+                title: '讨论精选',
+                type: 'douban',
+                img: 'nBe0JLBv37',
+            }, {
+                name: 'IT最新资讯',
+                title: '',
+                type: 'itNews',
+                img: '74Kvx59dkx',
+            }, {
+                name: '历史上的今天',
+                title: '',
+                type: 'history',
+                img: 'KMZd7X3erO',
+            }],
             hot_list_data: {},
+            hot_list_update: '',
         },
         created() {
             this.init()
@@ -646,27 +696,22 @@
                 })
             },
             // 更换热搜榜
-            get_hot_search(e = '') {
-                let type = 'wbHot'
-                if(e) {
-                    this.hot_list.img = e.$attrs.img
-                    type = e.$attrs.type
+            get_hot_search() {
+                if(this.hot_tab === this.last_tab) {
+                    return
                 }
+                let type = this.hot_list_info[this.hot_tab].type
+                this.last_tab = this.hot_tab
+                this.hot_list_data = []
 
                 axios.get(`https://api.vvhan.com/api/hotlist?type=${type}`).then(res => {
+                    if(res.success)
+                        this.hot_list_data = res.data
+                        this.hot_list_update = res.update_time
                     console.log(res)
-                    this.hot_list_data = res.data
                 })
             },
-            // 热搜样式
-            hot_style(i) {
-                if(i === 0)
-                    return 'first'
-                if(i < 3)
-                    return 'hot'
-                else
-                    return ''
-            },
+            
         }
     })
 </script>
