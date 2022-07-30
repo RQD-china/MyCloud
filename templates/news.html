@@ -6,14 +6,66 @@
 
 {% block main %}
     <div class="main">
-        <el-tabs
-            class="tabs"
-            tab-position="left">
-            <el-tab-pane label="用户管理"><i><iconpark-icon name="thumbs-up"></iconpark-icon></i>用户管理</el-tab-pane>
-            <el-tab-pane label="配置管理">配置管理</el-tab-pane>
-            <el-tab-pane label="角色管理">角色管理</el-tab-pane>
-            <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
-        </el-tabs>
+        <div class="left">
+            <el-tabs
+                class="tabs"
+                tab-position="left">
+                <el-tab-pane>
+                    <template slot="label">
+                        <iconpark-icon name="weibo"></iconpark-icon>
+                        微博
+                    </template>
+                </el-tab-pane>
+                <el-tab-pane label="">
+                    <template slot="label">
+                        <iconpark-icon name="wechat"></iconpark-icon>
+                        微信
+                    </template>
+                </el-tab-pane>
+                <el-tab-pane label="角色管理">
+                    <template slot="label">
+                        <iconpark-icon name="bilibili"></iconpark-icon>
+                        Bilibili
+                    </template>
+                </el-tab-pane>
+                <el-tab-pane label="定时任务补偿">
+                    <template slot="label">
+                        <iconpark-icon name="tiktok"></iconpark-icon>
+                        抖音
+                    </template>
+                </el-tab-pane>
+            </el-tabs>
+        </div>
+        <div class="right">
+            <div class="title">
+                <iconpark-icon name="weibo"></iconpark-icon>微博热搜榜
+            </div>
+            <div class="body">
+                <ul>
+                    <li class="hot first">
+                        <span class="index">1</span>
+                        <span class="news_title">
+                            <a href="" target="_blank">热搜第一</a>
+                        </span>
+                        <span class="discuss">热度</span>
+                    </li>
+                    <li class="hot">
+                        <span class="index">2</span>
+                        <span class="news_title">
+                            <a href="" target="_blank">热搜第一</a>
+                        </span>
+                        <span class="discuss">热度</span>
+                    </li>
+                    <li class="hot">
+                        <span class="index">3</span>
+                        <span class="news_title">
+                            <a href="" target="_blank">热搜第一</a>
+                        </span>
+                        <span class="discuss">热度</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 {% endblock main %}
 
