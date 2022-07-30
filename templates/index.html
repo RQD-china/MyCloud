@@ -336,7 +336,12 @@
             current_page: 1,
             base_url: '',
             search_input: '',
-            search_key: ''
+            search_key: '',
+            hot_list: {
+                name: '微博-热门微博',
+                img: 'KqndgxeLl9'
+            },
+            hot_list_data: {},
         },
         created() {
             this.init()
@@ -356,8 +361,15 @@
                         case 'search':
                             // 初始化搜素页面
                             this.init_search()
-                        default:
+                            break
+                        case 'news':
+                            // 初始化新闻页面
+                            this.init_news()
+                            break
+                        case '':
+                            // 初始化主页
                             this.init_index()
+                            break
                     }
                 },200)
             },
@@ -391,6 +403,10 @@
                 if(theme) {
                     this.theme = theme
                 }
+            },
+            // 初始化新闻页
+            init_news(){
+                this.get_hot_search()
             },
             // 发布评论
             add_comment(nid) {
@@ -628,12 +644,34 @@
                     // 提示成功
                     this.$message.success('复制成功！')
                 })
-            }
+            },
+            // 更换热搜榜
+            get_hot_search(e = '') {
+                let type = 'wbHot'
+                if(e) {
+                    this.hot_list.img = e.$attrs.img
+                    type = e.$attrs.type
+                }
+
+                axios.get(`https://api.vvhan.com/api/hotlist?type=${type}`).then(res => {
+                    console.log(res)
+                    this.hot_list_data = res.data
+                })
+            },
+            // 热搜样式
+            hot_style(i) {
+                if(i === 0)
+                    return 'first'
+                if(i < 3)
+                    return 'hot'
+                else
+                    return ''
+            },
         }
     })
 </script>
     {% block banner_js %}
-    <script>
+<script>
     // 节流函数
     function throttle(fn, delay = 200) {
         let ttimer = null

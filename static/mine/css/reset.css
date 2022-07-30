@@ -48,12 +48,7 @@ ul {
 
 iconpark-icon {
     vertical-align: middle;
-}
-
-svg {
-    position: absolute;
-    bottom: -0.125em;
-    color: #409eff;
+    color: #333;
 }
 
 ::-webkit-scrollbar {
