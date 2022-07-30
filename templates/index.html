@@ -81,37 +81,40 @@
                                     <li>
                                         <div class="left">
                                             <div>
-                                                <a href="/article/{{
-                                                    recommend.nid }}/">
-                                                    <img src="{{
-                                                        recommend.cover.url.url
-                                                        }}" alt="">
+                                                <a href="/article/{{ recommend.nid }}/">
+                                                    <img src="{{ recommend.cover.url.url }}" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="right">
-                                            <h2><a href="/article/{{
-                                                    recommend.nid }}/">{{
-                                                    recommend.title }}</a></h2>
+                                            <h2><a href="/article/{{ recommend.nid }}/">{{ recommend.title }}</a></h2>
                                             <p>{{ recommend.abstract }}</p>
-                                            <span>{{
-                                                recommend.change_date|date:'Y-m-d'
-                                                }}</span>
+                                            <span>{{ recommend.change_date|date:'Y-m-d' }}</span>
                                         </div>
                                     </li>
                                     {% endfor %}
                                 </ul>
                             </div>
                         </div>
-                        <div class="hot_list card">
+                        <div class="weibo_hot card">
                             <div class="title">
                                 <h2>今日热搜</h2>
                                 <div>
-                                    <a href="#">查看更多</a>
+                                    <a href="/news/" target="_blank">查看更多</a>
                                 </div>
                             </div>
                             <div class="body">
-                                主要内容区域
+                                <ul class="hot_list">
+                                    <li
+                                        v-for="(item, index) in weibo_hot.data">
+                                        <span class="index">[[ index + 1 ]]</span>
+                                        <span class="news_title">
+                                            <a :href="item.url" target="_blank">[[ item.title ]]</a>
+                                        </span>
+                                        <span class="discuss">[[ item.hot ]]</span>
+                                    </li>
+                                    <el-skeleton v-if="!weibo_hot.data.length" :rows="3" animated />
+                                </ul>
                             </div>
                         </div>
                         <div id="all_article" class="all_article card">
@@ -392,6 +395,10 @@
             }],
             hot_list_data: {},
             hot_list_update: '',
+            weibo_hot: {
+                update: '',
+                data: []
+            },
         },
         created() {
             this.init()
@@ -425,10 +432,31 @@
             },
             // 初始化主页
             init_index() {
+                // 准备分页器参数
                 let pagination = document.querySelector('.pagination')
                 let params = JSON.parse(pagination.getAttribute('params').replace(/\'/g, '\"'))
                 this.current_page = params.current_page
                 this.base_url = params.base_url
+
+                // 检查是否已有一个小时内的热搜数据
+                weibo_hot = JSON.parse(localStorage.getItem('weibo_hot'))
+                this.weibo_hot = weibo_hot
+                if(weibo_hot) {
+                    let now = new Date()
+                    let update = new Date(weibo_hot.update)
+                    if((now - update)/1000/60/60 < 1) {
+                        return
+                    }
+                } 
+
+                // 获取热搜
+                axios.get(`https://api.vvhan.com/api/hotlist?type=wbHot`).then(res => {
+                    if(res.success)
+                        this.weibo_hot.data = res.data.splice(0, 3)
+                        this.weibo_hot.update = new Date()
+                        localStorage.setItem('weibo_hot', JSON.stringify(this.weibo_hot))
+                        console.log(this.weibo_hot)
+                })
             },
             // 初始化搜索页面
             init_search() {

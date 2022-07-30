@@ -83,12 +83,12 @@
 }
 #app .main .left .boutique > .body ul > li .right h2 {
   font-size: 18px;
-}
-#app .main .left .boutique > .body ul > li .right h2 a {
-  color: #333;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+#app .main .left .boutique > .body ul > li .right h2 a {
+  color: #333;
 }
 #app .main .left .boutique > .body ul > li .right p {
   font-size: 14px;
@@ -159,6 +159,9 @@
 }
 #app .main .left .all_article > .body > ul > li .right > h2 {
   font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 #app .main .left .all_article > .body > ul > li .right > h2 > a {
   color: #333;
@@ -200,6 +203,12 @@
   display: block;
   line-height: 40px;
   color: white;
+}
+#app .main .left .weibo_hot > .body {
+  padding: 10px 20px 0 20px;
+}
+#app .main .left .weibo_hot > .body ul.hot_list {
+  height: 100px;
 }
 #app .main .right {
   width: 30%;

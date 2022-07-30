@@ -94,12 +94,12 @@
 
                             h2 {
                                 font-size: 18px;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
 
                                 a {
                                     color: #333;
-                                    white-space: nowrap;
-                                    overflow: hidden;
-                                    text-overflow: ellipsis;
                                 }
                             }
 
@@ -185,6 +185,9 @@
 
                             > h2 {
                                 font-size: 20px;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
 
                                 > a {                                        
                                     color: #333;
@@ -237,6 +240,13 @@
                             }
                         }
                     }
+                }
+            }
+
+            .weibo_hot > .body {
+                padding: 10px 20px 0 20px;
+                ul.hot_list {
+                    height: 100px;
                 }
             }
         }

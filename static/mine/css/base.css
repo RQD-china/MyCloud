@@ -302,4 +302,55 @@ footer .contact .link .svg:hover ~ .tips {
 
 .empty {
   width: 100%;
+}
+
+ul.hot_list {
+  margin-top: 10px;
+  list-style: none;
+  width: 100%;
+  height: calc(100vh - 200px);
+  overflow: scroll;
+}
+ul.hot_list li {
+  width: 100%;
+  height: 30px;
+  text-align: justify;
+}
+ul.hot_list li .index {
+  color: #333;
+  background-color: #e4e7ed;
+  display: inline-block;
+  font-size: 14px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 3px;
+}
+ul.hot_list li .news_title {
+  display: inline-block;
+  margin-left: 10px;
+  width: calc(100% - 120px);
+  vertical-align: text-top;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+ul.hot_list li .news_title a {
+  color: #333;
+}
+ul.hot_list li .discuss {
+  display: inline-block;
+  text-align: right;
+  width: 80px;
+  color: #777;
+  font-size: 14px;
+}
+ul.hot_list li:nth-child(1) > .index {
+  color: white;
+  background-color: #f56c6c;
+}
+ul.hot_list li:nth-child(2) .index, ul.hot_list li:nth-child(3) .index {
+  color: white;
+  background-color: #e6a23c;
 }/*# sourceMappingURL=base.css.map */
