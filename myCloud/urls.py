@@ -23,6 +23,7 @@ from app01 import views
 urlpatterns = [
     path('', views.index),
     path('news/', views.news),
+    path('share/', views.share),
     path('login/', views.login),
     path('logout/', views.logout),
     path('sign/', views.sign),

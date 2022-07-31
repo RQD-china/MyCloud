@@ -399,6 +399,9 @@
                 update: '',
                 data: []
             },
+            leave_message: '',
+            emoji_list: [],
+            selector_is_show: false,
         },
         created() {
             this.init()
@@ -422,6 +425,10 @@
                         case 'news':
                             // 初始化新闻页面
                             this.init_news()
+                            break
+                        case 'share':
+                            // 初始化 动态页面
+                            this.init_share()
                             break
                         case '':
                             // 初始化主页
@@ -483,8 +490,14 @@
                 }
             },
             // 初始化新闻页
-            init_news(){
+            init_news() {
                 this.get_hot_search()
+            },
+            // 初始化动态页
+            init_share() {
+                this.emoji_list = emoji_list
+                let selector = $('.emoji_selector')
+                $(selector).slideUp()
             },
             // 发布评论
             add_comment(nid) {
@@ -739,7 +752,17 @@
                     console.log(res)
                 })
             },
-            
+            // 展示emoji选择器
+            show_selector() {
+                let selector = $('.emoji_selector')
+                $(selector).slideToggle(1000)
+            },
+            // 输入emoji
+            enter_emoji(i) {
+                var message_input = document.getElementsByClassName('el-textarea__inner')[0]
+                message_input.focus()
+                message_input.setRangeText(emoji_list[index])
+            }
         }
     })
 </script>

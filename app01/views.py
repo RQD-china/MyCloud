@@ -55,6 +55,10 @@ def article(request, nid):
 def news(request):
     return render(request, 'news.html')
 
+# 动态页
+def share(request):
+    return render(request, 'share.html')
+
 # 登录页面
 def login(request):
     return render(request, 'login.html')
