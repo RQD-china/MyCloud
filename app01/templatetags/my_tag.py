@@ -60,7 +60,7 @@ def dynamic_nav(request):
     path_dict = {
         '/': '首页',
         '/news/': '新闻',
-        '/share/': '动态',
+        '/message/': '留言板',
         '/about/': '关于',
         '/sites/': '导航',
     }

@@ -426,9 +426,9 @@
                             // 初始化新闻页面
                             this.init_news()
                             break
-                        case 'share':
+                        case 'message':
                             // 初始化 动态页面
-                            this.init_share()
+                            this.init_message()
                             break
                         case '':
                             // 初始化主页
@@ -493,8 +493,8 @@
             init_news() {
                 this.get_hot_search()
             },
-            // 初始化动态页
-            init_share() {
+            // 初始化留言板页
+            init_message() {
                 this.emoji_list = emoji_list
                 let selector = $('.emoji_selector')
                 $(selector).slideUp()
@@ -755,6 +755,7 @@
             // 展示emoji选择器
             show_selector() {
                 let selector = $('.emoji_selector')
+                console.log(selector)
                 $(selector).slideToggle(1000)
             },
             // 输入emoji
@@ -762,7 +763,15 @@
                 var message_input = document.getElementsByClassName('el-textarea__inner')[0]
                 message_input.focus()
                 message_input.setRangeText(emoji_list[index])
-            }
+            },
+            // 发布留言
+            add_message() {
+                axios.post('/api/message/', {
+                    'content': this.leave_message
+                }).then(res => {
+                    console.log(res)
+                })
+            },
         }
     })
 </script>

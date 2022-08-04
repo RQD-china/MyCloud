@@ -14,9 +14,14 @@
   font-size: 20px;
   font-weight: 600;
   color: #333;
-  border-bottom: 1px solid #d0d3d8;
+  border-bottom: 1px solid #6d7993;
   padding-bottom: 10px;
   margin-bottom: 10px;
+  position: relative;
+}
+.main .title button {
+  position: absolute;
+  right: 0;
 }
 .main .leave_message {
   position: relative;
@@ -26,14 +31,17 @@
   top: 0;
   right: 0;
   display: block;
-  width: 24px;
-  height: 24px;
-  line-height: 24px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
   text-align: center;
   z-index: 10;
-  background-color: #dcdfe6;
-  border-radius: 0 4px 0 0;
   cursor: pointer;
+}
+.main .leave_message .selector_container {
+  position: absolute;
+  background-color: white;
+  z-index: 1;
 }
 .main .leave_message .emoji_selector {
   width: 100%;
@@ -51,10 +59,25 @@
   line-height: 24px;
   text-align: center;
   z-index: 10;
-  border: #dcdfe6;
+  border: #6d7993;
   padding: 5px;
   cursor: pointer;
 }
 .main .leave_message .emoji_selector span:hover {
   background-color: #f0f3f8;
-}/*# sourceMappingURL=share.css.map */
+}
+.main .message_container {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #9c9ea6;
+}
+.main .message_container .comment_list_ul .right {
+  box-shadow: none;
+  border: 1px solid #dcdfe6;
+}
+.main .message_container .comment_list_ul .right::after {
+  display: none;
+}
+.main .message_container .comment_list_ul .sub_comment_list {
+  border-top: 1px solid #9c9ea6;
+}/*# sourceMappingURL=message.css.map */

@@ -39,15 +39,12 @@ class MyInfo(models.Model):
     class Meta:
         verbose_name_plural = '个人信息'
 
-
 # 用户表
 class UserInfo(AbstractUser):
     nid = models.AutoField(primary_key=True)
     nick_name = models.CharField(max_length=16, verbose_name='昵称', null=True, blank=True)
     avatar_url = models.URLField(verbose_name='用户头像', help_text='可能是其他平台的头像', null=True, blank=True)
     tel = models.CharField(verbose_name='手机号', max_length=12, null=True, blank=True)
-    integral = models.IntegerField(default=20, verbose_name='用户积分')
-    a_unique_id = models.CharField(verbose_name='id', help_text='其他平台的唯一登录id', max_length=64, null=True, blank=True)
 
     sign_choice = (
         (0, '用户名注册'),
@@ -208,14 +205,14 @@ class History(models.Model):
         verbose_name_plural = '回忆录'
 
 
-# 心情
-class Moods(models.Model):
+# 留言
+class Message(models.Model):
     nid = models.AutoField(primary_key=True)
     name = models.CharField(verbose_name='发布人', max_length=16)
     ip = models.GenericIPAddressField(verbose_name='ip地址', default='120.228.2.238')
     addr = models.JSONField(verbose_name='用户地址信息', null=True)
     create_date = models.DateTimeField(verbose_name='发布时间', auto_now=True)
-    content = models.TextField(verbose_name='心情内容')
+    content = models.TextField(verbose_name='留言内容')
     drawing = models.TextField(verbose_name='配图组，以;隔开', null=True, blank=True)
     comment_count = models.IntegerField(verbose_name='评论数', default=0)
     digg_count = models.IntegerField(verbose_name='点赞数', default=0)
@@ -224,36 +221,36 @@ class Moods(models.Model):
         to_field='nid',
         on_delete=models.SET_NULL,
         null=True,
-        verbose_name='心情的发布头像'
+        verbose_name='留言的发布头像'
     )
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name_plural = '心情'
+        verbose_name_plural = '留言'
 
 
-# 心情评论
-class MoodComment(models.Model):
+# 留言评论
+class MessageComment(models.Model):
     nid = models.AutoField(primary_key=True)
     avatar = models.ForeignKey(
         to='Avatars',
         to_field='nid',
         on_delete=models.SET_NULL,
         null=True,
-        verbose_name='心情的发布头像'
+        verbose_name='留言的发布头像'
     )
     name = models.CharField(verbose_name='评论人', max_length=16, null=True)
     content = models.TextField(verbose_name='评论内容')
     digg_count = models.IntegerField(verbose_name='点赞数', default=0)
     ip = models.GenericIPAddressField(verbose_name='ip地址', default='120.228.2.238')
     addr = models.JSONField(verbose_name='用户地址信息', null=True)
-    mood = models.ForeignKey(
-        to='Moods',
+    message = models.ForeignKey(
+        to='Message',
         to_field='nid',
         on_delete=models.SET_NULL,
-        verbose_name='评论的心情',
+        verbose_name='评论的留言',
         null=True
     )
     create_date = models.DateTimeField(
@@ -264,7 +261,7 @@ class MoodComment(models.Model):
         return self.content
 
     class Meta:
-        verbose_name_plural = '心情评论'
+        verbose_name_plural = '留言评论'
 
 
 # 网站导航

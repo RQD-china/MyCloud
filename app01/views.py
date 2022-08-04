@@ -35,8 +35,8 @@ def index(request):
         'total': article_list.count(),
         'page_size': 2
     }
-    if params['current_page'] > math.ceil(params['total'] / params['page_size']):
-        return redirect('/?page=1')
+    # if params['current_page'] > math.ceil(params['total'] / params['page_size']):
+        # return redirect('/?page=1')
     start = (params['current_page'] - 1) * params['page_size']
     article_list = article_list[start : start + params['page_size']]
     return render(request, 'index.html', locals())
@@ -55,9 +55,10 @@ def article(request, nid):
 def news(request):
     return render(request, 'news.html')
 
-# 动态页
-def share(request):
-    return render(request, 'share.html')
+# 留言页
+def message(request):
+    message()
+    return render(request, 'message.html', locals())
 
 # 登录页面
 def login(request):

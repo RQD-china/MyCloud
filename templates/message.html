@@ -1,0 +1,135 @@
+{% extends "index.html" %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/mine/css/message.css">
+{% endblock css %}
+
+{% block main %}
+    <div class="main">
+        {% csrf_token %}
+        <div class="title">
+            <iconpark-icon name="notepad"></iconpark-icon>
+            留言板
+            <el-button
+                @click="add_message"
+                type="success" 
+                size="small">发布留言</el-button>
+        </div>
+        <div class="leave_message">
+            <el-input
+                class="message_input"
+                type="textarea"
+                :autosize="{ minRows: 4}"
+                placeholder="在这里留下你的足迹"
+                maxlength="200"
+                resize="none"
+                v-model="leave_message">
+            </el-input>
+            <span class="emoji_switch" @click="show_selector">
+                😀
+            </span>
+            <div class="selector_container">
+                <div class="emoji_selector">
+                    <span 
+                        @click="enter_emoji(index)"
+                        v-for="(item, index) in emoji_list">[[ item ]]</span>
+                </div>
+            </div>
+        </div>
+        <div class="message_container">
+            <ul class="comment_list_ul">
+                <li>
+                    <div class="left">
+                        <img src="/article_img/avatars/a-10.jpg">
+                    </div>
+                    <div class="right">
+                        <h4>user</h4>
+                        <div class="comment_contetnt">
+                            <p>留言</p>
+                        </div>
+                        <div class="comment_info">
+                            <span>456</span>
+                            <div>
+                                <span>回复()</span>
+                                <el-popconfirm
+                                    confirm-button-text='删除'
+                                    confirm-button-type="danger"
+                                    cancel-button-text='取消'
+                                    title="确认删除该条评论吗？"
+                                    @cancel="$message({type: 'info', message: '取消删除'})"
+                                    >
+                                    <span
+                                        slot="reference"
+                                        class="delete">删除</span>
+                                </el-popconfirm>
+                            </div>
+                        </div>
+                        <div class="sub_comment_list">
+                            <div class="sub_comment_item">
+                                <div class="sub_left">
+                                    <img src="/article_img/avatars/a-2.jpg">
+                                </div>
+                                <div class="sub_right">
+                                    <h5>user2&nbsp;<span>@user</span></h5>
+                                    <div class="sub_comment_content">
+                                        <p>子评论</p>
+                                    </div>
+                                    <div class="sub_comment_info">
+                                        <span>123</span>
+                                        <div>
+                                            <span >回复</span>
+                                            <el-popconfirm
+                                                confirm-button-text='删除'
+                                                confirm-button-type="danger"
+                                                cancel-button-text='取消'
+                                                title="确认删除该条评论吗？"
+                                                @cancel="$message({type: 'info', message: '取消删除'})"
+                                                >
+                                                <span
+                                                    slot="reference"
+                                                    class="delete">删除</span>
+                                            </el-popconfirm>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sub_comment_textarea">
+                                <textarea
+                                cols="30"
+                                rows="10"
+                                placeholder="回复 user01"
+                                ref="sub_content_textarea"></textarea>
+                                <button
+                                class = reply>回复</button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock main %}
+
+{% block js %}
+<script>
+    const emoji_list = [
+        '😀', '😁', '😂', '🤣', '😃', '😄', '😅', '😆', 
+        '😉', '😊', '😋', '😎', '😍', '😘', '🥰', '😗', 
+        '😙', '😚', '🙂', '🤗', '🤩', '🤔', '🤨', '😐', 
+        '😑', '😶', '🙄', '😏', '😣', '😥', '😮', '🤐', 
+        '😯', '😪', '😫', '🥱', '😴', '😌', '😛', '😜', 
+        '😝', '🤤', '😒', '😓', '😔', '😕', '🙃', '🤑', 
+        '😲', '🙁', '😖', '😞', '😟', '😤', '😢', '😭', 
+        '😦', '😧', '😨', '😩', '🤯', '😬', '😰', '😱', 
+        '🥵', '🥶', '😳', '🤪', '😵', '🥴', '😠', '😡', 
+        '🤬', '😷', '🤒', '🤕', '🤢', '🤮', '🤧', '😇', 
+        '🥳', '🥺', '🤠', '🤡', '🤥', '🤫', '🤭', '🧐', 
+        '🤓', '😈', '👿', '👹', '👺', '💀', '☠', '👻', 
+        '👽', '👾', '🤖', '💩', '😺', '😸', '😹', '😻', 
+        '😼', '😽', '🙀', '😿', '😾', '🐱‍👤', '🐱‍🏍', '🐱‍💻', 
+        '🐱‍🐉', '🐱‍👓', '🐱‍🚀', '🙈', '🙉', '🙊', '🐵', '🐶', 
+        '🐺', '🐱', '🦁', '🐯', '🦒', '🦊', '🦝', '🐮', 
+        '🐷', '🐗', '🐭', '🐹', '🐰', '🐻', '🐨', '👀'
+    ]
+</script>
+{% endblock js %}

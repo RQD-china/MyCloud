@@ -14,9 +14,15 @@
         font-size: 20px;
         font-weight: 600;
         color: #333;
-        border-bottom: 1px solid #d0d3d8;
+        border-bottom: 1px solid #6d7993;
         padding-bottom: 10px;
         margin-bottom: 10px;
+        position: relative;
+
+        button {
+            position: absolute;
+            right: 0;
+        }
     }
 
     .leave_message {
@@ -27,14 +33,18 @@
             top: 0;
             right: 0;
             display: block;
-            width: 24px;
-            height: 24px;
-            line-height: 24px;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
             text-align: center;
             z-index: 10;
-            background-color: #dcdfe6;
-            border-radius: 0 4px 0 0;
             cursor: pointer;
+        }
+
+        .selector_container {
+            position: absolute;
+            background-color: white;
+            z-index: 1;
         }
 
         .emoji_selector {
@@ -53,13 +63,35 @@
                 line-height: 24px;
                 text-align: center;
                 z-index: 10;
-                border: #dcdfe6;
+                border: #6d7993;
                 padding: 5px;
                 cursor: pointer;
 
                 &:hover {
                     background-color: #f0f3f8;
                 }
+            }
+        }
+    }
+
+    .message_container {
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid #9c9ea6;
+
+        .comment_list_ul {
+            
+            .right {
+                box-shadow: none;
+                border: 1px solid #dcdfe6;
+
+                &::after {
+                    display: none;
+                }
+            }
+
+            .sub_comment_list {
+                border-top: 1px solid #9c9ea6;
             }
         }
     }
